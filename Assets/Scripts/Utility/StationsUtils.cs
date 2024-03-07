@@ -29,13 +29,10 @@ public class Station : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        print("hello");
-        print(other);
         StartMinigame(station_type);
 
         destination_col.isTrigger = false;
         PACPointer.inputDisabled = false;
-        
     }
 
     void StartMinigame(Station_Type station)

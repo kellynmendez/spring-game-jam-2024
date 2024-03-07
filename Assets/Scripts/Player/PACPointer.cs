@@ -62,6 +62,7 @@ public class PACPointer : MonoBehaviour
                 //_pointAndClickMovement.SetDestination(impactObj.transform.position);
 
                 Vector3 _destination = objectHit.GetChild(1).transform.position;
+                _pointAndClickMovement._position = objectHit.position;
                 _pointAndClickMovement.SetDestination(_destination);
             }
         }

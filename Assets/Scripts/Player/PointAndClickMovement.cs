@@ -10,12 +10,11 @@ public class PointAndClickMovement : MonoBehaviour
     public NavMeshAgent _agent;
     bool _seekingDestination = false;
     public PACPointer _pointer;
+    public Vector3 _position;
 
     Camera _camera;
     GameObject _cameraObject;
     public GameObject _hitVisuals;
-    public bool _lookingAtTarget = false;
-    private Vector3 Target;
     //bool _acceptingNewDestination = true;
 
     private void Awake()
@@ -29,9 +28,17 @@ public class PointAndClickMovement : MonoBehaviour
     {
         if (_seekingDestination == false) 
         { return; }
-        if (_lookingAtTarget == true)
+
+        if (!_agent.pathPending)
         {
-            transform.LookAt(Target);
+            if (_agent.remainingDistance <= _agent.stoppingDistance)
+            {
+                transform.LookAt(_position);
+                if (!_agent.hasPath || _agent.velocity.sqrMagnitude == 0f)
+                {
+                    _seekingDestination = false;
+                }
+            }
         }
     }
 
@@ -39,7 +46,6 @@ public class PointAndClickMovement : MonoBehaviour
     {
         _destination = hitLocation;
         _agent.SetDestination(hitLocation);
-        print(_destination);
         _seekingDestination = true;
     }
 }
