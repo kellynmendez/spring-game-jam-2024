@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PACPointer : MonoBehaviour
@@ -10,11 +11,20 @@ public class PACPointer : MonoBehaviour
     public GameObject _hitVisuals;
 
     public PointAndClickMovement _pointAndClickMovement;
+    public Station _station;
+
+    private Transform objectHit = null;
+
+    private Collider _targetCollider = null;
+    public bool inputDisabled = false;
+
 
     //public bool AcceptingNewLocation = true;
+    //public bool _playerHasDestination = false;
 
     private void Start()
     {
+        _station = GameObject.FindObjectOfType(typeof(Station)) as Station;
         _pointAndClickMovement = GameObject.FindObjectOfType(typeof(PointAndClickMovement)) as PointAndClickMovement;
         _cameraObject = GameObject.FindGameObjectWithTag("PAC_Camera");
         _camera = _cameraObject.GetComponent<Camera>();
@@ -23,27 +33,37 @@ public class PACPointer : MonoBehaviour
     void Update()
     {
         if (Input.GetButtonDown("Fire1"))
-            //if(AcceptingNewLocation == true)
+        {
+            if (inputDisabled == false)
             {
                 Shoot();
             }
+        }
     }
 
-    void Shoot()
+    public void Shoot()
     {
         RaycastHit hit;
         Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
 
         if (Physics.Raycast(ray, out hit))
         {
-            Transform objectHit = hit.transform;
-            print(objectHit);
+            objectHit = hit.transform;
+            if (objectHit.gameObject.GetComponent<Station>() != null)
+            {
+                inputDisabled = true;
+                print(objectHit);
 
-            GameObject impactObj = Instantiate(_hitVisuals, hit.point, Quaternion.LookRotation(hit.normal));
-            Destroy(impactObj, 2);
+                _targetCollider = objectHit.gameObject.GetComponent<Collider>();
+                _targetCollider.isTrigger = true;
 
-            //AcceptingNewLocation = false;
-            _pointAndClickMovement.SetDestination(impactObj.transform.position);
+                //GameObject impactObj = Instantiate(_hitVisuals, hit.point, Quaternion.LookRotation(hit.normal));
+                //Destroy(impactObj, 2);
+                //_pointAndClickMovement.SetDestination(impactObj.transform.position);
+
+                Vector3 _destination = objectHit.GetChild(1).transform.position;
+                _pointAndClickMovement.SetDestination(_destination);
+            }
         }
     }
 }

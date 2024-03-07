@@ -2,17 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using static UnityEngine.GraphicsBuffer;
 
 public class PointAndClickMovement : MonoBehaviour
 {
     Vector3 _destination;
-    NavMeshAgent _agent;
+    public NavMeshAgent _agent;
     bool _seekingDestination = false;
     public PACPointer _pointer;
 
     Camera _camera;
     GameObject _cameraObject;
     public GameObject _hitVisuals;
+    public bool _lookingAtTarget = false;
+    private Vector3 Target;
     //bool _acceptingNewDestination = true;
 
     private void Awake()
@@ -24,36 +27,13 @@ public class PointAndClickMovement : MonoBehaviour
 
     private void Update()
     {
-        //if (Input.GetButtonDown("Fire1"))
-        ////if(AcceptingNewLocation == true)
-        //{
-        //    Shoot();
-        //}
-
         if (_seekingDestination == false) 
         { return; }
-
-        //_agent.SetDestination(_destination);
-
+        if (_lookingAtTarget == true)
+        {
+            transform.LookAt(Target);
+        }
     }
-
-    //void Shoot()
-    //{
-    //    RaycastHit hit;
-    //    Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
-
-    //    if (Physics.Raycast(ray, out hit))
-    //    {
-    //        Transform objectHit = hit.transform;
-    //        print(objectHit);
-
-    //        GameObject impactObj = Instantiate(_hitVisuals, hit.point, Quaternion.LookRotation(hit.normal));
-    //        Destroy(impactObj, 2);
-
-    //        //AcceptingNewLocation = false;
-    //        SetDestination(impactObj.transform.position);
-    //    }
-    //}
 
     public void SetDestination(Vector3 hitLocation)
     {
