@@ -20,7 +20,8 @@ public class Customer_Order_Zone : MonoBehaviour
     {
         if (other != null)
         {
-            other.gameObject.GetComponent<CustomerOrders>().GetOrder();
+            other.gameObject.GetComponent<Customer>().GetOrder();
+            //other.gameObject.GetComponent<Customer>().GetPayment();
         }
     }
 }

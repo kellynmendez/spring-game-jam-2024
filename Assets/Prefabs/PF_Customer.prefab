@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8640671040501644851}
-  - component: {fileID: 2149354521580232784}
   - component: {fileID: 4692974257547063906}
   - component: {fileID: 7692668456474620153}
+  - component: {fileID: 9175755559186084521}
   m_Layer: 0
   m_Name: PF_Customer
   m_TagString: Untagged
@@ -35,21 +35,6 @@ Transform:
   - {fileID: 8659270993807221946}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2149354521580232784
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1235594709064425047}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ccc2c6ef1dbc50846acb1703028454ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HelmetOdds: 100
-  SwordOdds: 40
-  ArrowOdds: 10
 --- !u!54 &4692974257547063906
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -98,6 +83,21 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 3.33807, y: 8.671083, z: 3.5195706}
   m_Center: {x: 0.03221011, y: 3.8355398, z: 0.059659123}
+--- !u!114 &9175755559186084521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1235594709064425047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5dbb22fddf6f842b1a6fa91900fe6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HelmetOdds: 100
+  SwordOdds: 50
+  ArrowOdds: 20
 --- !u!1 &6413771557908196109
 GameObject:
   m_ObjectHideFlags: 0
@@ -109,7 +109,6 @@ GameObject:
   - component: {fileID: 8659270993807221946}
   - component: {fileID: 4947826817823652509}
   - component: {fileID: 703578638705615997}
-  - component: {fileID: 6527109829433293139}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -182,24 +181,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &6527109829433293139
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6413771557908196109}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
