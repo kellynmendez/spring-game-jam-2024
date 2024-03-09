@@ -12,44 +12,73 @@ public class Customer : MonoBehaviour
     public enum PaymentType { Metal, Wood, Arrow };
     private PaymentType _paymentType;
     private int _paymentAmount = 0;
+    private bool _timerStarted = false;
+    public float _timerTime = 10;
+    private int _ordersDone = 0;
+    private int _orderNumMax = 3;
 
     private void Start()
     {
         //GetOrder();
     }
-
-    private void Update()
-    {
-        if (Input.GetButtonDown("Fire2"))
-        {
-            transform.Translate(4, 0, 0);
-        }
-    }
-
     public Order GetOrder()
     {
-        int _randomNum = Random.Range(0, 100);
-        if (_randomNum <= ArrowOdds)
-        {
-            _order = Order.Arrow;
-            GetPayment(_order);
-        }
-        else if (_randomNum <= SwordOdds)
-        {
-            _order = Order.Sword;
-            GetPayment(_order);
-        }
-        else if (_randomNum <= HelmetOdds)
+        //if (_ordersDone >= 10)
+        //{
+        //    int _randOrderNum = Random.Range(0, 3);
+        //    _orderNumMax = 3;
+        //}
+        //else if (_ordersDone >= 4)
+        //{
+        //    int randOrderNum = Random.Range(1, 2);
+        //    _orderNumMax = 2;
+        //}
+        //else 
+        //{
+        //    _orderNumMax = 1;
+        //}
+
+
+        if (_ordersDone == 0)
         {
             _order = Order.Helmet;
-            GetPayment(_order);
+            print("Order is: " + _order);
         }
-        else
+        else if (_ordersDone == 1)
         {
-            Debug.Log("Error");
+            _order = Order.Sword;
+            print("Order is: " + _order);
         }
-
-        print("Order is: " + _order + " based on random number: " + _randomNum);
+        else if (_ordersDone == 2)
+        {
+            _order = Order.Arrow;
+            print("Order is: " + _order);
+        }
+        else if (_ordersDone >= 3)
+        {
+            int _randOrderType = Random.Range(0, 100);
+            if (_randOrderType <= ArrowOdds)
+            {
+                _order = Order.Arrow;
+                GetPayment(_order);
+            }
+            else if (_randOrderType <= SwordOdds)
+            {
+                _order = Order.Sword;
+                GetPayment(_order);
+            }
+            else if (_randOrderType <= HelmetOdds)
+            {
+                _order = Order.Helmet;
+                GetPayment(_order);
+            }
+            else
+            {
+                Debug.Log("Error");
+            }
+            print("Order is: " + _order + " based on random number: " + _randOrderType);
+        }
+        print(_ordersDone);
         return _order;
     }
     public PaymentType GetPayment(Order order)
@@ -73,5 +102,29 @@ public class Customer : MonoBehaviour
 
 
         return _paymentType + _paymentAmount;
+    }
+    public void StartTimer()
+    {
+        _timerStarted = true;
+        print("timer started");
+    }
+    private void Update()
+    {
+        if (Input.GetButtonDown("Fire2"))
+        {
+            transform.Translate(4, 0, 0);
+        }
+        if (_timerStarted == true)
+        {
+            _timerTime -= Time.deltaTime;
+            if (_timerTime <= 0)
+            {
+                _ordersDone = _ordersDone + 1;
+                print(_ordersDone);
+                print("timer ended");
+                _timerStarted = false;
+                //transform.Translate(0, 0, 15);
+            }
+        }
     }
 }
