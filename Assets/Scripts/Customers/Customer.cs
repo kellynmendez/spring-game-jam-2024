@@ -11,14 +11,15 @@ public class Customer : MonoBehaviour
     public enum Order { Helmet, Sword, Arrow };
     private Order _order;
     private List<Order> _orders = new List<Order>();
-    public enum PaymentType { Metal, Wood, Arrow };
-    private PaymentType _paymentType;
     private int _paymentAmount = 0;
     private bool _timerStarted = false;
     public float _timerTime = 2;
     private int _ordersDone = 0;
     private int _orderNumMax = 3;
     private int _cost = 0;
+    public int _helmetCost = 30;
+    public int _swordCost = 80;
+    public int _arrowCost = 150;
 
     public Customer_Data _customerData;
 
@@ -31,38 +32,29 @@ public class Customer : MonoBehaviour
 
     public List<Order> GetOrder()
     {
-        //if (_ordersDone >= 10)
-        //{
-        //    int _randOrderNum = Random.Range(0, 3);
-        //    _orderNumMax = 3;
-        //}
-        //else if (_ordersDone >= 4)
-        //{
-        //    int randOrderNum = Random.Range(1, 2);
-        //    _orderNumMax = 2;
-        //}
-        //else 
-        //{
-        //    _orderNumMax = 1;
-        //}
-
-
         if (_customerData._ordersCompleted == 0)
         {
             _order = Order.Helmet;
-            print("Order is: " + _order);
+            _orders.Add(_order);
+            _paymentAmount += GetPayment(_order);
+            //print("Order is: " + _order);
         }
         else if (_customerData._ordersCompleted == 1)
         {
             _order = Order.Sword;
-            print("Order is: " + _order);
+            _orders.Add(_order);
+            _paymentAmount += GetPayment(_order);
+            //print("Order is: " + _order);
         }
         else if (_customerData._ordersCompleted == 2)
         {
             _order = Order.Arrow;
-            print("Order is: " + _order);
+            _orders.Add(_order);
+            _paymentAmount += GetPayment(_order);
+            //print("Order is: " + _order);
         }
-        else if (_customerData._ordersCompleted >= 3)
+
+        if (_customerData._ordersCompleted >= 3)
         {
             if (_customerData._ordersCompleted >= 15)
             {
@@ -94,53 +86,45 @@ public class Customer : MonoBehaviour
                 if ((_randOrderType <= ArrowOdds) && (!_orders.Contains(Order.Arrow)))
                 {
                     _order = Order.Arrow;
-                    GetPayment(_order);
                 }
                 else if ((_randOrderType <= SwordOdds) && (_swordCount < 2))
                 {
                     _swordCount++;
                     _order = Order.Sword;
-                    GetPayment(_order);
                 }
                 else if (_randOrderType <= HelmetOdds)
                 {
                     _order = Order.Helmet;
-                    GetPayment(_order);
                 }
-                else
-                {
-                    Debug.Log("Error");
-                }
+                _paymentAmount += GetPayment(_order);
                 _orders.Add(_order);
-                
             }
-            string _ordersText = "";
-            foreach (var item in _orders)
-            {
-                _ordersText += item.ToString() + ", ";
-            }
-            print("Order is: " + _ordersText);
         }
-        //print(_customerData._ordersCompleted);
+        string _ordersText = "";
+        foreach (var item in _orders)
+        {
+            _ordersText += item.ToString() + ", ";
+        }
+        print("Order is: " + _ordersText + " for " + _paymentAmount);
         return _orders;
     }
-    public PaymentType GetPayment(Order order)
+    public int GetPayment(Order order)
     {
         int _randomNum = Random.Range(0, 100);
         if (order == Order.Helmet)
         {
-            _cost = 30;
+            _cost = _helmetCost;
         }
         else if (order == Order.Sword)
         {
-            _cost = 80;
+            _cost = _swordCost;
         }
         else if (order == Order.Arrow)
         {
-            _cost = 150;
+            _cost = _arrowCost;
         }
 
-        return _paymentType + _paymentAmount;
+        return _cost;
     }
     public void StartTimer()
     {

@@ -4,22 +4,20 @@ using UnityEngine;
 
 public class Customer_Data : MonoBehaviour
 {
-    public int _ordersCompleted;
-    public int _ordersFailed;
+    public int _ordersCompleted = 0;
+    public int _ordersFailed = 0;
+    public int _currentScore = 0;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        _currentScore = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (_ordersFailed >= 3)
-        {
-            //LOSE THE GAME
-        }
+
     }
 
     public int CompleteOrder()
@@ -31,5 +29,9 @@ public class Customer_Data : MonoBehaviour
     public void FailOrder()
     {
         _ordersFailed++;
+        if (_ordersFailed <= 0)
+        {
+            //Lose the game
+        }
     }
 }

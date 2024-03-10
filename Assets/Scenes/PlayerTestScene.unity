@@ -5430,6 +5430,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _ordersCompleted: 0
   _ordersFailed: 0
+  _currentScore: 0
 --- !u!4 &2110779601 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8640671040501644851, guid: a38359a5bb878d34b9646d237cc9447e, type: 3}
