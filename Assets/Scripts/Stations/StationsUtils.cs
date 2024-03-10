@@ -12,7 +12,7 @@ public class Station : MonoBehaviour
     public enum Station_Type {Build, Assemble, Paint, Mold, Counter}
     public Station_Type station_type;
     private Collider destination_col;
-    private PlayerController playerSM;
+    private PlayerSM playerSM;
 
     // Start is called before the first frame update
     void Start()
@@ -20,7 +20,7 @@ public class Station : MonoBehaviour
         pointAndClickMovement = GameObject.FindObjectOfType(typeof(PointAndClickMovement)) as PointAndClickMovement;
         PACPointer = GameObject.FindObjectOfType(typeof(PACPointer)) as PACPointer;
         destination_col = gameObject.GetComponent<Collider>();
-        playerSM = FindObjectOfType<PlayerController>();
+        playerSM = FindObjectOfType<PlayerSM>();
     }
 
     // Update is called once per frame
