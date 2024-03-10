@@ -2,17 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CorePlayState : MonoBehaviour
+public class CorePlayState : IState
 {
-    // Start is called before the first frame update
-    void Start()
+    private PlayerSM playerSM;
+
+    public CorePlayState(PlayerSM playerSM)
     {
-        
+        this.playerSM = playerSM;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Enter()
     {
-        
+        PACPointer movementComp = playerSM.transform.GetComponent<PACPointer>();
+        movementComp.enabled = true;
+    }
+
+    public void Exit()
+    {
+        PACPointer movementComp = playerSM.transform.GetComponent<PACPointer>();
+        movementComp.enabled = false;
     }
 }

@@ -2,17 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AssembleState : MonoBehaviour
+public class AssembleState : IState
 {
-    // Start is called before the first frame update
-    void Start()
+    private PlayerSM playerSM;
+
+    public AssembleState(PlayerSM playerSM)
     {
-        
+        this.playerSM = playerSM;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Enter()
     {
-        
+
+
+        // Change back to core game play
+        CorePlayState st_corePlay = new CorePlayState(playerSM);
+        playerSM.ChangeState(st_corePlay);
+    }
+
+    public void Exit()
+    {
+
     }
 }

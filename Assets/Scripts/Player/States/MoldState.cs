@@ -1,13 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
-public class PaintState : IState
+public class MoldState : IState
 {
     private PlayerSM playerSM;
 
-    public PaintState(PlayerSM playerSM) 
+    public MoldState(PlayerSM playerSM)
     {
         this.playerSM = playerSM;
     }
