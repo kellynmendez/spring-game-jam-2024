@@ -156,7 +156,7 @@ public class Customer : MonoBehaviour
         if (wasOrderCompleted == true)
         {
             //happy pop up, walk away, destroy
-            
+             
         }
         else
         {
