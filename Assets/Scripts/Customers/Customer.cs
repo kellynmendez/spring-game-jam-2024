@@ -142,12 +142,25 @@ public class Customer : MonoBehaviour
             _timerTime -= Time.deltaTime;
             if (_timerTime <= 0)
             {
-                _customerData.CompleteOrder(); //here for testing needs to be moved 
-                // _customerData.FailOrder();  <--- this should be here
+                _customerData.CompleteOrder(gameObject); //here for testing needs to be moved 
+                // _customerData.FailOrder(gameObject);  <--- this should be here
                 //print("Timer Ended. Order Failed.");
                 _timerStarted = false;
                 //transform.Translate(0, 0, 15);
             }
+        }
+    }
+
+    public void LeaveStore(bool wasOrderCompleted)
+    {
+        if (wasOrderCompleted == true)
+        {
+            //happy pop up, walk away, destroy
+            
+        }
+        else
+        {
+            //sadge pop up, walk away, setroy
         }
     }
 }
