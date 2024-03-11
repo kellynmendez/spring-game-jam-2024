@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using static System.Collections.Specialized.BitVector32;
 
-public class Station : MonoBehaviour
+public class StationUtils : MonoBehaviour
 {   
     PACPointer PACPointer;
     PointAndClickMovement pointAndClickMovement;
