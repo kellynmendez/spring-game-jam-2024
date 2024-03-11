@@ -39,31 +39,25 @@ public class Station : MonoBehaviour
 
     void StartMinigame(Station_Type station)
     {
-        print("started " + station + " minigame");
-
         // Change state to start build station mini game
         if (station == Station_Type.Build)
         {
-            IState st_build = new BuildState(playerSM);
-            playerSM.ChangeState(st_build);
+            playerSM.ChangeState(PlayerSM.PlayerState.Build);
         }
         // Change state to start assemble station mini game
         else if (station == Station_Type.Assemble)
         {
-            IState st_assemble = new AssembleState(playerSM);
-            playerSM.ChangeState(st_assemble);
+            playerSM.ChangeState(PlayerSM.PlayerState.Assemble);
         }
         // Change state to start paint station mini game
         else if (station == Station_Type.Paint)
         {
-            IState st_paint = new PaintState(playerSM);
-            playerSM.ChangeState(st_paint);
+            playerSM.ChangeState(PlayerSM.PlayerState.Paint);
         }
         // Change state to start mold station mini game
         else if (station == Station_Type.Mold)
         {
-            IState st_mold = new MoldState(playerSM);
-            playerSM.ChangeState(st_mold);
+            playerSM.ChangeState(PlayerSM.PlayerState.Mold);
         }
         // One of three counters
         else if (station == Station_Type.Counter)
