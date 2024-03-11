@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.UIElements;
+using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 
 public class Customer : MonoBehaviour
 {
@@ -14,7 +17,6 @@ public class Customer : MonoBehaviour
     private int _paymentAmount = 0;
     private bool _timerStarted = false;
     public float _timerTime = 2;
-    private int _ordersDone = 0;
     private int _orderNumMax = 3;
     private int _cost = 0;
     public int _helmetCost = 30;
@@ -23,12 +25,17 @@ public class Customer : MonoBehaviour
 
     public Customer_Data _customerData;
 
-    private void Start()
+    public NavMeshAgent _agent;
+    private bool _seekingDestination = false;
+    private GameObject _counter;
+    private Vector3 _counterPosistion;
+    private bool _leavingCounter = false;
+
+    private void Awake()
     {
         _customerData = GameObject.FindObjectOfType(typeof(Customer_Data)) as Customer_Data;
-        //GetOrder();
+        _agent = GetComponent<NavMeshAgent>();
     }
-
 
     public List<Order> GetOrder()
     {
@@ -133,10 +140,10 @@ public class Customer : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetButtonDown("Fire2"))
-        {
-            transform.Translate(4, 0, 0);
-        }
+        //if (Input.GetButtonDown("Fire2"))
+        //{
+        //    transform.Translate(4, 0, 0);
+        //}
         if (_timerStarted == true)
         {
             _timerTime -= Time.deltaTime;
@@ -149,9 +156,35 @@ public class Customer : MonoBehaviour
                 //transform.Translate(0, 0, 15);
             }
         }
+
+        if (_seekingDestination == false)
+        { return; }
+
+        if (!_agent.pathPending)
+        {
+            if (_agent.remainingDistance <= _agent.stoppingDistance)
+            {
+                transform.LookAt(_counterPosistion);
+                if (!_agent.hasPath || _agent.velocity.sqrMagnitude == 0f)
+                {
+                    _seekingDestination = false;
+                    if (_leavingCounter == true)
+                    {
+                        Destroy(gameObject);
+                    }
+                }
+            }
+        }
     }
 
-    public void LeaveStore(bool wasOrderCompleted)
+    public void ApproachCounter(Transform counter)
+    {
+        _agent.SetDestination(counter.GetChild(0).position);
+        _counter = counter.gameObject;
+        _counterPosistion = counter.position;
+        _seekingDestination = true;
+    }
+    public void LeaveCounter(bool wasOrderCompleted)
     {
         if (wasOrderCompleted == true)
         {
@@ -162,5 +195,9 @@ public class Customer : MonoBehaviour
         {
             //sadge pop up, walk away, setroy
         }
+        _counter.GetComponent<Counter>()._counterIsEmpty = true;
+        _agent.SetDestination(_customerData._customerSpawnPoint.transform.position);
+        _seekingDestination = true;
+        _leavingCounter = true;
     }
 }

@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class Customer_Order_Zone : MonoBehaviour
 {
+    Counter _counter;
     // Start is called before the first frame update
     void Start()
     {
-        
+        _counter = gameObject.GetComponentInParent<Counter>();
     }
 
     // Update is called once per frame
@@ -23,6 +24,8 @@ public class Customer_Order_Zone : MonoBehaviour
             other.gameObject.GetComponent<Customer>().GetOrder();
             //other.gameObject.GetComponent<Customer>().GetPayment();
             other.gameObject.GetComponent<Customer>().StartTimer();
+
+            _counter._counterIsEmpty = false;
         }
     }
 }
