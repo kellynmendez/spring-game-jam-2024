@@ -9,9 +9,10 @@ public class Station : MonoBehaviour
     PACPointer PACPointer;
     PointAndClickMovement pointAndClickMovement;
 
-    public enum Station_Type {Station01, Station02, Station03, Station04, Counter}
+    public enum Station_Type {Build, Assemble, Paint, Mold, Counter}
     public Station_Type station_type;
     private Collider destination_col;
+    private PlayerSM playerSM;
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +20,7 @@ public class Station : MonoBehaviour
         pointAndClickMovement = GameObject.FindObjectOfType(typeof(PointAndClickMovement)) as PointAndClickMovement;
         PACPointer = GameObject.FindObjectOfType(typeof(PACPointer)) as PACPointer;
         destination_col = gameObject.GetComponent<Collider>();
+        playerSM = FindObjectOfType<PlayerSM>();
     }
 
     // Update is called once per frame
@@ -37,6 +39,30 @@ public class Station : MonoBehaviour
 
     void StartMinigame(Station_Type station)
     {
-        print("started " + station + " minigame");
+        // Change state to start build station mini game
+        if (station == Station_Type.Build)
+        {
+            playerSM.ChangeState(PlayerSM.PlayerState.Build);
+        }
+        // Change state to start assemble station mini game
+        else if (station == Station_Type.Assemble)
+        {
+            playerSM.ChangeState(PlayerSM.PlayerState.Assemble);
+        }
+        // Change state to start paint station mini game
+        else if (station == Station_Type.Paint)
+        {
+            playerSM.ChangeState(PlayerSM.PlayerState.Paint);
+        }
+        // Change state to start mold station mini game
+        else if (station == Station_Type.Mold)
+        {
+            playerSM.ChangeState(PlayerSM.PlayerState.Mold);
+        }
+        // One of three counters
+        else if (station == Station_Type.Counter)
+        {
+
+        }
     }
 }
