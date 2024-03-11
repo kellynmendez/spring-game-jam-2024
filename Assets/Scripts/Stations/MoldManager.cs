@@ -2,25 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoldManager : MonoBehaviour
+public class MoldManager : Station
 {
-    private PlayerSM playerSM;
-
     private void Awake()
     {
         playerSM = FindObjectOfType<PlayerSM>();
     }
 
-    public void StartGame()
+    public override void StartGame()
     {
 
-
-        // Change back to core game play
-        playerSM.ChangeState(PlayerSM.PlayerState.CorePlay);
-    }
-
-    public void Exit()
-    {
-        
     }
 }
