@@ -6,7 +6,9 @@ using UnityEngine.EventSystems;
 public class DropPoint : MonoBehaviour
 {
     [SerializeField] string slotName;
-    
+
+    private bool dropped = false;
+
     public void OnDrop(PointerEventData eventData)
     {
         if (eventData.pointerDrag.transform.name == slotName)
@@ -15,7 +17,13 @@ public class DropPoint : MonoBehaviour
             if (draggable != null)
             {
                 draggable.SetStartPosition(this.transform.position);
+                dropped = true;
             }
         }
+    }
+
+    public bool Dropped()
+    {
+        return dropped;
     }
 }
