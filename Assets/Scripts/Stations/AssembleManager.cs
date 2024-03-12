@@ -65,7 +65,7 @@ public class AssembleManager : Station
 
         if (isAssembled)
         {
-            currentState = AssembleState.Finished;
+            StartCoroutine(WaitAfterAssembled());
         }
     }
 
@@ -82,5 +82,13 @@ public class AssembleManager : Station
     public void SetIsArrow(bool newIsArrow)
     {
         isArrow = newIsArrow;
+    }
+
+
+    IEnumerator WaitAfterAssembled()
+    {
+        yield return new WaitForSeconds(1f);
+        currentState = AssembleState.Finished;
+        yield break;
     }
 }

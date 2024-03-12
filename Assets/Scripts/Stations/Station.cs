@@ -9,7 +9,7 @@ public abstract class Station : MonoBehaviour
 
     public abstract void StartGame();
 
-    public virtual void ExitGame()
+    protected virtual void ExitGame()
     {
         gameScreen.SetActive(false);
         // Change back to core game play
