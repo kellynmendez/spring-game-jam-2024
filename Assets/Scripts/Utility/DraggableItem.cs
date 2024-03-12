@@ -9,6 +9,7 @@ public class DraggableItem : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
 {
     [HideInInspector] public Image image;
     private Vector3 startPosition;
+    private bool dropped = false;
 
     private void Start()
     {
@@ -23,6 +24,9 @@ public class DraggableItem : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
 
     public void OnDrag(PointerEventData eventData)
     {
+        if (dropped) 
+            return;
+
         this.transform.position = Input.mousePosition;
     }
 
@@ -39,6 +43,11 @@ public class DraggableItem : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
 
     public void SetStartPosition(Vector3 startPosition)
     { 
-        this.startPosition = startPosition; 
+        this.startPosition = startPosition;
+    }
+
+    public void SetDropped(bool dropped)
+    {
+        this.dropped = dropped;
     }
 }

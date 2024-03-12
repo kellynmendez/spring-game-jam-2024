@@ -20,7 +20,7 @@ public class DropPoint : MonoBehaviour, IDropHandler
             {
                 origStartPos = draggable.GetStartPosition();
                 draggable.SetStartPosition(this.transform.position);
-                //draggable.image.raycastTarget = false;
+                draggable.SetDropped(true);
                 dropped = true;
             }
         }
@@ -33,9 +33,9 @@ public class DropPoint : MonoBehaviour, IDropHandler
 
     public void ResetDropPoint()
     {
-        draggable.SetStartPosition(origStartPos);
         draggable.transform.position = origStartPos;
-        //draggable.image.raycastTarget = true;
+        draggable.SetStartPosition(origStartPos);
+        draggable.SetDropped(false);
         dropped = false;
     }
 }
