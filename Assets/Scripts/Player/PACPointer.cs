@@ -11,7 +11,7 @@ public class PACPointer : MonoBehaviour
     public GameObject _hitVisuals;
 
     public PointAndClickMovement _pointAndClickMovement;
-    public Station _station;
+    public StationUtils _station;
 
     private Transform objectHit = null;
 
@@ -24,7 +24,7 @@ public class PACPointer : MonoBehaviour
 
     private void Start()
     {
-        _station = GameObject.FindObjectOfType(typeof(Station)) as Station;
+        _station = GameObject.FindObjectOfType(typeof(StationUtils)) as StationUtils;
         _pointAndClickMovement = GameObject.FindObjectOfType(typeof(PointAndClickMovement)) as PointAndClickMovement;
         _cameraObject = GameObject.FindGameObjectWithTag("PAC_Camera");
         _camera = _cameraObject.GetComponent<Camera>();
@@ -49,7 +49,7 @@ public class PACPointer : MonoBehaviour
         if (Physics.Raycast(ray, out hit))
         {
             objectHit = hit.transform;
-            if (objectHit.gameObject.GetComponent<Station>() != null)
+            if (objectHit.gameObject.GetComponent<StationUtils>() != null || objectHit.gameObject.GetComponent<Counter>() != null)
             {
                 inputDisabled = true;
                 print(objectHit);

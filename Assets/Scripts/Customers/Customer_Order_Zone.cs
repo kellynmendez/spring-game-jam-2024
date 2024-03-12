@@ -22,6 +22,7 @@ public class Customer_Order_Zone : MonoBehaviour
         {
             other.gameObject.GetComponent<Customer>().GetOrder();
             //other.gameObject.GetComponent<Customer>().GetPayment();
+            other.gameObject.GetComponent<Customer>().StartTimer();
         }
     }
 }
