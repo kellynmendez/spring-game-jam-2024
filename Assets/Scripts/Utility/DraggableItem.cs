@@ -5,31 +5,36 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(Image))]
-public class Drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
+public class DraggableItem : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
-    private Image img;
+    [HideInInspector] public Image image;
     private Vector3 startPosition;
 
     private void Start()
     {
-        img = GetComponent<Image>();
+        image = GetComponent<Image>();
         startPosition = transform.position;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        img.raycastTarget = false;
+        image.raycastTarget = false;
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        this.transform.position = eventData.position;
+        this.transform.position = Input.mousePosition;
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
         transform.position = startPosition;
-        img.raycastTarget = true;
+        image.raycastTarget = true;
+    }
+
+    public Vector3 GetStartPosition()
+    {
+        return startPosition;
     }
 
     public void SetStartPosition(Vector3 startPosition)

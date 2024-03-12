@@ -11,6 +11,6 @@ public class BuildManager : Station
 
     public override void StartGame()
     {
-
+        ExitGame();
     }
 }

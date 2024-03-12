@@ -11,6 +11,6 @@ public class MoldManager : Station
 
     public override void StartGame()
     {
-
+        ExitGame();
     }
 }

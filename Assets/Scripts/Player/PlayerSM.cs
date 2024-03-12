@@ -43,8 +43,6 @@ public class PlayerSM : MonoBehaviour
 
     public void ChangeState(PlayerState nextState)
     {
-        Debug.Log("Exiting " + nextState);
-
         // Disable movement if entering mini game
         if (currentPlayerState == PlayerState.CorePlay 
             && nextState != PlayerState.CorePlay)
@@ -60,23 +58,18 @@ public class PlayerSM : MonoBehaviour
         {
             // Enable movement component if exitng mini game
             case PlayerState.CorePlay:
-                Debug.Log("Entering core play");
                 movementComp.enabled = true;
                 break;
             case PlayerState.Build:
-                Debug.Log("Entering build");
                 buildManager.StartGame();
                 break;
             case PlayerState.Assemble:
-                Debug.Log("Entering assemble");
                 assembleManager.StartGame();
                 break;
             case PlayerState.Paint:
-                Debug.Log("Entering paint");
                 paintManager.StartGame();
                 break;
             case PlayerState.Mold:
-                Debug.Log("Entering mold");
                 moldManager.StartGame();
                 break;
             default:

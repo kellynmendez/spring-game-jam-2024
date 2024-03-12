@@ -11,6 +11,6 @@ public class PaintManager : Station
 
     public override void StartGame()
     {
-
+        ExitGame();
     }
 }
