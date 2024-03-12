@@ -26,6 +26,11 @@ public class DropPoint : MonoBehaviour, IDropHandler
         }
     }
 
+    public void SetSlotName(string slotName)
+    {
+        this.slotName = slotName;
+    }
+
     public bool Filled()
     {
         return dropped;
