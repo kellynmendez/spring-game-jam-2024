@@ -14,7 +14,6 @@ public class BuildManager : Station
     [SerializeField] GameObject arrowFilledMold;
 
     private BuildState currentState;
-    private bool weaponChosen = false;
     private GameObject unfilledMold = null;
     private GameObject filledMold = null;
 
@@ -37,6 +36,7 @@ public class BuildManager : Station
     {
         currentState = BuildState.ChoosingMold;
         gameScreen.SetActive(true);
+        chooseMoldsScreen.SetActive(true);
     }
 
     private void Update()
@@ -55,7 +55,6 @@ public class BuildManager : Station
         unfilledMold = swordUnfilledMold;
         filledMold = swordFilledMold;
         SwitchToFillMold();
-        
     }
 
     public void HelmetChosen()
@@ -63,7 +62,6 @@ public class BuildManager : Station
         unfilledMold = helmetUnfilledMold;
         filledMold = helmetFilledMold;
         SwitchToFillMold();
-        
     }
 
     public void ArrowChosen()
@@ -71,7 +69,6 @@ public class BuildManager : Station
         unfilledMold = arrowUnfilledMold;
         filledMold = arrowFilledMold;
         SwitchToFillMold();
-        
     }
 
     private void SwitchToFillMold()
@@ -91,6 +88,7 @@ public class BuildManager : Station
     IEnumerator WaitAfterFill()
     {
         yield return new WaitForSeconds(1f);
+        filledMold.SetActive(false);
         currentState = BuildState.Finished;
         yield break;
     }

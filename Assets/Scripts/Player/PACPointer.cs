@@ -52,7 +52,6 @@ public class PACPointer : MonoBehaviour
             if (objectHit.gameObject.GetComponent<StationUtils>() != null || objectHit.gameObject.GetComponent<Counter>() != null)
             {
                 inputDisabled = true;
-                print(objectHit);
 
                 _targetCollider = objectHit.gameObject.GetComponent<Collider>();
                 _targetCollider.isTrigger = true;
