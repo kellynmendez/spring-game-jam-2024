@@ -37,6 +37,10 @@ public class Customer_Data : MonoBehaviour
 
     public int CompleteOrder(GameObject customer)
     {
+        int scoreIncrease = customer.GetComponent<Customer>()._paymentAmount;
+        _currentScore += scoreIncrease;
+        print("Current Score: " + _currentScore);
+
         bool _wasorderComleted = true;
         customer.GetComponent<Customer>().LeaveCounter(_wasorderComleted);
         _ordersCompleted++;

@@ -14,9 +14,9 @@ public class Customer : MonoBehaviour
     public enum Order { Helmet, Sword, Arrow };
     private Order _order;
     private List<Order> _orders = new List<Order>();
-    private int _paymentAmount = 0;
+    public int _paymentAmount = 0;
     private bool _timerStarted = false;
-    public float _timerTime = 2;
+    public float _timerTime = 5;
     private int _orderNumMax = 3;
     private int _cost = 0;
     public int _helmetCost = 30;
@@ -30,11 +30,17 @@ public class Customer : MonoBehaviour
     private GameObject _counter;
     private Vector3 _counterPosistion;
     private bool _leavingCounter = false;
+    
+    private SpriteRenderer _spriteRender;
+    [SerializeField] Sprite _orderCompletedSprite;
+    [SerializeField] Sprite _orderFailedSprite;
 
     private void Awake()
     {
         _customerData = GameObject.FindObjectOfType(typeof(Customer_Data)) as Customer_Data;
         _agent = GetComponent<NavMeshAgent>();
+        _spriteRender = GetComponentInChildren<SpriteRenderer>();
+        _spriteRender.enabled = false;
     }
 
     public List<Order> GetOrder()
@@ -149,8 +155,7 @@ public class Customer : MonoBehaviour
             _timerTime -= Time.deltaTime;
             if (_timerTime <= 0)
             {
-                _customerData.CompleteOrder(gameObject); //here for testing needs to be moved 
-                // _customerData.FailOrder(gameObject);  <--- this should be here
+                _customerData.FailOrder(gameObject);
                 //print("Timer Ended. Order Failed.");
                 _timerStarted = false;
                 //transform.Translate(0, 0, 15);
@@ -179,8 +184,9 @@ public class Customer : MonoBehaviour
 
     public void ApproachCounter(Transform counter)
     {
-        _agent.SetDestination(counter.GetChild(0).position);
+        _agent.SetDestination(counter.GetChild(2).position);
         _counter = counter.gameObject;
+        _counter.GetComponent<Counter>()._currentCustomer = gameObject;
         _counterPosistion = counter.position;
         _seekingDestination = true;
     }
@@ -189,12 +195,22 @@ public class Customer : MonoBehaviour
         if (wasOrderCompleted == true)
         {
             //happy pop up, walk away, destroy
-             
+            print("order done");
+            _spriteRender.sprite = _orderCompletedSprite;
+            _spriteRender.enabled = true;
         }
         else
         {
             //sadge pop up, walk away, setroy
+            print("order failed");
+            _spriteRender.sprite = _orderFailedSprite;
+            _spriteRender.enabled = true;
         }
+        StartCoroutine(WaitToLeave());
+    }
+    private IEnumerator WaitToLeave()
+    {
+        yield return new WaitForSeconds(1);
         _counter.GetComponent<Counter>()._counterIsEmpty = true;
         _agent.SetDestination(_customerData._customerSpawnPoint.transform.position);
         _seekingDestination = true;
