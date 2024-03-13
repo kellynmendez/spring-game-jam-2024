@@ -1,26 +1,94 @@
+using Mono.Reflection;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AssembleManager : MonoBehaviour
+public class AssembleManager : Station
 {
-    private PlayerSM playerSM;
+    [SerializeField] DropPoint[] swordSlots;
+
+    private AssembleState currentState;
+    private bool isSword = false;
+    private bool isHelmet = false;
+    private bool isArrow = false;
+
+    private enum AssembleState
+    {
+        Inactive,
+        Assembling,
+        Finished
+    }
 
     private void Awake()
     {
         playerSM = FindObjectOfType<PlayerSM>();
+        gameScreen.SetActive(false);
+        currentState = AssembleState.Inactive;
     }
 
-    public void StartGame()
+    public override void StartGame()
     {
-
-
-        // Change back to core game play
-        playerSM.ChangeState(PlayerSM.PlayerState.CorePlay);
+        currentState = AssembleState.Assembling;
+        gameScreen.SetActive(true);
     }
 
-    public void Exit()
+    private void Update()
     {
-        
+        if (currentState == AssembleState.Inactive) 
+            return;
+        else if (currentState == AssembleState.Assembling)
+        {
+            HandleDragInput();
+        }
+        else if (currentState == AssembleState.Finished)
+        {
+            currentState = AssembleState.Inactive;
+            foreach (DropPoint slot in swordSlots)
+            {
+                slot.ResetDropPoint();
+            }
+            ExitGame();
+        }
+    }
+
+    private void HandleDragInput()
+    {
+        bool isAssembled = true;
+        foreach (DropPoint slot in swordSlots)
+        {
+            if (slot.Filled() == false)
+            {
+                isAssembled = false;
+                break;
+            }
+        }
+
+        if (isAssembled)
+        {
+            StartCoroutine(WaitAfterAssembled());
+        }
+    }
+
+    public void SetIsSword(bool newIsSword)
+    {
+        isSword = newIsSword;
+    }
+
+    public void SetIsHelmet(bool newIsHelmet)
+    {
+        isHelmet = newIsHelmet;
+    }
+
+    public void SetIsArrow(bool newIsArrow)
+    {
+        isArrow = newIsArrow;
+    }
+
+
+    IEnumerator WaitAfterAssembled()
+    {
+        yield return new WaitForSeconds(1f);
+        currentState = AssembleState.Finished;
+        yield break;
     }
 }
