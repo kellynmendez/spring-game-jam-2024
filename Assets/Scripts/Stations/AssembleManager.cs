@@ -79,6 +79,10 @@ public class AssembleManager : StationManager
     IEnumerator WaitAfterAssembled()
     {
         yield return new WaitForSeconds(1f);
+        foreach (DropPoint slot in swordSlots)
+        {
+            slot.ResetDropPoint();
+        }
         currentState = AssembleState.Inactive;
         ExitGame();
         yield break;
