@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - PAC_Camera
+  - Build_Camera
+  - Assemble_Camera
+  - Paint_Camera
+  - Mold_Camera
   layers:
   - Default
   - TransparentFX
