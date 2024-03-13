@@ -14,6 +14,7 @@ public class PlayerSM : MonoBehaviour
 
     private PlayerState currentPlayerState;
     private PACPointer movementComp;
+    private PointAndClickMovement pacComp;
     private GameObject weapon = null;
 
     public enum PlayerState
@@ -28,6 +29,7 @@ public class PlayerSM : MonoBehaviour
     private void Awake()
     {
         movementComp = this.transform.GetComponent<PACPointer>();
+        pacComp = this.transform.GetComponent<PointAndClickMovement>();
     }
 
     private void Start()
@@ -45,18 +47,6 @@ public class PlayerSM : MonoBehaviour
     {
         stationManager = newStnMngr;
 
-        // Disable movement if entering mini game
-        if (currentPlayerState == PlayerState.CorePlay 
-            && nextState != PlayerState.CorePlay)
-        {
-            movementComp.enabled = false;
-        }
-        else if (currentPlayerState != PlayerState.CorePlay
-            && nextState == PlayerState.CorePlay)
-        {
-            movementComp.enabled = true;
-        }
-
         // Change state
         currentPlayerState = nextState;
 
@@ -64,6 +54,13 @@ public class PlayerSM : MonoBehaviour
         if (currentPlayerState != PlayerState.CorePlay)
         {
             stationManager.StartGame();
+            movementComp.enabled = false;
+            pacComp.enabled = false;
+        }
+        else if (currentPlayerState == PlayerState.CorePlay)
+        {
+            movementComp.enabled = true;
+            pacComp.enabled = true;
         }
 
         // Start state
