@@ -13,7 +13,7 @@ public abstract class StationManager : MonoBehaviour
     {
         gameScreen.SetActive(false);
         // Change back to core game play
-        playerSM.ChangeState(PlayerSM.PlayerState.CorePlay);
+        playerSM.ChangeState(PlayerSM.PlayerState.CorePlay, null);
         GameObject[] stations = GameObject.FindGameObjectsWithTag("Un-Clickable");
         foreach (GameObject things in stations)
         {

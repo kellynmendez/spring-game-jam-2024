@@ -8,13 +8,9 @@ using UnityEngine.Events;
 public class PlayerSM : MonoBehaviour
 {
     [SerializeField] public GameObject weaponHolder;
-
-    [SerializeField] private BuildManager buildManager;
-    [SerializeField] private AssembleManager assembleManager;
-    [SerializeField] private PaintManager paintManager;
-    [SerializeField] private MoldManager moldManager;
-
     [HideInInspector] public bool carryingWeapon = false;
+
+    private StationManager stationManager = null;
 
     private PlayerState currentPlayerState;
     private PACPointer movementComp;
@@ -45,20 +41,33 @@ public class PlayerSM : MonoBehaviour
         Debug.Log(currentPlayerState);
     }
 
-    public void ChangeState(PlayerState nextState)
+    public void ChangeState(PlayerState nextState, StationManager newStnMngr)
     {
+        stationManager = newStnMngr;
+
         // Disable movement if entering mini game
         if (currentPlayerState == PlayerState.CorePlay 
             && nextState != PlayerState.CorePlay)
         {
             movementComp.enabled = false;
         }
+        else if (currentPlayerState != PlayerState.CorePlay
+            && nextState == PlayerState.CorePlay)
+        {
+            movementComp.enabled = true;
+        }
 
         // Change state
         currentPlayerState = nextState;
 
+        // Change to any of the stations
+        if (currentPlayerState != PlayerState.CorePlay)
+        {
+            stationManager.StartGame();
+        }
+
         // Start state
-        switch (currentPlayerState)
+        /*switch (currentPlayerState)
         {
             // Enable movement component if exitng mini game
             case PlayerState.CorePlay:
@@ -79,7 +88,7 @@ public class PlayerSM : MonoBehaviour
             default:
                 Debug.Log("Error: State doesn't exist");
                 break;
-        }
+        }*/
     }
 
     public GameObject GetWeapon()

@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using static System.Collections.Specialized.BitVector32;
 
 public class StationUtils : MonoBehaviour
 {
@@ -14,6 +13,7 @@ public class StationUtils : MonoBehaviour
     PACPointer PACPointer;
     private Collider destination_col;
     private PlayerSM playerSM;
+    private StationManager stationManager;
     private bool stationOccupied = false;
     private GameObject weaponAtStation = null;
 
@@ -24,6 +24,10 @@ public class StationUtils : MonoBehaviour
         PACPointer = GameObject.FindObjectOfType(typeof(PACPointer)) as PACPointer;
         destination_col = gameObject.GetComponent<Collider>();
         playerSM = FindObjectOfType<PlayerSM>();
+        if (station_type != Station_Type.Counter)
+            stationManager = GetComponent<StationManager>();
+        else
+            stationManager = null;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -56,19 +60,19 @@ public class StationUtils : MonoBehaviour
     {
         if (station == Station_Type.Build)
         {
-            playerSM.ChangeState(PlayerSM.PlayerState.Build);
+            playerSM.ChangeState(PlayerSM.PlayerState.Build, stationManager);
         }
         else if (station == Station_Type.Assemble)
         {
-            playerSM.ChangeState(PlayerSM.PlayerState.Assemble);
+            playerSM.ChangeState(PlayerSM.PlayerState.Assemble, stationManager);
         }
         else if (station == Station_Type.Paint)
         {
-            playerSM.ChangeState(PlayerSM.PlayerState.Paint);
+            playerSM.ChangeState(PlayerSM.PlayerState.Paint, stationManager);
         }
         else if (station == Station_Type.Mold)
         {
-            playerSM.ChangeState(PlayerSM.PlayerState.Mold);
+            playerSM.ChangeState(PlayerSM.PlayerState.Mold, stationManager);
         }
     }
 
