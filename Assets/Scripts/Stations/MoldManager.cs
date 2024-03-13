@@ -24,8 +24,7 @@ public class MoldManager : StationManager
     {
         Inactive,
         ChoosingMold,
-        MakingMold,
-        Finished
+        MakingMold
     }
 
     private void Awake()
@@ -45,6 +44,7 @@ public class MoldManager : StationManager
 
     public override void StartGame()
     {
+        inactive = false;
         currentState = MoldState.ChoosingMold;
         gameScreen.SetActive(true);
         chooseMoldsScreen.SetActive(true);
@@ -57,11 +57,6 @@ public class MoldManager : StationManager
         else if (currentState == MoldState.MakingMold)
         {
             HandleMoldDragInput();
-        }
-        else if (currentState == MoldState.Finished)
-        {
-            currentState = MoldState.Inactive;
-            ExitGame();
         }
     }
 
@@ -117,7 +112,8 @@ public class MoldManager : StationManager
         finishedMold.SetActive(false);
         chooseMoldsScreen.SetActive(true);
         clayBlob.GetComponent<DropPoint>().ResetDropPoint();
-        currentState = MoldState.Finished;
+        currentState = MoldState.Inactive;
+        ExitGame();
         yield break;
     }
 }

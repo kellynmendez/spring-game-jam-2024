@@ -6,18 +6,25 @@ public abstract class StationManager : MonoBehaviour
 {
     [SerializeField] protected GameObject gameScreen;
     protected PlayerSM playerSM;
+    protected bool inactive = true;
 
     public abstract void StartGame();
 
     protected virtual void ExitGame()
     {
-        gameScreen.SetActive(false);
-        // Change back to core game play
-        playerSM.ChangeState(PlayerSM.PlayerState.CorePlay, null);
-        GameObject[] stations = GameObject.FindGameObjectsWithTag("Un-Clickable");
-        foreach (GameObject things in stations)
+        if (!inactive)
         {
-            gameObject.tag = "Clickable";
+            inactive = true;
+            gameScreen.SetActive(false);
+            // Change back to core game play
+            Debug.Log("Ending mini game");
+            playerSM.ChangeState(PlayerSM.PlayerState.CorePlay, null);
+            GameObject[] stations = GameObject.FindGameObjectsWithTag("Un-Clickable");
+            foreach (GameObject things in stations)
+            {
+                gameObject.tag = "Clickable";
+            }
         }
+        
     }
 }

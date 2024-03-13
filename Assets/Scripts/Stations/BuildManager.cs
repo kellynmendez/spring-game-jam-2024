@@ -21,8 +21,7 @@ public class BuildManager : StationManager
     {
         Inactive,
         ChoosingMold,
-        FillingMold,
-        Finished
+        FillingMold
     }
 
     private void Awake()
@@ -34,20 +33,10 @@ public class BuildManager : StationManager
 
     public override void StartGame()
     {
+        inactive = false;
         currentState = BuildState.ChoosingMold;
         gameScreen.SetActive(true);
         chooseMoldsScreen.SetActive(true);
-    }
-
-    private void Update()
-    {
-        if (currentState == BuildState.Inactive)
-            return;
-        else if (currentState == BuildState.Finished)
-        {
-            currentState = BuildState.Inactive;
-            ExitGame();
-        }
     }
 
     public void SwordChosen()
@@ -89,7 +78,8 @@ public class BuildManager : StationManager
     {
         yield return new WaitForSeconds(1f);
         filledMold.SetActive(false);
-        currentState = BuildState.Finished;
+        currentState = BuildState.Inactive;
+        ExitGame();
         yield break;
     }
 }

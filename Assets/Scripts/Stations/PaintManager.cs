@@ -19,8 +19,7 @@ public class PaintManager : StationManager
     private enum PaintState
     {
         Inactive,
-        Painting,
-        Finished
+        Painting
     }
 
     private void Awake()
@@ -32,19 +31,9 @@ public class PaintManager : StationManager
 
     public override void StartGame()
     {
+        inactive = false;
         currentState = PaintState.Painting;
         gameScreen.SetActive(true);
-    }
-
-    private void Update()
-    {
-        if (currentState == PaintState.Inactive)
-            return;
-        else if (currentState == PaintState.Finished)
-        {
-            currentState = PaintState.Inactive;
-            ExitGame();
-        }
     }
 
     public void RedChosen()
@@ -72,7 +61,8 @@ public class PaintManager : StationManager
         swordDefault.SetActive(true);
         swordRed.SetActive(false);
         swordBlue.SetActive(false);
-        currentState = PaintState.Finished;
+        currentState = PaintState.Inactive;
+        ExitGame();
         yield break;
     }
 }

@@ -15,8 +15,7 @@ public class AssembleManager : StationManager
     private enum AssembleState
     {
         Inactive,
-        Assembling,
-        Finished
+        Assembling
     }
 
     private void Awake()
@@ -28,6 +27,7 @@ public class AssembleManager : StationManager
 
     public override void StartGame()
     {
+        inactive = false;
         currentState = AssembleState.Assembling;
         gameScreen.SetActive(true);
     }
@@ -39,15 +39,6 @@ public class AssembleManager : StationManager
         else if (currentState == AssembleState.Assembling)
         {
             HandleDragInput();
-        }
-        else if (currentState == AssembleState.Finished)
-        {
-            currentState = AssembleState.Inactive;
-            foreach (DropPoint slot in swordSlots)
-            {
-                slot.ResetDropPoint();
-            }
-            ExitGame();
         }
     }
 
@@ -88,7 +79,8 @@ public class AssembleManager : StationManager
     IEnumerator WaitAfterAssembled()
     {
         yield return new WaitForSeconds(1f);
-        currentState = AssembleState.Finished;
+        currentState = AssembleState.Inactive;
+        ExitGame();
         yield break;
     }
 }
