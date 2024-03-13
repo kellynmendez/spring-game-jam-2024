@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Station : MonoBehaviour
+public abstract class StationManager : MonoBehaviour
 {
     [SerializeField] protected GameObject gameScreen;
     protected PlayerSM playerSM;

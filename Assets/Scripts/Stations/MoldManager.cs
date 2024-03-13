@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoldManager : Station
+public class MoldManager : StationManager
 {
     // Screen to choose the mold to create
     [SerializeField] GameObject chooseMoldsScreen;

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-public class BuildManager : Station
+public class BuildManager : StationManager
 {
     [SerializeField] GameObject chooseMoldsScreen;
     [SerializeField] GameObject swordUnfilledMold;

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PaintManager : Station
+public class PaintManager : StationManager
 {
     [SerializeField] GameObject swordDefault;
     [SerializeField] GameObject swordRed;

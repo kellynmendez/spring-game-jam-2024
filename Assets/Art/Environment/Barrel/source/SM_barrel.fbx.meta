@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 8fff6609e360e294c89619d5910d02d8
+guid: ab4394af51ce32e49be2fe4bcb37c7a0
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,13 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: M_forge
-    second: {fileID: 2100000, guid: 72c14ceb52e204843b3db7d236c8257f, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: T_forge
-    second: {fileID: 2100000, guid: 72c14ceb52e204843b3db7d236c8257f, type: 2}
+      name: T_barrel
+    second: {fileID: 2100000, guid: 48216e3fc5f52864aa5db81b8e6143de, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
