@@ -14,5 +14,10 @@ public abstract class StationManager : MonoBehaviour
         gameScreen.SetActive(false);
         // Change back to core game play
         playerSM.ChangeState(PlayerSM.PlayerState.CorePlay);
+        GameObject[] stations = GameObject.FindGameObjectsWithTag("Un-Clickable");
+        foreach (GameObject things in stations)
+        {
+            gameObject.tag = "Clickable";
+        }
     }
 }

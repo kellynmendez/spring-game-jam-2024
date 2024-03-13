@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - PAC_Camera
+  - Clickable
+  - Un-Clickable
   layers:
   - Default
   - TransparentFX
