@@ -38,7 +38,7 @@ public class PlayerSM : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(currentPlayerState);
+        //Debug.Log(currentPlayerState);
     }
 
     public void ChangeState(PlayerState nextState)
