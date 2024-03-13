@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AssembleManager : Station
+public class AssembleManager : StationManager
 {
     [SerializeField] DropPoint[] swordSlots;
 

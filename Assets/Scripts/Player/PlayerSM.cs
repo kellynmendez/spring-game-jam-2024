@@ -7,14 +7,18 @@ using UnityEngine.Events;
 [RequireComponent(typeof(PACPointer))]
 public class PlayerSM : MonoBehaviour
 {
-    [SerializeField] BuildManager buildManager;
-    [SerializeField] AssembleManager assembleManager;
-    [SerializeField] PaintManager paintManager;
-    [SerializeField] MoldManager moldManager;
+    [SerializeField] public GameObject weaponHolder;
 
+    [SerializeField] private BuildManager buildManager;
+    [SerializeField] private AssembleManager assembleManager;
+    [SerializeField] private PaintManager paintManager;
+    [SerializeField] private MoldManager moldManager;
+
+    [HideInInspector] public bool carryingWeapon = false;
 
     private PlayerState currentPlayerState;
     private PACPointer movementComp;
+    private GameObject weapon = null;
 
     public enum PlayerState
     {
@@ -76,5 +80,15 @@ public class PlayerSM : MonoBehaviour
                 Debug.Log("Error: State doesn't exist");
                 break;
         }
+    }
+
+    public GameObject GetWeapon()
+    {
+        return weapon;
+    }
+
+    public void SetWeapon(GameObject weapon)
+    {
+        this.weapon = weapon;
     }
 }
