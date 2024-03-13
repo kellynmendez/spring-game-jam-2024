@@ -14,6 +14,7 @@ public class StationUtils : MonoBehaviour
     private Collider destination_col;
     private PlayerSM playerSM;
 
+    public bool _counterIsEmpty;
     // Start is called before the first frame update
     void Start()
     {
@@ -62,7 +63,7 @@ public class StationUtils : MonoBehaviour
         // One of three counters
         else if (station == Station_Type.Counter)
         {
-
+            //get order, if carrying weapon drop off and check if order is complete?
         }
     }
 }
