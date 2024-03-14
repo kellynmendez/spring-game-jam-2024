@@ -7,14 +7,15 @@ using UnityEngine.Events;
 [RequireComponent(typeof(PACPointer))]
 public class PlayerSM : MonoBehaviour
 {
-    [SerializeField] BuildManager buildManager;
-    [SerializeField] AssembleManager assembleManager;
-    [SerializeField] PaintManager paintManager;
-    [SerializeField] MoldManager moldManager;
+    [SerializeField] public Transform weaponHolder;
+    [HideInInspector] public bool carryingWeapon = false;
 
+    private StationManager stationManager = null;
 
     private PlayerState currentPlayerState;
     private PACPointer movementComp;
+    private PointAndClickMovement pacComp;
+    private Weapon weapon = null;
 
     public enum PlayerState
     {
@@ -28,6 +29,7 @@ public class PlayerSM : MonoBehaviour
     private void Awake()
     {
         movementComp = this.transform.GetComponent<PACPointer>();
+        pacComp = this.transform.GetComponent<PointAndClickMovement>();
     }
 
     private void Start()
@@ -38,43 +40,37 @@ public class PlayerSM : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(currentPlayerState);
+        //Debug.Log(currentPlayerState);
     }
 
-    public void ChangeState(PlayerState nextState)
+    public void ChangeState(PlayerState nextState, StationManager newStnMngr)
     {
-        // Disable movement if entering mini game
-        if (currentPlayerState == PlayerState.CorePlay 
-            && nextState != PlayerState.CorePlay)
-        {
-            movementComp.enabled = false;
-        }
+        stationManager = newStnMngr;
 
         // Change state
         currentPlayerState = nextState;
 
-        // Start state
-        switch (currentPlayerState)
+        // Change to any of the stations
+        if (currentPlayerState != PlayerState.CorePlay)
         {
-            // Enable movement component if exitng mini game
-            case PlayerState.CorePlay:
-                movementComp.enabled = true;
-                break;
-            case PlayerState.Build:
-                buildManager.StartGame();
-                break;
-            case PlayerState.Assemble:
-                assembleManager.StartGame();
-                break;
-            case PlayerState.Paint:
-                paintManager.StartGame();
-                break;
-            case PlayerState.Mold:
-                moldManager.StartGame();
-                break;
-            default:
-                Debug.Log("Error: State doesn't exist");
-                break;
+            stationManager.StartGame();
+            movementComp.enabled = false;
+            pacComp.enabled = false;
         }
+        else if (currentPlayerState == PlayerState.CorePlay)
+        {
+            movementComp.enabled = true;
+            pacComp.enabled = true;
+        }
+    }
+
+    public Weapon GetWeapon()
+    {
+        return weapon;
+    }
+
+    public void SetWeapon(Weapon weapon)
+    {
+        this.weapon = weapon;
     }
 }

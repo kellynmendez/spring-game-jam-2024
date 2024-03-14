@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoldManager : Station
+public class MoldManager : StationManager
 {
     // Screen to choose the mold to create
     [SerializeField] GameObject chooseMoldsScreen;
@@ -24,8 +24,7 @@ public class MoldManager : Station
     {
         Inactive,
         ChoosingMold,
-        MakingMold,
-        Finished
+        MakingMold
     }
 
     private void Awake()
@@ -45,6 +44,7 @@ public class MoldManager : Station
 
     public override void StartGame()
     {
+        inactive = false;
         currentState = MoldState.ChoosingMold;
         gameScreen.SetActive(true);
         chooseMoldsScreen.SetActive(true);
@@ -57,11 +57,6 @@ public class MoldManager : Station
         else if (currentState == MoldState.MakingMold)
         {
             HandleMoldDragInput();
-        }
-        else if (currentState == MoldState.Finished)
-        {
-            currentState = MoldState.Inactive;
-            ExitGame();
         }
     }
 
@@ -117,7 +112,8 @@ public class MoldManager : Station
         finishedMold.SetActive(false);
         chooseMoldsScreen.SetActive(true);
         clayBlob.GetComponent<DropPoint>().ResetDropPoint();
-        currentState = MoldState.Finished;
+        currentState = MoldState.Inactive;
+        ExitGame();
         yield break;
     }
 }

@@ -3,8 +3,14 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-public class BuildManager : Station
+public class BuildManager : StationManager
 {
+    [Header("Weapons")]
+    [SerializeField] GameObject swordPrefab;
+    [SerializeField] GameObject helmetPrefab;
+    [SerializeField] GameObject arrowPrefab;
+
+    [Header("UI Objects")]
     [SerializeField] GameObject chooseMoldsScreen;
     [SerializeField] GameObject swordUnfilledMold;
     [SerializeField] GameObject helmetUnfilledMold;
@@ -16,13 +22,14 @@ public class BuildManager : Station
     private BuildState currentState;
     private GameObject unfilledMold = null;
     private GameObject filledMold = null;
+    private GameObject weaponObj = null;
+    private StationUtils station;
 
     private enum BuildState
     {
         Inactive,
         ChoosingMold,
-        FillingMold,
-        Finished
+        FillingMold
     }
 
     private void Awake()
@@ -30,30 +37,24 @@ public class BuildManager : Station
         playerSM = FindObjectOfType<PlayerSM>();
         gameScreen.SetActive(false);
         currentState = BuildState.Inactive;
+        station = GetComponent<StationUtils>();
     }
 
     public override void StartGame()
     {
+        inactive = false;
         currentState = BuildState.ChoosingMold;
         gameScreen.SetActive(true);
         chooseMoldsScreen.SetActive(true);
-    }
-
-    private void Update()
-    {
-        if (currentState == BuildState.Inactive)
-            return;
-        else if (currentState == BuildState.Finished)
-        {
-            currentState = BuildState.Inactive;
-            ExitGame();
-        }
     }
 
     public void SwordChosen()
     {
         unfilledMold = swordUnfilledMold;
         filledMold = swordFilledMold;
+        weaponObj = Instantiate(swordPrefab);
+        station.SetStationOccupied(true, weaponObj.GetComponent<Weapon>());
+        weaponObj.SetActive(false);
         SwitchToFillMold();
     }
 
@@ -61,6 +62,9 @@ public class BuildManager : Station
     {
         unfilledMold = helmetUnfilledMold;
         filledMold = helmetFilledMold;
+        weaponObj = Instantiate(helmetPrefab);
+        station.SetStationOccupied(true, weaponObj.GetComponent<Weapon>());
+        weaponObj.SetActive(false);
         SwitchToFillMold();
     }
 
@@ -68,6 +72,9 @@ public class BuildManager : Station
     {
         unfilledMold = arrowUnfilledMold;
         filledMold = arrowFilledMold;
+        weaponObj = Instantiate(arrowPrefab);
+        station.SetStationOccupied(true, weaponObj.GetComponent<Weapon>());
+        weaponObj.SetActive(false);
         SwitchToFillMold();
     }
 
@@ -88,8 +95,14 @@ public class BuildManager : Station
     IEnumerator WaitAfterFill()
     {
         yield return new WaitForSeconds(1f);
+
+        // Resetting UI
+        weaponObj.SetActive(true);
         filledMold.SetActive(false);
-        currentState = BuildState.Finished;
+        // Setting build state
+        currentState = BuildState.Inactive;
+
+        ExitGame();
         yield break;
     }
 }

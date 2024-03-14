@@ -49,8 +49,14 @@ public class PACPointer : MonoBehaviour
         if (Physics.Raycast(ray, out hit))
         {
             objectHit = hit.transform;
-            if (objectHit.gameObject.GetComponent<StationUtils>() != null || objectHit.gameObject.GetComponent<Counter>() != null)
+            if ((objectHit.gameObject.GetComponent<StationUtils>() != null || objectHit.gameObject.GetComponent<Counter>() != null) && objectHit.gameObject.tag == "Clickable")
             {
+                GameObject [] stations = GameObject.FindGameObjectsWithTag("Clickable");
+                foreach (GameObject things in stations)
+                {
+                    gameObject.tag = "Un-Clickable";
+                }
+                //print("Objecthit = " + );
                 inputDisabled = true;
 
                 _targetCollider = objectHit.gameObject.GetComponent<Collider>();
