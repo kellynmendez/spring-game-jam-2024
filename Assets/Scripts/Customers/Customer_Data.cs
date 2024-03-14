@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class Customer_Data : MonoBehaviour
 {
@@ -15,6 +18,14 @@ public class Customer_Data : MonoBehaviour
     [SerializeField] GameObject _counter02;
     [SerializeField] GameObject _counter03;
 
+    private Text _scoreValue;
+    [SerializeField] Canvas _canvas;
+    [SerializeField] UnityEngine.UI.Image _life01;
+    [SerializeField] UnityEngine.UI.Image _life02;
+    [SerializeField] UnityEngine.UI.Image _life03;
+    [SerializeField] Sprite _brokenHeart;
+    [SerializeField] GameObject _gameOverScreen;
+
     private GameObject _customer = null;
 
     //[SerializeField] GameObject _playerTEST;
@@ -24,6 +35,7 @@ public class Customer_Data : MonoBehaviour
     {
         _currentScore = 0;
         SpawnNewCustomer();
+        _scoreValue = _canvas.GetComponentInChildren<Text>();
     }
 
     // Update is called once per frame
@@ -39,6 +51,7 @@ public class Customer_Data : MonoBehaviour
     {
         int scoreIncrease = customer.GetComponent<Customer>()._paymentAmount;
         _currentScore += scoreIncrease;
+        _scoreValue.text = _currentScore.ToString();
         print("Current Score: " + _currentScore);
 
         bool _wasorderComleted = true;
@@ -53,10 +66,20 @@ public class Customer_Data : MonoBehaviour
         customer.GetComponent<Customer>().LeaveCounter(_wasorderComleted);
 
         _ordersFailed++;
-
-        if (_ordersFailed <= 0)
+        if (_ordersFailed == 1)
         {
-            //Lose the game
+            _life03.sprite = _brokenHeart;
+        }
+        else if(_ordersFailed == 2)
+        {
+            _life02.sprite = _brokenHeart;
+        }
+        else if (_ordersFailed >= 3)
+        {
+            _life01.sprite = _brokenHeart;
+            _gameOverScreen.SetActive(true);
+            Text _finalScoreText = _gameOverScreen.GetComponentInChildren<Text>();
+            _finalScoreText.text = _currentScore.ToString();
         }
     }
     public void SpawnNewCustomer()

@@ -21,6 +21,7 @@ public class DropPoint : MonoBehaviour, IDropHandler
                 origStartPos = draggable.GetStartPosition();
                 draggable.SetStartPosition(this.transform.position);
                 draggable.SetDropped(true);
+                draggable.image.raycastTarget = false;
                 dropped = true;
             }
         }
@@ -41,6 +42,7 @@ public class DropPoint : MonoBehaviour, IDropHandler
         draggable.transform.position = origStartPos;
         draggable.SetStartPosition(origStartPos);
         draggable.SetDropped(false);
+        draggable.image.raycastTarget = true;
         dropped = false;
     }
 }
