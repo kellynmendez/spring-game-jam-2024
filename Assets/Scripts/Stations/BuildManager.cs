@@ -9,14 +9,25 @@ public class BuildManager : StationManager
     [SerializeField] int numSwordsToMoldBreak = 5;
     [SerializeField] int numHelmetsToMoldBreak = 5;
     [SerializeField] int numArrowsToMoldBreak = 5;
+    [HideInInspector] public bool swordMoldActive = true;
+    [HideInInspector] public bool helmetMoldActive = true;
+    [HideInInspector] public bool arrowMoldActive = true;
 
-    [Header("Weapons")]
+    [Header("Weapon Prefabs")]
     [SerializeField] GameObject swordPrefab;
     [SerializeField] GameObject helmetPrefab;
     [SerializeField] GameObject arrowPrefab;
 
-    [Header("UI Objects")]
+    [Header("Choose Mold UI Objects")]
     [SerializeField] GameObject chooseMoldsScreen;
+    [SerializeField] GameObject swordChooseMold;
+    [SerializeField] GameObject helmetChooseMold;
+    [SerializeField] GameObject arrowChooseMold;
+    [SerializeField] GameObject swordGrayedOutMold;
+    [SerializeField] GameObject helmetGrayedOutMold;
+    [SerializeField] GameObject arrowGrayedOutMold;
+
+    [Header("Fill Mold UI Objects")]
     [SerializeField] GameObject swordUnfilledMold;
     [SerializeField] GameObject helmetUnfilledMold;
     [SerializeField] GameObject arrowUnfilledMold;
@@ -64,6 +75,40 @@ public class BuildManager : StationManager
         gameScreen.SetActive(true);
         brokenMoldGroup.SetActive(false);
         chooseMoldsScreen.SetActive(true);
+
+        // Decide if sword can be made
+        if (swordMoldActive)
+        {
+            swordChooseMold.SetActive(true);
+            swordGrayedOutMold.SetActive(false);
+        }
+        else
+        {
+            swordChooseMold.SetActive(false);
+            swordGrayedOutMold.SetActive(true);
+        }
+        // Decide if helmet can be made
+        if (helmetMoldActive)
+        {
+            helmetChooseMold.SetActive(true);
+            helmetGrayedOutMold.SetActive(false);
+        }
+        else
+        {
+            helmetChooseMold.SetActive(false);
+            helmetGrayedOutMold.SetActive(true);
+        }
+        // Decide if arrow can be made
+        if (arrowMoldActive)
+        {
+            arrowChooseMold.SetActive(true);
+            arrowGrayedOutMold.SetActive(false);
+        }
+        else
+        {
+            arrowChooseMold.SetActive(false);
+            arrowGrayedOutMold.SetActive(true);
+        }
     }
 
     public void SwordChosen()
@@ -110,18 +155,24 @@ public class BuildManager : StationManager
     {
         unfilledMold.SetActive(false);
         filledMold.SetActive(true);
-        if (swordCounter == 0) 
+        if (swordCounter == 0 && swordMoldActive) 
         {
+            Debug.Log("breaking sword mold");
+            swordMoldActive = false;
             swordCounter = numSwordsToMoldBreak;
             StartCoroutine(BreakMold(filledMold, swordUnfilledMold, swordBrokenMold));
         }
-        else if (helmetCounter == 0)
+        else if (helmetCounter == 0 && helmetMoldActive)
         {
+            Debug.Log("breaking helmet mold");
+            helmetMoldActive = false;
             helmetCounter = numHelmetsToMoldBreak;
             StartCoroutine(BreakMold(filledMold, helmetUnfilledMold, helmetBrokenMold));
         }
-        else if (arrowCounter == 0)
+        else if (arrowCounter == 0 && arrowMoldActive)
         {
+            Debug.Log("breaking arrow mold");
+            arrowMoldActive = false;
             arrowCounter = numArrowsToMoldBreak;
             StartCoroutine(BreakMold(filledMold, arrowUnfilledMold, arrowBrokenMold));
         }
