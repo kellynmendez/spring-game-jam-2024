@@ -17,7 +17,7 @@ public class Arrow : Weapon
         ShowParts();
     }
 
-    public void ShowParts()
+    public override void ShowParts()
     {
         arrowParts.SetActive(true);
         defaultArrow.SetActive(false);
@@ -25,7 +25,7 @@ public class Arrow : Weapon
         blueArrow.SetActive(false);
     }
 
-    public void ShowDefaultArrow()
+    public override void ShowDefault()
     {
         arrowParts.SetActive(false);
         defaultArrow.SetActive(true);
@@ -33,14 +33,14 @@ public class Arrow : Weapon
         blueArrow.SetActive(false);
     }
 
-    public void PaintArrowRed()
+    public override void PaintRed()
     {
         defaultArrow.SetActive(false);
         redArrow.SetActive(true);
         blueArrow.SetActive(false);
     }
 
-    public void PaintArrowBlue()
+    public override void PaintBlue()
     {
         defaultArrow.SetActive(false);
         redArrow.SetActive(false);

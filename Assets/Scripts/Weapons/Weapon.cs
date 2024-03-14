@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour
+public abstract class Weapon : MonoBehaviour
 {
     [SerializeField] public enum Station_Type { Sword, Helmet, Arrow }
 
@@ -12,6 +12,11 @@ public class Weapon : MonoBehaviour
     {
         playerSM = FindObjectOfType<PlayerSM>();
     }
+
+    public abstract void ShowParts();
+    public abstract void ShowDefault();
+    public abstract void PaintRed();
+    public abstract void PaintBlue();
 
     public void CarryWeapon()
     {
