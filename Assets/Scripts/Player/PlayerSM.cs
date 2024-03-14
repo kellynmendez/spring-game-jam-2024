@@ -45,7 +45,6 @@ public class PlayerSM : MonoBehaviour
 
     public void ChangeState(PlayerState nextState, StationManager newStnMngr)
     {
-        Debug.Log("Changing from " + currentPlayerState + " to " + nextState);
         stationManager = newStnMngr;
 
         // Change state
