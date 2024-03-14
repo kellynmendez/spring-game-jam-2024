@@ -15,9 +15,9 @@ public class StationUtils : MonoBehaviour
     private PlayerSM playerSM;
     private StationManager stationManager;
     private bool stationOccupied = false;
-    private GameObject weaponAtStation = null;
 
-    public bool _counterIsEmpty;
+    [HideInInspector] public Weapon weaponAtStation = null;
+    [HideInInspector] public bool _counterIsEmpty;
 
     void Start()
     {
@@ -32,25 +32,36 @@ public class StationUtils : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // If station is occupied and player is not carrying anything, player picks up weapon
-        if (station_type != Station_Type.Counter && stationOccupied && !playerSM.carryingWeapon)
-        {
-            SetStationOccupied(false, weaponAtStation);
-        }
-        // If station is not occupied and player is carrying weapon, weapon is placed at station
-        else if (station_type != Station_Type.Counter && !stationOccupied && playerSM.carryingWeapon)
+        // If a build OR assemble station and not occupied, player is holding weapon, and weapon is built, can place at station
+        if ((station_type == Station_Type.Build || station_type == Station_Type.Assemble) && !stationOccupied 
+            && playerSM.carryingWeapon && playerSM.GetWeapon().currentState == Weapon.WeaponState.Built)
         {
             SetStationOccupied(true, playerSM.GetWeapon());
         }
+        // If assembly OR paint station not occupied, player is holding weapon, and weapon is assembled, can place at station
+        else if ((station_type == Station_Type.Assemble || station_type == Station_Type.Paint) && !stationOccupied
+            && playerSM.carryingWeapon && playerSM.GetWeapon().currentState == Weapon.WeaponState.Assembled)
+        {
+            SetStationOccupied(true, playerSM.GetWeapon());
+        }
+        // If paint station not occupied, player is holding weapon, and weapon is painted, can place at station
+        else if (station_type == Station_Type.Paint && !stationOccupied
+            && playerSM.carryingWeapon && playerSM.GetWeapon().currentState == Weapon.WeaponState.Painted)
+        {
+            SetStationOccupied(true, playerSM.GetWeapon());
+        }
+
+        // If player is not carrying a weapon, check if a mini game can be started
+        else if (!playerSM.carryingWeapon)
+        {
+            StartMinigame(station_type);
+        }
+
+        // 
         else if (station_type == Station_Type.Counter)
         {
             //get order, if carrying weapon drop off and check if order is complete?
         }
-        else
-        {
-            StartMinigame(station_type);
-        }
-        
         
         destination_col.isTrigger = false;
         PACPointer.inputDisabled = false;
@@ -58,38 +69,44 @@ public class StationUtils : MonoBehaviour
 
     void StartMinigame(Station_Type station)
     {
-        if (station == Station_Type.Build)
+        if (!stationOccupied && station == Station_Type.Build)
         {
             playerSM.ChangeState(PlayerSM.PlayerState.Build, stationManager);
         }
-        else if (station == Station_Type.Assemble)
+        else if (stationOccupied && station == Station_Type.Assemble && weaponAtStation.currentState == Weapon.WeaponState.Built)
         {
             playerSM.ChangeState(PlayerSM.PlayerState.Assemble, stationManager);
         }
-        else if (station == Station_Type.Paint)
+        else if (stationOccupied && station == Station_Type.Paint && weaponAtStation.currentState == Weapon.WeaponState.Assembled)
         {
             playerSM.ChangeState(PlayerSM.PlayerState.Paint, stationManager);
         }
-        else if (station == Station_Type.Mold)
+        else if (station == Station_Type.Mold && !playerSM.carryingWeapon)
         {
             playerSM.ChangeState(PlayerSM.PlayerState.Mold, stationManager);
         }
+        // If station is occupied and player is not carrying anything, player picks up weapon
+        else if (station_type != Station_Type.Counter && station_type != Station_Type.Mold
+            && stationOccupied && !playerSM.carryingWeapon)
+        {
+            SetStationOccupied(false, weaponAtStation);
+        }
     }
 
-    public void SetStationOccupied(bool newOccupied, GameObject weapon)
+    public void SetStationOccupied(bool newOccupied, Weapon weapon)
     {
+        Debug.Log("newOcc = " + newOccupied + " oldOcc = " + stationOccupied);
         // Removing weapon from station and adding to player
         if (stationOccupied && !newOccupied)
         {
-            weapon.transform.parent = playerSM.weaponHolder.transform;
-            playerSM.carryingWeapon = true;
+            Debug.Log("carrying weapon");
+            weapon.CarryWeapon();
             weaponAtStation = null;
         }
         // Moving weapon to station
         else if (!stationOccupied && newOccupied)
         {
-            weapon.transform.parent = weaponPlace.transform;
-            playerSM.carryingWeapon = false;
+            weapon.PlaceWeapon(weaponPlace.transform);
             weaponAtStation = weapon;
         }
 

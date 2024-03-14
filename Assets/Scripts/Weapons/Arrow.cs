@@ -5,45 +5,48 @@ using UnityEngine;
 public class Arrow : Weapon
 {
     public enum ArrowColor { Default, Red, Blue };
-    public ArrowColor arrowColor = ArrowColor.Default;
+    [HideInInspector] public ArrowColor arrowColor = ArrowColor.Default;
 
     [SerializeField] GameObject arrowParts;
     [SerializeField] GameObject defaultArrow;
-    [SerializeField] GameObject redArrow;
-    [SerializeField] GameObject blueArrow;
+    [SerializeField] Material whiteMat;
+    [SerializeField] Material redMat;
+    [SerializeField] Material blueMat;
 
     private void Awake()
     {
         ShowParts();
+        currentState = WeaponState.Built;
+        playerSM = FindObjectOfType<PlayerSM>();
     }
 
     public override void ShowParts()
     {
         arrowParts.SetActive(true);
         defaultArrow.SetActive(false);
-        redArrow.SetActive(false);
-        blueArrow.SetActive(false);
     }
 
     public override void ShowDefault()
     {
         arrowParts.SetActive(false);
         defaultArrow.SetActive(true);
-        redArrow.SetActive(false);
-        blueArrow.SetActive(false);
+        defaultArrow.transform.GetChild(0).GetComponent<MeshRenderer>().material = whiteMat;
+        arrowColor = ArrowColor.Default;
     }
 
     public override void PaintRed()
     {
-        defaultArrow.SetActive(false);
-        redArrow.SetActive(true);
-        blueArrow.SetActive(false);
+        arrowParts.SetActive(false);
+        defaultArrow.SetActive(true);
+        defaultArrow.transform.GetChild(0).GetComponent<MeshRenderer>().material = redMat;
+        arrowColor = ArrowColor.Red;
     }
 
     public override void PaintBlue()
     {
-        defaultArrow.SetActive(false);
-        redArrow.SetActive(false);
-        blueArrow.SetActive(true);
+        arrowParts.SetActive(false);
+        defaultArrow.SetActive(true);
+        defaultArrow.transform.GetChild(0).GetComponent<MeshRenderer>().material = blueMat;
+        arrowColor = ArrowColor.Blue;
     }
 }

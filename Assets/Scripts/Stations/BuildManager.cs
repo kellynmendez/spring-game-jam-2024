@@ -5,6 +5,12 @@ using UnityEngine;
 
 public class BuildManager : StationManager
 {
+    [Header("Weapons")]
+    [SerializeField] GameObject swordPrefab;
+    [SerializeField] GameObject helmetPrefab;
+    [SerializeField] GameObject arrowPrefab;
+
+    [Header("UI Objects")]
     [SerializeField] GameObject chooseMoldsScreen;
     [SerializeField] GameObject swordUnfilledMold;
     [SerializeField] GameObject helmetUnfilledMold;
@@ -16,6 +22,8 @@ public class BuildManager : StationManager
     private BuildState currentState;
     private GameObject unfilledMold = null;
     private GameObject filledMold = null;
+    private GameObject weaponObj = null;
+    private StationUtils station;
 
     private enum BuildState
     {
@@ -29,6 +37,7 @@ public class BuildManager : StationManager
         playerSM = FindObjectOfType<PlayerSM>();
         gameScreen.SetActive(false);
         currentState = BuildState.Inactive;
+        station = GetComponent<StationUtils>();
     }
 
     public override void StartGame()
@@ -43,6 +52,9 @@ public class BuildManager : StationManager
     {
         unfilledMold = swordUnfilledMold;
         filledMold = swordFilledMold;
+        weaponObj = Instantiate(swordPrefab);
+        station.SetStationOccupied(true, weaponObj.GetComponent<Weapon>());
+        weaponObj.SetActive(false);
         SwitchToFillMold();
     }
 
@@ -50,6 +62,9 @@ public class BuildManager : StationManager
     {
         unfilledMold = helmetUnfilledMold;
         filledMold = helmetFilledMold;
+        weaponObj = Instantiate(helmetPrefab);
+        station.SetStationOccupied(true, weaponObj.GetComponent<Weapon>());
+        weaponObj.SetActive(false);
         SwitchToFillMold();
     }
 
@@ -57,6 +72,9 @@ public class BuildManager : StationManager
     {
         unfilledMold = arrowUnfilledMold;
         filledMold = arrowFilledMold;
+        weaponObj = Instantiate(arrowPrefab);
+        station.SetStationOccupied(true, weaponObj.GetComponent<Weapon>());
+        weaponObj.SetActive(false);
         SwitchToFillMold();
     }
 
@@ -77,8 +95,13 @@ public class BuildManager : StationManager
     IEnumerator WaitAfterFill()
     {
         yield return new WaitForSeconds(1f);
+
+        // Resetting UI
+        weaponObj.SetActive(true);
         filledMold.SetActive(false);
+        // Setting build state
         currentState = BuildState.Inactive;
+
         ExitGame();
         yield break;
     }

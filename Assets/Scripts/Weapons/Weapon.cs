@@ -4,14 +4,10 @@ using UnityEngine;
 
 public abstract class Weapon : MonoBehaviour
 {
-    [SerializeField] public enum Station_Type { Sword, Helmet, Arrow }
+    public enum WeaponState { Built, Assembled, Painted };
+    public WeaponState currentState;
 
-    private PlayerSM playerSM;
-
-    private void Awake()
-    {
-        playerSM = FindObjectOfType<PlayerSM>();
-    }
+    protected PlayerSM playerSM;
 
     public abstract void ShowParts();
     public abstract void ShowDefault();
@@ -20,11 +16,26 @@ public abstract class Weapon : MonoBehaviour
 
     public void CarryWeapon()
     {
-        this.transform.parent = playerSM.weaponHolder.transform;
+        this.transform.SetParent(playerSM.weaponHolder, false);
+        Extensions.SetGlobalScale(transform, Vector3.one);
+        playerSM.SetWeapon(this);
+        playerSM.carryingWeapon = true;
     }
 
-    public void PlaceWeapon(StationUtils station)
+    public void PlaceWeapon(Transform trnsfrm)
     {
-        this.transform.parent = station.weaponPlace.transform;
+        this.transform.SetParent(trnsfrm, false);
+        Extensions.SetGlobalScale(transform, Vector3.one);
+        playerSM.SetWeapon(null);
+        playerSM.carryingWeapon = false;
+    }
+}
+
+public static class Extensions
+{
+    public static void SetGlobalScale(this Transform transform, Vector3 globalScale)
+    {
+        transform.localScale = Vector3.one;
+        transform.localScale = new Vector3(globalScale.x / transform.lossyScale.x, globalScale.y / transform.lossyScale.y, globalScale.z / transform.lossyScale.z);
     }
 }

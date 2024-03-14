@@ -1,4 +1,3 @@
-using Mono.Reflection;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,11 +5,16 @@ using UnityEngine;
 public class AssembleManager : StationManager
 {
     [SerializeField] DropPoint[] swordSlots;
+    [SerializeField] DropPoint[] helmetSlots;
+    [SerializeField] DropPoint[] arrowSlots;
+    [SerializeField] GameObject swordGroup;
+    [SerializeField] GameObject helmetGroup;
+    [SerializeField] GameObject arrowGroup;
 
     private AssembleState currentState;
-    private bool isSword = false;
-    private bool isHelmet = false;
-    private bool isArrow = false;
+    private Weapon stationWeapon = null;
+    private DropPoint[] dropPoints = null;
+    private bool finishedAssembly = false;
 
     private enum AssembleState
     {
@@ -30,6 +34,30 @@ public class AssembleManager : StationManager
         inactive = false;
         currentState = AssembleState.Assembling;
         gameScreen.SetActive(true);
+        stationWeapon = GetComponent<StationUtils>().weaponAtStation;
+        finishedAssembly = false;
+
+        if (stationWeapon is Sword)
+        {
+            dropPoints = swordSlots;
+            swordGroup.SetActive(true);
+            helmetGroup.SetActive(false);
+            arrowGroup.SetActive(false);
+        }
+        else if (stationWeapon is Helmet)
+        {
+            dropPoints = helmetSlots;
+            swordGroup.SetActive(false);
+            helmetGroup.SetActive(true);
+            arrowGroup.SetActive(false);
+        }
+        else if (stationWeapon is Arrow)
+        {
+            dropPoints = arrowSlots;
+            swordGroup.SetActive(false);
+            helmetGroup.SetActive(false);
+            arrowGroup.SetActive(true);
+        }
     }
 
     private void Update()
@@ -38,14 +66,17 @@ public class AssembleManager : StationManager
             return;
         else if (currentState == AssembleState.Assembling)
         {
-            HandleDragInput();
+            if (dropPoints != null)
+            {
+                HandleDragInput();
+            }
         }
     }
 
     private void HandleDragInput()
     {
         bool isAssembled = true;
-        foreach (DropPoint slot in swordSlots)
+        foreach (DropPoint slot in dropPoints)
         {
             if (slot.Filled() == false)
             {
@@ -54,36 +85,30 @@ public class AssembleManager : StationManager
             }
         }
 
-        if (isAssembled)
+        if (isAssembled && !finishedAssembly)
         {
+            finishedAssembly = true;
             StartCoroutine(WaitAfterAssembled());
         }
     }
 
-    public void SetIsSword(bool newIsSword)
-    {
-        isSword = newIsSword;
-    }
-
-    public void SetIsHelmet(bool newIsHelmet)
-    {
-        isHelmet = newIsHelmet;
-    }
-
-    public void SetIsArrow(bool newIsArrow)
-    {
-        isArrow = newIsArrow;
-    }
-
-
     IEnumerator WaitAfterAssembled()
     {
         yield return new WaitForSeconds(1f);
-        foreach (DropPoint slot in swordSlots)
+
+        // Resetting UI
+        foreach (DropPoint slot in dropPoints)
         {
             slot.ResetDropPoint();
         }
+        dropPoints = null;
+        // Setting weapon state and showing fully assembled weapon
+        stationWeapon.currentState = Weapon.WeaponState.Assembled;
+        stationWeapon.ShowDefault();
+        stationWeapon = null;
+        // Changing assemble state
         currentState = AssembleState.Inactive;
+
         ExitGame();
         yield break;
     }
