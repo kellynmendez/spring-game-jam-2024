@@ -27,6 +27,9 @@ public class Counter : MonoBehaviour
     {
         gameObject.GetComponent<Collider>().isTrigger = false;
         PACPointer.inputDisabled = false;
-        _customerData.CompleteOrder(_currentCustomer);
+        if (_currentCustomer != null)
+        {
+            _customerData.CompleteOrder(_currentCustomer);
+        }
     }
 }

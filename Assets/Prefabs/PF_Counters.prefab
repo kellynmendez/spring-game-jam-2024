@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8701930010457201136}
   - component: {fileID: 627240845809088647}
   - component: {fileID: 7866340677246347669}
+  - component: {fileID: 8444485349776271660}
   m_Layer: 0
   m_Name: PF_Counters
   m_TagString: Clickable
@@ -71,6 +72,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _counterIsEmpty: 1
   _currentCustomer: {fileID: 0}
+--- !u!114 &8444485349776271660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3525999664251020122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79090bb54aa5c8a4e82726576e04a69b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  station_type: 4
+  weaponPlace: {fileID: 0}
+  weaponAtStation: {fileID: 0}
+  _counterIsEmpty: 0
 --- !u!1 &3988638071522167285
 GameObject:
   m_ObjectHideFlags: 0
