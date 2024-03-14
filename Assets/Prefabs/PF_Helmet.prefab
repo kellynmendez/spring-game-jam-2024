@@ -49,10 +49,10 @@ MonoBehaviour:
   currentState: 0
   swordColor: 0
   helmetParts: {fileID: 7936537646618670423}
-  defaultHelmet: {fileID: 6831916520224963634}
-  whiteMat: {fileID: 2100000, guid: b13c0696a0c2d2e4fb6a951359cb8d56, type: 2}
-  redMat: {fileID: 2100000, guid: fc77f10d529e3b741b1a854bb97c1004, type: 2}
-  blueMat: {fileID: 2100000, guid: db6fdb3ec1ea13944b8a81e4fa26245f, type: 2}
+  defaultHelmet: {fileID: 2756832695910163094}
+  whiteMat: {fileID: 2100000, guid: a8f4a20513adb704d93694552c8db53e, type: 2}
+  redMat: {fileID: 2100000, guid: e4bdb2a1a746f0c45b81ba0a1ce0f451, type: 2}
+  blueMat: {fileID: 2100000, guid: ca83235fd51d31948ba113daf827219b, type: 2}
 --- !u!1 &6831916520224963634
 GameObject:
   m_ObjectHideFlags: 0
@@ -187,6 +187,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb8e6a92ad288ab499662f5db4d1f7fd, type: 3}
+--- !u!1 &2756832695910163094 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 265174383693435412, guid: fb8e6a92ad288ab499662f5db4d1f7fd, type: 3}
+  m_PrefabInstance: {fileID: 2732605293786361986}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7848806260436158412 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5260386595656447822, guid: fb8e6a92ad288ab499662f5db4d1f7fd, type: 3}
