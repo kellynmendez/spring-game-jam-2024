@@ -52,6 +52,7 @@ public class BuildManager : StationManager
     private int swordCounter;
     private int helmetCounter;
     private int arrowCounter;
+    private MoldManager moldManager;
 
     private enum BuildState
     {
@@ -69,6 +70,7 @@ public class BuildManager : StationManager
         swordCounter = numSwordsToMoldBreak;
         helmetCounter = numHelmetsToMoldBreak;
         arrowCounter = numArrowsToMoldBreak;
+        moldManager = FindObjectOfType<MoldManager>();
     }
 
     public override void StartGame()
@@ -160,23 +162,23 @@ public class BuildManager : StationManager
         filledMold.SetActive(true);
         if (swordCounter == 0) 
         {
-            Debug.Log("breaking sword mold");
             swordMoldActive = false;
             swordCounter = numSwordsToMoldBreak;
+            moldManager.canMakeSwordMold = true;
             StartCoroutine(BreakMold(filledMold, swordUnbrokenMold, swordBrokenMold));
         }
         else if (helmetCounter == 0)
         {
-            Debug.Log("breaking helmet mold");
             helmetMoldActive = false;
             helmetCounter = numHelmetsToMoldBreak;
+            moldManager.canMakeHelmetMold = true;
             StartCoroutine(BreakMold(filledMold, helmetUnbrokenMold, helmetBrokenMold));
         }
         else if (arrowCounter == 0)
         {
-            Debug.Log("breaking arrow mold");
             arrowMoldActive = false;
             arrowCounter = numArrowsToMoldBreak;
+            moldManager.canMakeArrowMold = true;
             StartCoroutine(BreakMold(filledMold, arrowUnbrokenMold, arrowBrokenMold));
         }
         else
