@@ -155,21 +155,21 @@ public class BuildManager : StationManager
     {
         unfilledMold.SetActive(false);
         filledMold.SetActive(true);
-        if (swordCounter == 0 && swordMoldActive) 
+        if (swordCounter == 0) 
         {
             Debug.Log("breaking sword mold");
             swordMoldActive = false;
             swordCounter = numSwordsToMoldBreak;
             StartCoroutine(BreakMold(filledMold, swordUnfilledMold, swordBrokenMold));
         }
-        else if (helmetCounter == 0 && helmetMoldActive)
+        else if (helmetCounter == 0)
         {
             Debug.Log("breaking helmet mold");
             helmetMoldActive = false;
             helmetCounter = numHelmetsToMoldBreak;
             StartCoroutine(BreakMold(filledMold, helmetUnfilledMold, helmetBrokenMold));
         }
-        else if (arrowCounter == 0 && arrowMoldActive)
+        else if (arrowCounter == 0)
         {
             Debug.Log("breaking arrow mold");
             arrowMoldActive = false;
