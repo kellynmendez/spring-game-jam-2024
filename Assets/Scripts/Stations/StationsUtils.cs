@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class StationUtils : MonoBehaviour
 {
-    public enum Station_Type {Build, Assemble, Paint, Mold, Counter}
+    public enum Station_Type {Build, Assemble, Paint, Mold, Trash, Counter}
     public Station_Type station_type;
 
     [SerializeField] public GameObject weaponPlace;
@@ -50,12 +50,19 @@ public class StationUtils : MonoBehaviour
         {
             SetStationOccupied(true, playerSM.GetWeapon());
         }
+
+        else if (station_type == Station_Type.Trash && playerSM.carryingWeapon)
+        {
+            SetStationOccupied(true, playerSM.GetWeapon());
+        }
+
         else if (station_type == Station_Type.Counter && gameObject.GetComponent<Counter>()._counterIsEmpty == false
-    && playerSM.carryingWeapon && playerSM.GetWeapon().currentState == Weapon.WeaponState.Painted)
+                && playerSM.carryingWeapon && playerSM.GetWeapon().currentState == Weapon.WeaponState.Painted)
         {
             //get order, if carrying weapon drop off and check if order is complete?
             SetStationOccupied(true, playerSM.GetWeapon());
         }
+        
         // If player is not carrying a weapon, check if a mini game can be started
         else if (!playerSM.carryingWeapon)
         {
@@ -101,14 +108,28 @@ public class StationUtils : MonoBehaviour
             Debug.Log("carrying weapon");
             weapon.CarryWeapon();
             weaponAtStation = null;
+            this.stationOccupied = newOccupied;
         }
         // Moving weapon to station
         else if (!stationOccupied && newOccupied)
         {
-            weapon.PlaceWeapon(weaponPlace.transform);
-            weaponAtStation = weapon;
+            if (station_type != Station_Type.Trash)
+            {
+                weapon.PlaceWeapon(weaponPlace.transform);
+                weaponAtStation = weapon;
+                this.stationOccupied = newOccupied;
+            }
+            else
+            {
+                weapon.PlaceWeapon(weaponPlace.transform);
+                StartCoroutine(TrashWeapon(weapon.gameObject));
+            }
         }
+    }
 
-        this.stationOccupied = newOccupied;
+    IEnumerator TrashWeapon(GameObject weapon)
+    {
+        yield return new WaitForSeconds(1);
+        Destroy(weapon);
     }
 }
