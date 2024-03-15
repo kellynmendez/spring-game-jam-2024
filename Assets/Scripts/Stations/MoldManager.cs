@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class MoldManager : StationManager
 {
-    [HideInInspector] public bool canMakeSwordMold = false;
-    [HideInInspector] public bool canMakeHelmetMold = false;
-    [HideInInspector] public bool canMakeArrowMold = false;
+    [HideInInspector] public bool canMakeSwordMold;
+    [HideInInspector] public bool canMakeHelmetMold;
+    [HideInInspector] public bool canMakeArrowMold;
 
     [Header("Choose Mold UI")]
     // Screen to choose the mold to create
@@ -55,6 +55,10 @@ public class MoldManager : StationManager
         finishedSwordMold.SetActive(false);
         finishedHelmetMold.SetActive(false);
         finishedArrowMold.SetActive(false);
+
+        canMakeSwordMold = false;
+        canMakeHelmetMold = false;
+        canMakeArrowMold = false;
     }
 
     public override void StartGame()
@@ -114,6 +118,7 @@ public class MoldManager : StationManager
         moldCutter = swordCutter;
         finishedMold = finishedSwordMold;
         buildManager.swordMoldActive = true;
+        canMakeSwordMold = false;
         SwitchToMakeMold();
     }
 
@@ -122,6 +127,7 @@ public class MoldManager : StationManager
         moldCutter = helmetCutter;
         finishedMold = finishedHelmetMold;
         buildManager.helmetMoldActive = true;
+        canMakeHelmetMold = false;
         SwitchToMakeMold();
     }
 
@@ -130,6 +136,7 @@ public class MoldManager : StationManager
         moldCutter = arrowCutter;
         finishedMold = finishedArrowMold;
         buildManager.arrowMoldActive = true;
+        canMakeArrowMold = false;
         SwitchToMakeMold();
     }
 
