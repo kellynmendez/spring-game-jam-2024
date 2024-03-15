@@ -29,7 +29,7 @@ public class Counter : MonoBehaviour
         PACPointer.inputDisabled = false;
         if (_currentCustomer != null)
         {
-            _customerData.CompleteOrder(_currentCustomer);
+            //_customerData.CompleteOrder(_currentCustomer);
         }
     }
 }
