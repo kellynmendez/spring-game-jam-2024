@@ -37,6 +37,9 @@ public class BuildManager : StationManager
 
     [Header("Broken Mold UI")]
     [SerializeField] GameObject brokenMoldGroup;
+    [SerializeField] GameObject swordUnbrokenMold;
+    [SerializeField] GameObject helmetUnbrokenMold;
+    [SerializeField] GameObject arrowUnbrokenMold;
     [SerializeField] GameObject swordBrokenMold;
     [SerializeField] GameObject helmetBrokenMold;
     [SerializeField] GameObject arrowBrokenMold;
@@ -160,21 +163,21 @@ public class BuildManager : StationManager
             Debug.Log("breaking sword mold");
             swordMoldActive = false;
             swordCounter = numSwordsToMoldBreak;
-            StartCoroutine(BreakMold(filledMold, swordUnfilledMold, swordBrokenMold));
+            StartCoroutine(BreakMold(filledMold, swordUnbrokenMold, swordBrokenMold));
         }
         else if (helmetCounter == 0)
         {
             Debug.Log("breaking helmet mold");
             helmetMoldActive = false;
             helmetCounter = numHelmetsToMoldBreak;
-            StartCoroutine(BreakMold(filledMold, helmetUnfilledMold, helmetBrokenMold));
+            StartCoroutine(BreakMold(filledMold, helmetUnbrokenMold, helmetBrokenMold));
         }
         else if (arrowCounter == 0)
         {
             Debug.Log("breaking arrow mold");
             arrowMoldActive = false;
             arrowCounter = numArrowsToMoldBreak;
-            StartCoroutine(BreakMold(filledMold, arrowUnfilledMold, arrowBrokenMold));
+            StartCoroutine(BreakMold(filledMold, arrowUnbrokenMold, arrowBrokenMold));
         }
         else
         {
