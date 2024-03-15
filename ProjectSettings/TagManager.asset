@@ -7,6 +7,10 @@ TagManager:
   - PAC_Camera
   - Clickable
   - Un-Clickable
+  - Build
+  - Assemble
+  - Paint
+  - Mold
   layers:
   - Default
   - TransparentFX

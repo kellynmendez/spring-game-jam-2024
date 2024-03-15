@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2212794136037287867}
   m_Layer: 0
-  m_Name: PF_SwordCMP
+  m_Name: PF_SwordCMP_Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -95,7 +95,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 2ddcf92c9fb39f242b748d2a815b306e, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 526b2278e245f3c4192f7394e3f06541, type: 2}
+      objectReference: {fileID: 2100000, guid: 14aebae722856c745b67abc34dd5c616, type: 2}
     - target: {fileID: 919132149155446097, guid: 2ddcf92c9fb39f242b748d2a815b306e, type: 3}
       propertyPath: m_Name
       value: SM_SwordComplete
