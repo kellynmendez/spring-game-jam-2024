@@ -50,17 +50,16 @@ public class StationUtils : MonoBehaviour
         {
             SetStationOccupied(true, playerSM.GetWeapon());
         }
-
+        else if (station_type == Station_Type.Counter && gameObject.GetComponent<Counter>()._counterIsEmpty == false
+    && playerSM.carryingWeapon && playerSM.GetWeapon().currentState == Weapon.WeaponState.Painted)
+        {
+            //get order, if carrying weapon drop off and check if order is complete?
+            SetStationOccupied(true, playerSM.GetWeapon());
+        }
         // If player is not carrying a weapon, check if a mini game can be started
         else if (!playerSM.carryingWeapon)
         {
             StartMinigame(station_type);
-        }
-
-        // 
-        else if (station_type == Station_Type.Counter)
-        {
-            //get order, if carrying weapon drop off and check if order is complete?
         }
         
         destination_col.isTrigger = false;
