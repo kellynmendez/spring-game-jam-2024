@@ -6,6 +6,8 @@ public abstract class Weapon : MonoBehaviour
 {
     public enum WeaponState { Built, Assembled, Painted };
     public WeaponState currentState;
+    public enum WeaponColor { Default, Red, Blue };
+    public WeaponColor weaponColor = WeaponColor.Default;
 
     protected PlayerSM playerSM;
 

@@ -124,7 +124,7 @@ public class BuildManager : StationManager
 
     public void HelmetChosen()
     {
-        swordCounter--;
+        helmetCounter--;
         unfilledMold = helmetUnfilledMold;
         filledMold = helmetFilledMold;
         weaponObj = Instantiate(helmetPrefab);
@@ -202,6 +202,9 @@ public class BuildManager : StationManager
 
         // Resetting UI
         brokenMoldGroup.SetActive(false);
+        swordBrokenMold.SetActive(false);
+        helmetBrokenMold.SetActive(false);
+        arrowBrokenMold.SetActive(false);
         weaponObj.SetActive(true);
         filledMold.SetActive(false);
         // Setting build state
