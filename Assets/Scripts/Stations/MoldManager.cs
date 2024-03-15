@@ -4,21 +4,35 @@ using UnityEngine;
 
 public class MoldManager : StationManager
 {
+    [HideInInspector] public bool canMakeSwordMold = false;
+    [HideInInspector] public bool canMakeHelmetMold = false;
+    [HideInInspector] public bool canMakeArrowMold = false;
+
+    [Header("Choose Mold UI")]
     // Screen to choose the mold to create
     [SerializeField] GameObject chooseMoldsScreen;
+    [SerializeField] GameObject chooseSwordMold;
+    [SerializeField] GameObject chooseHelmetMold;
+    [SerializeField] GameObject chooseArrowMold;
+    [SerializeField] GameObject swordGrayedOutMold;
+    [SerializeField] GameObject helmetGrayedOutMold;
+    [SerializeField] GameObject arrowGrayedOutMold;
+
+    [Header("Create Mold UI")]
     // Cutter images and clay to cut
     [SerializeField] GameObject swordCutter;
     [SerializeField] GameObject helmetCutter;
     [SerializeField] GameObject arrowCutter;
     [SerializeField] GameObject clayBlob;
     // Finished mold images
-    [SerializeField] GameObject swordMold;
-    [SerializeField] GameObject helmetMold;
-    [SerializeField] GameObject arrowMold;
+    [SerializeField] GameObject finishedSwordMold;
+    [SerializeField] GameObject finishedHelmetMold;
+    [SerializeField] GameObject finishedArrowMold;
 
     private MoldState currentState;
     private GameObject moldCutter = null;
     private GameObject finishedMold = null;
+    private BuildManager buildManager;
 
     private enum MoldState
     {
@@ -31,15 +45,16 @@ public class MoldManager : StationManager
     {
         playerSM = FindObjectOfType<PlayerSM>();
         currentState = MoldState.Inactive;
+        buildManager = FindObjectOfType<BuildManager>();
         // Default all screens that shouldn't be active
         gameScreen.SetActive(false);
         swordCutter.SetActive(false);
         helmetCutter.SetActive(false);
         arrowCutter.SetActive(false);
         clayBlob.SetActive(false);
-        swordMold.SetActive(false);
-        helmetMold.SetActive(false);
-        arrowMold.SetActive(false);
+        finishedSwordMold.SetActive(false);
+        finishedHelmetMold.SetActive(false);
+        finishedArrowMold.SetActive(false);
     }
 
     public override void StartGame()
@@ -48,6 +63,40 @@ public class MoldManager : StationManager
         currentState = MoldState.ChoosingMold;
         gameScreen.SetActive(true);
         chooseMoldsScreen.SetActive(true);
+
+        // Decide if sword can be made
+        if (canMakeSwordMold)
+        {
+            chooseSwordMold.SetActive(true);
+            swordGrayedOutMold.SetActive(false);
+        }
+        else
+        {
+            chooseSwordMold.SetActive(false);
+            swordGrayedOutMold.SetActive(true);
+        }
+        // Decide if helmet can be made
+        if (canMakeHelmetMold)
+        {
+            chooseHelmetMold.SetActive(true);
+            helmetGrayedOutMold.SetActive(false);
+        }
+        else
+        {
+            chooseHelmetMold.SetActive(false);
+            helmetGrayedOutMold.SetActive(true);
+        }
+        // Decide if arrow can be made
+        if (canMakeArrowMold)
+        {
+            chooseArrowMold.SetActive(true);
+            arrowGrayedOutMold.SetActive(false);
+        }
+        else
+        {
+            chooseArrowMold.SetActive(false);
+            arrowGrayedOutMold.SetActive(true);
+        }
     }
 
     private void Update()
@@ -63,21 +112,24 @@ public class MoldManager : StationManager
     public void SwordChosen()
     {
         moldCutter = swordCutter;
-        finishedMold = swordMold;
+        finishedMold = finishedSwordMold;
+        buildManager.swordMoldActive = true;
         SwitchToMakeMold();
     }
 
     public void HelmetChosen()
     {
         moldCutter = helmetCutter;
-        finishedMold = helmetMold;
+        finishedMold = finishedHelmetMold;
+        buildManager.helmetMoldActive = true;
         SwitchToMakeMold();
     }
 
     public void ArrowChosen()
     {
         moldCutter = arrowCutter;
-        finishedMold = arrowMold;
+        finishedMold = finishedArrowMold;
+        buildManager.arrowMoldActive = true;
         SwitchToMakeMold();
     }
 

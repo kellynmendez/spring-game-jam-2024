@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class Sword : Weapon
 {
-    public enum SwordColor { Default, Red, Blue };
-    [HideInInspector] public SwordColor swordColor = SwordColor.Default;
-
     [SerializeField] GameObject swordParts;
     [SerializeField] GameObject defaultSword;
     [SerializeField] Material whiteMat;
@@ -31,7 +28,7 @@ public class Sword : Weapon
         swordParts.SetActive(false);
         defaultSword.SetActive(true);
         defaultSword.transform.GetChild(0).GetComponent<MeshRenderer>().material = whiteMat;
-        swordColor = SwordColor.Default;
+        weaponColor = WeaponColor.Default;
     }
 
     public override void PaintRed()
@@ -39,7 +36,7 @@ public class Sword : Weapon
         swordParts.SetActive(false);
         defaultSword.SetActive(true);
         defaultSword.transform.GetChild(0).GetComponent<MeshRenderer>().material = redMat;
-        swordColor = SwordColor.Red;
+        weaponColor = WeaponColor.Red;
     }
 
     public override void PaintBlue()
@@ -47,6 +44,6 @@ public class Sword : Weapon
         swordParts.SetActive(false);
         defaultSword.SetActive(true);
         defaultSword.transform.GetChild(0).GetComponent<MeshRenderer>().material = blueMat;
-        swordColor = SwordColor.Blue;
+        weaponColor = WeaponColor.Blue;
     }
 }

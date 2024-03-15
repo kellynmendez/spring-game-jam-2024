@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class Arrow : Weapon
 {
-    public enum ArrowColor { Default, Red, Blue };
-    [HideInInspector] public ArrowColor arrowColor = ArrowColor.Default;
-
     [SerializeField] GameObject arrowParts;
     [SerializeField] GameObject defaultArrow;
     [SerializeField] Material whiteMat;
@@ -31,7 +28,7 @@ public class Arrow : Weapon
         arrowParts.SetActive(false);
         defaultArrow.SetActive(true);
         defaultArrow.transform.GetChild(0).GetComponent<MeshRenderer>().material = whiteMat;
-        arrowColor = ArrowColor.Default;
+        weaponColor = WeaponColor.Default;
     }
 
     public override void PaintRed()
@@ -39,7 +36,7 @@ public class Arrow : Weapon
         arrowParts.SetActive(false);
         defaultArrow.SetActive(true);
         defaultArrow.transform.GetChild(0).GetComponent<MeshRenderer>().material = redMat;
-        arrowColor = ArrowColor.Red;
+        weaponColor = WeaponColor.Red;
     }
 
     public override void PaintBlue()
@@ -47,6 +44,6 @@ public class Arrow : Weapon
         arrowParts.SetActive(false);
         defaultArrow.SetActive(true);
         defaultArrow.transform.GetChild(0).GetComponent<MeshRenderer>().material = blueMat;
-        arrowColor = ArrowColor.Blue;
+        weaponColor = WeaponColor.Blue;
     }
 }

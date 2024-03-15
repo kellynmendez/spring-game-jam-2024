@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class Helmet : Weapon
 {
-    public enum HelmetColor { Default, Red, Blue };
-    [HideInInspector] public HelmetColor swordColor = HelmetColor.Default;
-
     [SerializeField] GameObject helmetParts;
     [SerializeField] GameObject defaultHelmet;
     [SerializeField] Material whiteMat;
@@ -31,7 +28,7 @@ public class Helmet : Weapon
         helmetParts.SetActive(false);
         defaultHelmet.SetActive(true);
         defaultHelmet.transform.GetChild(0).GetComponent<MeshRenderer>().material = whiteMat;
-        swordColor = HelmetColor.Default;
+        weaponColor = WeaponColor.Default;
     }
 
     public override void PaintRed()
@@ -39,7 +36,7 @@ public class Helmet : Weapon
         helmetParts.SetActive(false);
         defaultHelmet.SetActive(true);
         defaultHelmet.transform.GetChild(0).GetComponent<MeshRenderer>().material = redMat;
-        swordColor = HelmetColor.Red;
+        weaponColor = WeaponColor.Red;
     }
 
     public override void PaintBlue()
@@ -47,6 +44,6 @@ public class Helmet : Weapon
         helmetParts.SetActive(false);
         defaultHelmet.SetActive(true);
         defaultHelmet.transform.GetChild(0).GetComponent<MeshRenderer>().material = blueMat;
-        swordColor = HelmetColor.Blue;
+        weaponColor = WeaponColor.Blue;
     }
 }

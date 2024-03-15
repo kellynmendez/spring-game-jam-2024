@@ -11,7 +11,7 @@ public class Customer : MonoBehaviour
     [SerializeField] int HelmetOdds = 100;
     [SerializeField] int SwordOdds = 50;
     [SerializeField] int ArrowOdds = 20;
-    public enum Order { Helmet, Sword, Arrow };
+    public enum Order { Helmet_R, Helmet_B, Sword_R, Sword_B, Arrow_R, Arrow_B };
     private Order _order;
     private List<Order> _orders = new List<Order>();
     public int _paymentAmount = 0;
@@ -47,21 +47,45 @@ public class Customer : MonoBehaviour
     {
         if (_customerData._ordersCompleted == 0)
         {
-            _order = Order.Helmet;
+            int randomNum = Random.Range(1, 100);
+            if (randomNum >= 50)
+            {
+                _order = Order.Helmet_R;
+            }
+            else
+            {
+                _order = Order.Helmet_B;
+            }
             _orders.Add(_order);
             _paymentAmount += GetPayment(_order);
             //print("Order is: " + _order);
         }
         else if (_customerData._ordersCompleted == 1)
         {
-            _order = Order.Sword;
+            int randomNum = Random.Range(1, 100);
+            if (randomNum >= 50)
+            {
+                _order = Order.Sword_R;
+            }
+            else
+            {
+                _order = Order.Sword_B;
+            }
             _orders.Add(_order);
             _paymentAmount += GetPayment(_order);
             //print("Order is: " + _order);
         }
         else if (_customerData._ordersCompleted == 2)
         {
-            _order = Order.Arrow;
+            int randomNum = Random.Range(1, 100);
+            if (randomNum >= 50)
+            {
+                _order = Order.Arrow_R;
+            }
+            else
+            {
+                _order = Order.Arrow_B;
+            }
             _orders.Add(_order);
             _paymentAmount += GetPayment(_order);
             //print("Order is: " + _order);
@@ -96,18 +120,42 @@ public class Customer : MonoBehaviour
             {
                 print("i = " + i);
                 int _randOrderType = Random.Range(0, 100);
-                if ((_randOrderType <= ArrowOdds) && (!_orders.Contains(Order.Arrow)))
+                if ((_randOrderType <= ArrowOdds) && ((!_orders.Contains(Order.Arrow_R)) || (!_orders.Contains(Order.Arrow_B))))
                 {
-                    _order = Order.Arrow;
+                    int _ranNum = Random.Range(1, 100);
+                    if (_ranNum >= 50)
+                    {
+                        _order = Order.Arrow_R;
+                    }
+                    else
+                    {
+                        _order = Order.Arrow_B;
+                    }
                 }
                 else if ((_randOrderType <= SwordOdds) && (_swordCount < 2))
                 {
+                    int _ranNum = Random.Range(1, 100);
+                    if (_ranNum >= 50)
+                    {
+                        _order = Order.Sword_R;
+                    }
+                    else
+                    {
+                        _order = Order.Sword_B;
+                    }
                     _swordCount++;
-                    _order = Order.Sword;
                 }
                 else if (_randOrderType <= HelmetOdds)
                 {
-                    _order = Order.Helmet;
+                    int _ranNum = Random.Range(1, 100);
+                    if (_ranNum >= 50)
+                    {
+                        _order = Order.Helmet_R;
+                    }
+                    else
+                    {
+                        _order = Order.Helmet_B;
+                    }
                 }
                 _paymentAmount += GetPayment(_order);
                 _orders.Add(_order);
@@ -124,15 +172,15 @@ public class Customer : MonoBehaviour
     public int GetPayment(Order order)
     {
         int _randomNum = Random.Range(0, 100);
-        if (order == Order.Helmet)
+        if (order == Order.Helmet_R || order == Order.Helmet_B)
         {
             _cost = _helmetCost;
         }
-        else if (order == Order.Sword)
+        else if (order == Order.Sword_R || order == Order.Sword_B)
         {
             _cost = _swordCost;
         }
-        else if (order == Order.Arrow)
+        else if (order == Order.Arrow_R || order == Order.Arrow_B)
         {
             _cost = _arrowCost;
         }

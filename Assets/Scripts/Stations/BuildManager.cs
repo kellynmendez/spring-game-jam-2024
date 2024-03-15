@@ -37,6 +37,9 @@ public class BuildManager : StationManager
 
     [Header("Broken Mold UI")]
     [SerializeField] GameObject brokenMoldGroup;
+    [SerializeField] GameObject swordUnbrokenMold;
+    [SerializeField] GameObject helmetUnbrokenMold;
+    [SerializeField] GameObject arrowUnbrokenMold;
     [SerializeField] GameObject swordBrokenMold;
     [SerializeField] GameObject helmetBrokenMold;
     [SerializeField] GameObject arrowBrokenMold;
@@ -49,6 +52,7 @@ public class BuildManager : StationManager
     private int swordCounter;
     private int helmetCounter;
     private int arrowCounter;
+    private MoldManager moldManager;
 
     private enum BuildState
     {
@@ -66,6 +70,7 @@ public class BuildManager : StationManager
         swordCounter = numSwordsToMoldBreak;
         helmetCounter = numHelmetsToMoldBreak;
         arrowCounter = numArrowsToMoldBreak;
+        moldManager = FindObjectOfType<MoldManager>();
     }
 
     public override void StartGame()
@@ -124,7 +129,7 @@ public class BuildManager : StationManager
 
     public void HelmetChosen()
     {
-        swordCounter--;
+        helmetCounter--;
         unfilledMold = helmetUnfilledMold;
         filledMold = helmetFilledMold;
         weaponObj = Instantiate(helmetPrefab);
@@ -155,26 +160,26 @@ public class BuildManager : StationManager
     {
         unfilledMold.SetActive(false);
         filledMold.SetActive(true);
-        if (swordCounter == 0 && swordMoldActive) 
+        if (swordCounter == 0) 
         {
-            Debug.Log("breaking sword mold");
             swordMoldActive = false;
             swordCounter = numSwordsToMoldBreak;
-            StartCoroutine(BreakMold(filledMold, swordUnfilledMold, swordBrokenMold));
+            moldManager.canMakeSwordMold = true;
+            StartCoroutine(BreakMold(filledMold, swordUnbrokenMold, swordBrokenMold));
         }
-        else if (helmetCounter == 0 && helmetMoldActive)
+        else if (helmetCounter == 0)
         {
-            Debug.Log("breaking helmet mold");
             helmetMoldActive = false;
             helmetCounter = numHelmetsToMoldBreak;
-            StartCoroutine(BreakMold(filledMold, helmetUnfilledMold, helmetBrokenMold));
+            moldManager.canMakeHelmetMold = true;
+            StartCoroutine(BreakMold(filledMold, helmetUnbrokenMold, helmetBrokenMold));
         }
-        else if (arrowCounter == 0 && arrowMoldActive)
+        else if (arrowCounter == 0)
         {
-            Debug.Log("breaking arrow mold");
             arrowMoldActive = false;
             arrowCounter = numArrowsToMoldBreak;
-            StartCoroutine(BreakMold(filledMold, arrowUnfilledMold, arrowBrokenMold));
+            moldManager.canMakeArrowMold = true;
+            StartCoroutine(BreakMold(filledMold, arrowUnbrokenMold, arrowBrokenMold));
         }
         else
         {
@@ -202,6 +207,9 @@ public class BuildManager : StationManager
 
         // Resetting UI
         brokenMoldGroup.SetActive(false);
+        swordBrokenMold.SetActive(false);
+        helmetBrokenMold.SetActive(false);
+        arrowBrokenMold.SetActive(false);
         weaponObj.SetActive(true);
         filledMold.SetActive(false);
         // Setting build state
