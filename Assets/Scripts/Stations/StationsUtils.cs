@@ -19,6 +19,7 @@ public class StationUtils : MonoBehaviour
     [HideInInspector] public Weapon weaponAtStation = null;
     [HideInInspector] public bool _counterIsEmpty;
 
+    public Counter counter = null;
     void Start()
     {
         PACPointer = GameObject.FindObjectOfType(typeof(PACPointer)) as PACPointer;
@@ -28,6 +29,11 @@ public class StationUtils : MonoBehaviour
             stationManager = GetComponent<StationManager>();
         else
             stationManager = null;
+
+        if (gameObject.GetComponent<Counter>() != null)
+        {
+            counter = gameObject.GetComponent<Counter>();
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -60,6 +66,9 @@ public class StationUtils : MonoBehaviour
                 && playerSM.carryingWeapon && playerSM.GetWeapon().currentState == Weapon.WeaponState.Painted)
         {
             //get order, if carrying weapon drop off and check if order is complete?
+            print("HELLO");
+            print("Weapon " + playerSM.GetWeapon());
+            gameObject.GetComponent<Counter>().CheckOrder(playerSM.GetWeapon());
             SetStationOccupied(true, playerSM.GetWeapon());
         }
         
@@ -111,7 +120,7 @@ public class StationUtils : MonoBehaviour
         // Moving weapon to station
         else if (!stationOccupied && newOccupied)
         {
-            if (station_type != Station_Type.Trash)
+            if (station_type != Station_Type.Trash && station_type != Station_Type.Counter)
             {
                 weapon.PlaceWeapon(weaponPlace.transform);
                 weaponAtStation = weapon;

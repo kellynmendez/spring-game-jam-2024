@@ -202,6 +202,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 18443088}
   m_CullTransparentMesh: 1
+--- !u!1 &106485592
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 106485593}
+  m_Layer: 0
+  m_Name: CustomerDeathPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &106485593
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 106485592}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -42.73, y: -24.105, z: 56.52}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2110769407}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &136198758
 GameObject:
   m_ObjectHideFlags: 0
@@ -1198,6 +1229,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PF_Counters (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8444485349776271660, guid: e3b8a453c993aa94993bc0b25f1fd7ed, type: 3}
+      propertyPath: station_type
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8701930010457201136, guid: e3b8a453c993aa94993bc0b25f1fd7ed, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.86421
@@ -1612,6 +1647,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PF_Counters
       objectReference: {fileID: 0}
+    - target: {fileID: 8444485349776271660, guid: e3b8a453c993aa94993bc0b25f1fd7ed, type: 3}
+      propertyPath: station_type
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8701930010457201136, guid: e3b8a453c993aa94993bc0b25f1fd7ed, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.86421
@@ -1765,6 +1804,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PF_Counters (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 8444485349776271660, guid: e3b8a453c993aa94993bc0b25f1fd7ed, type: 3}
+      propertyPath: station_type
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8701930010457201136, guid: e3b8a453c993aa94993bc0b25f1fd7ed, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.86421
@@ -1880,7 +1923,7 @@ Transform:
   m_GameObject: {fileID: 1525158001}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -19.21, y: -24.105, z: 49.51}
+  m_LocalPosition: {x: -33.08, y: -24.105, z: 49.51}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3043,6 +3086,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1525158002}
+  - {fileID: 106485593}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2110769408
@@ -3062,6 +3106,7 @@ MonoBehaviour:
   _currentScore: 0
   _customerPreFab: {fileID: 1235594709064425047, guid: a38359a5bb878d34b9646d237cc9447e, type: 3}
   _customerSpawnPoint: {fileID: 1525158002}
+  _customerDeathPoint: {fileID: 106485593}
   _counter01: {fileID: 543198865}
   _counter02: {fileID: 781461042}
   _counter03: {fileID: 1102370459}

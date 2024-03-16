@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 using UnityEngine.UIElements;
 using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
+using static UnityEditor.Progress;
 
 public class Customer : MonoBehaviour
 {
@@ -12,34 +14,50 @@ public class Customer : MonoBehaviour
     [SerializeField] int SwordOdds = 50;
     [SerializeField] int ArrowOdds = 20;
     public enum Order { Helmet_R, Helmet_B, Sword_R, Sword_B, Arrow_R, Arrow_B };
-    private Order _order;
-    private List<Order> _orders = new List<Order>();
-    public int _paymentAmount = 0;
-    private bool _timerStarted = false;
-    public float _timerTime = 5;
+    public Order _order;
+    [HideInInspector] public List<Order> _orders = new List<Order>();
+    [HideInInspector] public int _paymentAmount = 0;
+    public bool _timerStarted = false;
+    public float _timerTime = 60;
     private int _orderNumMax = 3;
     private int _cost = 0;
     public int _helmetCost = 30;
     public int _swordCost = 80;
     public int _arrowCost = 150;
 
-    public Customer_Data _customerData;
+    [HideInInspector] public Customer_Data _customerData;
 
-    public NavMeshAgent _agent;
+    [HideInInspector] public NavMeshAgent _agent;
     private bool _seekingDestination = false;
     private GameObject _counter;
     private Vector3 _counterPosistion;
     private bool _leavingCounter = false;
     
+    private Canvas _canvas;
     private SpriteRenderer _spriteRender;
     [SerializeField] Sprite _orderCompletedSprite;
     [SerializeField] Sprite _orderFailedSprite;
+    [SerializeField] Sprite _checkmark;
+    [SerializeField] Sprite _helmetSpriteR;
+    [SerializeField] Sprite _swordSpriteR;
+    [SerializeField] Sprite _arrowSpriteR;
+    [SerializeField] Sprite _helmetSpriteB;
+    [SerializeField] Sprite _swordSpriteB;
+    [SerializeField] Sprite _arrowSpriteB;
+    [SerializeField] public GameObject _1Order;
+    [SerializeField] public GameObject _2Order;
+    [SerializeField] public GameObject _3Order;
+    [HideInInspector] public Sprite _item01Sprite;
+    [HideInInspector] public Sprite _item02Sprite;
+    [HideInInspector] public Sprite _item03Sprite;
+    public int _ordersThru = 0;
 
     private void Awake()
     {
         _customerData = GameObject.FindObjectOfType(typeof(Customer_Data)) as Customer_Data;
         _agent = GetComponent<NavMeshAgent>();
-        _spriteRender = GetComponentInChildren<SpriteRenderer>();
+        _canvas = GetComponentInChildren<Canvas>();
+        _spriteRender = _canvas.GetComponentInChildren<SpriteRenderer>();
         _spriteRender.enabled = false;
     }
 
@@ -161,14 +179,124 @@ public class Customer : MonoBehaviour
                 _orders.Add(_order);
             }
         }
+
         string _ordersText = "";
         foreach (var item in _orders)
         {
             _ordersText += item.ToString() + ", ";
         }
         print("Order is: " + _ordersText + " for " + _paymentAmount);
+
+        //for (int numOfOrders = 0; numOfOrders < _orders.Count; numOfOrders++)
+        //{
+
+        //}
+        //Set the UI
+        if (_orders.Count == 1)
+        {
+            _1Order.SetActive(true);
+            int numOfLoops = 0;
+            foreach (var item in _orders)
+            {
+                GameObject _image = _1Order.transform.GetChild(numOfLoops).gameObject;
+                numOfLoops++;
+                if (item == Order.Helmet_R)
+                {
+                    _image.GetComponent<SpriteRenderer>().sprite = _helmetSpriteR;
+                }
+                else if (item == Order.Helmet_B)
+                {
+                    _image.GetComponent<SpriteRenderer>().sprite = _helmetSpriteB;
+                }
+                else if (item == Order.Sword_R)
+                {
+                    _image.GetComponent<SpriteRenderer>().sprite = _swordSpriteR;
+                }
+                else if (item == Order.Sword_B)
+                {
+                    _image.GetComponent<SpriteRenderer>().sprite = _swordSpriteB;
+                }
+                else if (item == Order.Arrow_R)
+                {
+                    _image.GetComponent<SpriteRenderer>().sprite = _arrowSpriteR;
+                }
+                else if (item == Order.Arrow_B)
+                {
+                    _image.GetComponent<SpriteRenderer>().sprite = _arrowSpriteB;
+                }
+            }
+        }
+        else if ( _orders.Count == 2) 
+        {
+            _2Order.SetActive(true);
+            int numOfLoops = 0;
+            foreach (var item in _orders)
+            {
+                GameObject _image = _2Order.transform.GetChild(numOfLoops).gameObject;
+                numOfLoops++;
+                if (item == Order.Helmet_R)
+                {
+                    _image.GetComponent<SpriteRenderer>().sprite = _helmetSpriteR;
+                }
+                else if (item == Order.Helmet_B)
+                {
+                    _image.GetComponent<SpriteRenderer>().sprite = _helmetSpriteB;
+                }
+                else if (item == Order.Sword_R)
+                {
+                    _image.GetComponent<SpriteRenderer>().sprite = _swordSpriteR;
+                }
+                else if (item == Order.Sword_B)
+                {
+                    _image.GetComponent<SpriteRenderer>().sprite = _swordSpriteB;
+                }
+                else if (item == Order.Arrow_R)
+                {
+                    _image.GetComponent<SpriteRenderer>().sprite = _arrowSpriteR;
+                }
+                else if (item == Order.Arrow_B)
+                {
+                    _image.GetComponent<SpriteRenderer>().sprite = _arrowSpriteB;
+                }
+            }
+        }
+        else if (_orders.Count == 3)
+        {
+            _3Order.SetActive(true);
+            int numOfLoops = 0;
+            foreach (var item in _orders)
+            {
+                GameObject _image = _3Order.transform.GetChild(numOfLoops).gameObject;
+                numOfLoops++;
+                if (item == Order.Helmet_R)
+                {
+                    _image.GetComponent<SpriteRenderer>().sprite = _helmetSpriteR;
+                }
+                else if (item == Order.Helmet_B)
+                {
+                    _image.GetComponent<SpriteRenderer>().sprite = _helmetSpriteB;
+                }
+                else if (item == Order.Sword_R)
+                {
+                    _image.GetComponent<SpriteRenderer>().sprite = _swordSpriteR;
+                }
+                else if (item == Order.Sword_B)
+                {
+                    _image.GetComponent<SpriteRenderer>().sprite = _swordSpriteB;
+                }
+                else if (item == Order.Arrow_R)
+                {
+                    _image.GetComponent<SpriteRenderer>().sprite = _arrowSpriteR;
+                }
+                else if (item == Order.Arrow_B)
+                {
+                    _image.GetComponent<SpriteRenderer>().sprite = _arrowSpriteB;
+                }
+            }
+        }
         return _orders;
     }
+
     public int GetPayment(Order order)
     {
         int _randomNum = Random.Range(0, 100);
@@ -260,7 +388,7 @@ public class Customer : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
         _counter.GetComponent<Counter>()._counterIsEmpty = true;
-        _agent.SetDestination(_customerData._customerSpawnPoint.transform.position);
+        _agent.SetDestination(_customerData._customerDeathPoint.transform.position);
         _seekingDestination = true;
         _leavingCounter = true;
     }

@@ -7,7 +7,8 @@ TagManager:
   - PAC_Camera
   - Clickable
   - Un-Clickable
-  - Assemble_Camera
+  - itemUI
+  - checkUI
   layers:
   - Default
   - TransparentFX
@@ -44,4 +45,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Item
+    uniqueID: 2499364845
+    locked: 0
+  - name: Checks
+    uniqueID: 1733609067
     locked: 0
