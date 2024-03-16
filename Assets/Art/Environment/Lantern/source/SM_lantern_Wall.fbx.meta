@@ -1,9 +1,14 @@
 fileFormatVersion: 2
-guid: 11be386a317122843a6acd88ab165875
+guid: b31f8a48bfd1dd4489894e09690726be
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: T_lantern
+    second: {fileID: 2100000, guid: 55b1da948a8814e489ea4af78192f304, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
