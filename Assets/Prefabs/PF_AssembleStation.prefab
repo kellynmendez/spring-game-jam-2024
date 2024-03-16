@@ -43,7 +43,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 790836884306284860}
-  - component: {fileID: 2377800720506564729}
+  - component: {fileID: 3476655085504172531}
+  - component: {fileID: 8948783667458054365}
   m_Layer: 0
   m_Name: FletchingSlot
   m_TagString: Untagged
@@ -66,7 +67,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6154343096353037020}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!114 &2377800720506564729
+--- !u!65 &3476655085504172531
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 606462573648570474}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.06424481, y: 0.06311036, z: 0.09736048}
+  m_Center: {x: -0.006272534, y: -0.004524248, z: 0.051319756}
+--- !u!114 &8948783667458054365
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -75,10 +97,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 606462573648570474}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a823c1c119481c4c80c928b6d1c392a, type: 3}
+  m_Script: {fileID: 11500000, guid: 9ad969a17cfed89468a8336d7ef9d1a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slotName: FLetching_PT
+  slotName: Fletching_PT
 --- !u!1 &792163229912043201
 GameObject:
   m_ObjectHideFlags: 0
@@ -94,7 +116,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1031835359096989997
 Transform:
   m_ObjectHideFlags: 0
@@ -227,8 +249,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.05014244, y: 0.061527215, z: 0.08795524}
-  m_Center: {x: -0.007435917, y: -0.002702866, z: 0.04927224}
+  m_Size: {x: 0.05793205, y: 0.061527215, z: 0.08795524}
+  m_Center: {x: -0.00689236, y: -0.002702866, z: 0.04927224}
 --- !u!1 &1267915518588764593
 GameObject:
   m_ObjectHideFlags: 0
@@ -319,7 +341,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2865264798842290980}
-  - component: {fileID: 510420603460789300}
+  - component: {fileID: 5399898300573294042}
+  - component: {fileID: 7617486738118260743}
   m_Layer: 0
   m_Name: HandleSlot
   m_TagString: Untagged
@@ -342,7 +365,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3426406743843632072}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
---- !u!114 &510420603460789300
+--- !u!65 &5399898300573294042
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1437821998534202057}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.1342415, y: 0.12728967, z: 0.16143462}
+  m_Center: {x: -0.013463717, y: -0.0012093596, z: 0.019282684}
+--- !u!114 &7617486738118260743
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -351,7 +395,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1437821998534202057}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a823c1c119481c4c80c928b6d1c392a, type: 3}
+  m_Script: {fileID: 11500000, guid: 9ad969a17cfed89468a8336d7ef9d1a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   slotName: Handle_PT
@@ -364,7 +408,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2357588070448719049}
-  - component: {fileID: 1086885864791775801}
+  - component: {fileID: 2126712768700399903}
+  - component: {fileID: 4127924633070461234}
   m_Layer: 0
   m_Name: HeadSlot
   m_TagString: Untagged
@@ -381,13 +426,34 @@ Transform:
   m_GameObject: {fileID: 1919229451321183230}
   serializedVersion: 2
   m_LocalRotation: {x: -0.000000029802322, y: 0.000000014901161, z: -0.000000014901161, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.022, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4815290707263697044}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1086885864791775801
+--- !u!65 &2126712768700399903
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1919229451321183230}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.2551462, y: 0.22625013, z: 0.20000003}
+  m_Center: {x: -0.09160657, y: -0.022119598, z: 0.100000046}
+--- !u!114 &4127924633070461234
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -396,7 +462,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1919229451321183230}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a823c1c119481c4c80c928b6d1c392a, type: 3}
+  m_Script: {fileID: 11500000, guid: 9ad969a17cfed89468a8336d7ef9d1a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   slotName: Head_PT
@@ -676,8 +742,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.14115718, y: 0.19195087, z: 0.22853103}
-  m_Center: {x: -0.02942159, y: -0.021344654, z: 0.10237568}
+  m_Size: {x: 0.2236956, y: 0.19195087, z: 0.22853106}
+  m_Center: {x: -0.016230527, y: -0.021344654, z: 0.10237577}
 --- !u!1 &3822967427273332344
 GameObject:
   m_ObjectHideFlags: 0
@@ -871,7 +937,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3090551434783088989}
-  - component: {fileID: 4921071280650589882}
+  - component: {fileID: 7804071635157875211}
+  - component: {fileID: 495395318075386871}
   m_Layer: 0
   m_Name: ArrowheadSlot
   m_TagString: Untagged
@@ -894,7 +961,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6154343096353037020}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
---- !u!114 &4921071280650589882
+--- !u!65 &7804071635157875211
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5218781697560627748}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.10212305, y: 0.07872012, z: 0.11229409}
+  m_Center: {x: -0.011440873, y: 0.0011901702, z: 0.05252793}
+--- !u!114 &495395318075386871
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -903,7 +991,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5218781697560627748}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a823c1c119481c4c80c928b6d1c392a, type: 3}
+  m_Script: {fileID: 11500000, guid: 9ad969a17cfed89468a8336d7ef9d1a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   slotName: Arrowhead_PT
@@ -1245,7 +1333,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4234251589748835294}
-  - component: {fileID: 34113747402476968}
+  - component: {fileID: 1587375311772795310}
+  - component: {fileID: 2986043127733425197}
   m_Layer: 0
   m_Name: JawSlot
   m_TagString: Untagged
@@ -1268,7 +1357,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4815290707263697044}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &34113747402476968
+--- !u!65 &1587375311772795310
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6928870136363619629}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.24168253, y: 0.19276434, z: 0.12126663}
+  m_Center: {x: -0.0978859, y: -0.0036178147, z: 0.12381241}
+--- !u!114 &2986043127733425197
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1277,7 +1387,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6928870136363619629}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a823c1c119481c4c80c928b6d1c392a, type: 3}
+  m_Script: {fileID: 11500000, guid: 9ad969a17cfed89468a8336d7ef9d1a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   slotName: Jaw_PT
@@ -1290,7 +1400,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2737650727116886079}
-  - component: {fileID: 2539122085909020045}
+  - component: {fileID: 2091818224361417134}
+  - component: {fileID: 3383628490225717497}
   m_Layer: 0
   m_Name: ShaftSlot
   m_TagString: Untagged
@@ -1313,7 +1424,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6154343096353037020}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2539122085909020045
+--- !u!65 &2091818224361417134
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6963014054447732286}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.048940636, y: 0.21902722, z: 0.053756714}
+  m_Center: {x: -0.0072661163, y: 0.002939269, z: 0.004676819}
+--- !u!114 &3383628490225717497
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1322,7 +1454,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6963014054447732286}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a823c1c119481c4c80c928b6d1c392a, type: 3}
+  m_Script: {fileID: 11500000, guid: 9ad969a17cfed89468a8336d7ef9d1a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   slotName: Shaft_PT
@@ -1418,7 +1550,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5252271622360239917}
-  - component: {fileID: 2237500285636050307}
+  - component: {fileID: 3143867493291562376}
+  - component: {fileID: 3676711287592422091}
   m_Layer: 0
   m_Name: BladeSlot
   m_TagString: Untagged
@@ -1441,7 +1574,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3426406743843632072}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
---- !u!114 &2237500285636050307
+--- !u!65 &3143867493291562376
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7561654653031938778}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.2608748, y: 0.09036792, z: 0.09852439}
+  m_Center: {x: 0.011631321, y: -0.002800321, z: -0.009346878}
+--- !u!114 &3676711287592422091
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1450,7 +1604,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7561654653031938778}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a823c1c119481c4c80c928b6d1c392a, type: 3}
+  m_Script: {fileID: 11500000, guid: 9ad969a17cfed89468a8336d7ef9d1a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   slotName: Blade_PT
@@ -1469,7 +1623,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &282300800311977942
 Transform:
   m_ObjectHideFlags: 0
@@ -1611,15 +1765,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameScreen: {fileID: 4029570499212550052}
   swordSlots:
-  - {fileID: 510420603460789300}
-  - {fileID: 2237500285636050307}
+  - {fileID: 7617486738118260743}
+  - {fileID: 3676711287592422091}
   helmetSlots:
-  - {fileID: 1086885864791775801}
-  - {fileID: 34113747402476968}
+  - {fileID: 4127924633070461234}
+  - {fileID: 2986043127733425197}
   arrowSlots:
-  - {fileID: 4921071280650589882}
-  - {fileID: 2539122085909020045}
-  - {fileID: 2377800720506564729}
+  - {fileID: 495395318075386871}
+  - {fileID: 3383628490225717497}
+  - {fileID: 8948783667458054365}
   swordGroup: {fileID: 409206997045970436}
   helmetGroup: {fileID: 792163229912043201}
   arrowGroup: {fileID: 7943517415781494243}
