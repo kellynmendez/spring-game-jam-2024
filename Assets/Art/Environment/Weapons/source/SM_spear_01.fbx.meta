@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4daeb0164057ea54ca47bd2c49fb6ae3
+guid: e70ba81c94046964487db2579d03472e
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,8 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: T_table_02
-    second: {fileID: 2100000, guid: 87912b93724b53345bde03a9a97e039c, type: 2}
+      name: T_spears
+    second: {fileID: 2100000, guid: efbb4ec35f4214e4ba508e172166b4db, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
