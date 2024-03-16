@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5449239479203336788}
   - component: {fileID: 7226927343590197123}
-  - component: {fileID: 4277158003636916231}
   m_Layer: 0
   m_Name: PaintCamera
   m_TagString: Paint
@@ -86,14 +85,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &4277158003636916231
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 695266178557719719}
-  m_Enabled: 1
 --- !u!1 &897802663373094938
 GameObject:
   m_ObjectHideFlags: 0
