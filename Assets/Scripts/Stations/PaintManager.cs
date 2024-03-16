@@ -129,7 +129,7 @@ public class PaintManager : StationManager
     IEnumerator WaitAfterPaint()
     {
         yield return new WaitForSeconds(0.5f);
-
+        Debug.Log("finished painting");
         // Setting paint state
         currentState = PaintState.Inactive;
         // Setting weapon state
