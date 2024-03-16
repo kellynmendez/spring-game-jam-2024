@@ -37,8 +37,9 @@ public class Draggable3DItem : MonoBehaviour
 
     public void OnMouseUp()
     {
-        RaycastHit hit;
-        if (Physics.Raycast(cmra.ScreenPointToRay(Input.mousePosition), out hit))
+        RaycastHit[] hits = Physics.RaycastAll(cmra.ScreenPointToRay(Input.mousePosition), 100f);
+
+        foreach (RaycastHit hit in hits)
         {
             DropPoint3D slot = hit.collider.GetComponent<DropPoint3D>();
             if (slot != null && slot.slotName == transform.name)
