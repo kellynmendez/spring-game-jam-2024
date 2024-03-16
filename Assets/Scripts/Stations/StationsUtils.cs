@@ -122,7 +122,7 @@ public class StationUtils : MonoBehaviour
         // Moving weapon to station
         else if (!stationOccupied && newOccupied)
         {
-            if (station_type != Station_Type.Trash)
+            if (station_type != Station_Type.Trash && station_type != Station_Type.Counter)
             {
                 weapon.PlaceWeapon(weaponPlace.transform);
                 weaponAtStation = weapon;
