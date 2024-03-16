@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7226927343590197123}
   m_Layer: 0
   m_Name: PaintCamera
-  m_TagString: Paint
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
