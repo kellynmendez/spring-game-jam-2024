@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: 0
-  swordColor: 0
+  weaponColor: 0
   helmetParts: {fileID: 7936537646618670423}
   defaultHelmet: {fileID: 2756832695910163094}
   whiteMat: {fileID: 2100000, guid: a8f4a20513adb704d93694552c8db53e, type: 2}
