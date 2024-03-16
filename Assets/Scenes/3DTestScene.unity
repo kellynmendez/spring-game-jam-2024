@@ -3203,6 +3203,7 @@ MonoBehaviour:
   _currentScore: 0
   _customerPreFab: {fileID: 1235594709064425047, guid: a38359a5bb878d34b9646d237cc9447e, type: 3}
   _customerSpawnPoint: {fileID: 1525158002}
+  _customerDeathPoint: {fileID: 0}
   _counter01: {fileID: 543198865}
   _counter02: {fileID: 781461042}
   _counter03: {fileID: 1102370459}
