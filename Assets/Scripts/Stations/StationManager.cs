@@ -10,7 +10,7 @@ public abstract class StationManager : MonoBehaviour
 
     public abstract void StartGame();
 
-    protected virtual void ExitGame()
+    public virtual void ExitGame()
     {
         if (!inactive)
         {
