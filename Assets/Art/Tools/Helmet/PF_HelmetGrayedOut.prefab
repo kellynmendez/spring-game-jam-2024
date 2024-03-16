@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5260386595656447822}
   m_Layer: 0
-  m_Name: PF_HelmetCMP_Blue
+  m_Name: PF_HelmetGrayedOut
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -95,7 +95,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: c894e2cd3fe995f489e5a7d8d6d862d7, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: ca83235fd51d31948ba113daf827219b, type: 2}
+      objectReference: {fileID: 2100000, guid: c9ef527477752a442bc8845257fcf73f, type: 2}
     - target: {fileID: 919132149155446097, guid: c894e2cd3fe995f489e5a7d8d6d862d7, type: 3}
       propertyPath: m_Name
       value: SM_Helmet_Complete
