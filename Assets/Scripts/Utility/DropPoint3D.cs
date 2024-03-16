@@ -25,7 +25,6 @@ public class DropPoint3D : MonoBehaviour
         dropCollider.enabled = false;
         draggable.SetDropped(true);
         dropped = true;
-        Debug.Log(draggable);
     }
 
     public void SetSlotName(string slotName)
