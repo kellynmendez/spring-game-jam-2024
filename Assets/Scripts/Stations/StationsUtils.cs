@@ -110,11 +110,9 @@ public class StationUtils : MonoBehaviour
 
     public void SetStationOccupied(bool newOccupied, Weapon weapon)
     {
-        Debug.Log("newOcc = " + newOccupied + " oldOcc = " + stationOccupied);
         // Removing weapon from station and adding to player
         if (stationOccupied && !newOccupied)
         {
-            Debug.Log("carrying weapon");
             weapon.CarryWeapon();
             weaponAtStation = null;
             this.stationOccupied = newOccupied;

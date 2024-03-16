@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using UnityEngine;
 
 public class MoldManager : StationManager
@@ -18,21 +19,33 @@ public class MoldManager : StationManager
     [SerializeField] GameObject helmetGrayedOutMold;
     [SerializeField] GameObject arrowGrayedOutMold;
 
-    [Header("Create Mold UI")]
-    // Cutter images and clay to cut
+    [Header("Stamps and Slots")]
+    // Stamps
     [SerializeField] GameObject swordCutter;
     [SerializeField] GameObject helmetCutter;
     [SerializeField] GameObject arrowCutter;
-    [SerializeField] GameObject clayBlob;
+    // Slots
+    [SerializeField] DropPoint3D swordSlot;
+    [SerializeField] DropPoint3D helmetSlot;
+    [SerializeField] DropPoint3D arrowSlot;
+
+    [Header("Blank and Finished Molds")]
+    // Blank molds
+    [SerializeField] GameObject blankSwordMold;
+    [SerializeField] GameObject blankHelmetMold;
+    [SerializeField] GameObject blankArrowMold;
     // Finished mold images
     [SerializeField] GameObject finishedSwordMold;
     [SerializeField] GameObject finishedHelmetMold;
     [SerializeField] GameObject finishedArrowMold;
 
     private MoldState currentState;
+    private DropPoint3D moldSlot = null;
+    private GameObject blankMold = null;
     private GameObject moldCutter = null;
     private GameObject finishedMold = null;
     private BuildManager buildManager;
+    private bool created = false;
 
     private enum MoldState
     {
@@ -51,7 +64,12 @@ public class MoldManager : StationManager
         swordCutter.SetActive(false);
         helmetCutter.SetActive(false);
         arrowCutter.SetActive(false);
-        clayBlob.SetActive(false);
+        swordSlot.gameObject.SetActive(false);
+        helmetSlot.gameObject.SetActive(false);
+        arrowSlot.gameObject.SetActive(false);
+        blankSwordMold.SetActive(false);
+        blankHelmetMold.SetActive(false);
+        blankArrowMold.SetActive(false);
         finishedSwordMold.SetActive(false);
         finishedHelmetMold.SetActive(false);
         finishedArrowMold.SetActive(false);
@@ -64,6 +82,7 @@ public class MoldManager : StationManager
     public override void StartGame()
     {
         inactive = false;
+        created = false;
         currentState = MoldState.ChoosingMold;
         gameScreen.SetActive(true);
         chooseMoldsScreen.SetActive(true);
@@ -117,6 +136,8 @@ public class MoldManager : StationManager
     {
         moldCutter = swordCutter;
         finishedMold = finishedSwordMold;
+        moldSlot = swordSlot;
+        blankMold = blankSwordMold;
         buildManager.swordMoldActive = true;
         canMakeSwordMold = false;
         SwitchToMakeMold();
@@ -126,6 +147,8 @@ public class MoldManager : StationManager
     {
         moldCutter = helmetCutter;
         finishedMold = finishedHelmetMold;
+        moldSlot = helmetSlot;
+        blankMold = blankHelmetMold;
         buildManager.helmetMoldActive = true;
         canMakeHelmetMold = false;
         SwitchToMakeMold();
@@ -135,6 +158,8 @@ public class MoldManager : StationManager
     {
         moldCutter = arrowCutter;
         finishedMold = finishedArrowMold;
+        moldSlot = arrowSlot;
+        blankMold = blankArrowMold;
         buildManager.arrowMoldActive = true;
         canMakeArrowMold = false;
         SwitchToMakeMold();
@@ -142,16 +167,17 @@ public class MoldManager : StationManager
 
     private void SwitchToMakeMold()
     {
-        clayBlob.GetComponent<DropPoint>().SetSlotName(moldCutter.transform.name);
+        moldSlot.SetSlotName(moldCutter.transform.name);
         chooseMoldsScreen.SetActive(false);
+        moldSlot.gameObject.SetActive(true);
         moldCutter.SetActive(true);
-        clayBlob.SetActive(true);
+        blankMold.SetActive(true);
         currentState = MoldState.MakingMold;
     }
 
     private void HandleMoldDragInput()
     {
-        if (clayBlob.GetComponent<DropPoint>().Filled())
+        if (moldSlot.Filled() && !created)
         {
             MakeMold();
         }
@@ -159,18 +185,21 @@ public class MoldManager : StationManager
 
     public void MakeMold()
     {
-        clayBlob.SetActive(false);
-        moldCutter.SetActive(false);
-        finishedMold.SetActive(true);
+        created = true;
+        moldSlot.gameObject.SetActive(false);
         StartCoroutine(WaitAfterCreating());
     }
 
     IEnumerator WaitAfterCreating()
     {
+        yield return new WaitForSeconds(0.5f);
+        blankMold.SetActive(false);
+        moldCutter.SetActive(false);
+        finishedMold.SetActive(true);
         yield return new WaitForSeconds(1f);
         finishedMold.SetActive(false);
         chooseMoldsScreen.SetActive(true);
-        clayBlob.GetComponent<DropPoint>().ResetDropPoint();
+        moldSlot.ResetDropPoint();
         currentState = MoldState.Inactive;
         ExitGame();
         yield break;

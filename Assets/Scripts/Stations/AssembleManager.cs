@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class AssembleManager : StationManager
 {
-    [SerializeField] DropPoint[] swordSlots;
-    [SerializeField] DropPoint[] helmetSlots;
-    [SerializeField] DropPoint[] arrowSlots;
+    [SerializeField] DropPoint3D[] swordSlots;
+    [SerializeField] DropPoint3D[] helmetSlots;
+    [SerializeField] DropPoint3D[] arrowSlots;
     [SerializeField] GameObject swordGroup;
     [SerializeField] GameObject helmetGroup;
     [SerializeField] GameObject arrowGroup;
 
     private AssembleState currentState;
     private Weapon stationWeapon = null;
-    private DropPoint[] dropPoints = null;
+    private DropPoint3D[] dropPoints = null;
     private bool finishedAssembly = false;
 
     private enum AssembleState
@@ -76,7 +76,7 @@ public class AssembleManager : StationManager
     private void HandleDragInput()
     {
         bool isAssembled = true;
-        foreach (DropPoint slot in dropPoints)
+        foreach (DropPoint3D slot in dropPoints)
         {
             if (slot.Filled() == false)
             {
@@ -97,7 +97,7 @@ public class AssembleManager : StationManager
         yield return new WaitForSeconds(1f);
 
         // Resetting UI
-        foreach (DropPoint slot in dropPoints)
+        foreach (DropPoint3D slot in dropPoints)
         {
             slot.ResetDropPoint();
         }
