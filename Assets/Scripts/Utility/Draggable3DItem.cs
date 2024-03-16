@@ -9,7 +9,9 @@ public class Draggable3DItem : MonoBehaviour
     private Vector3 startPosition;
     private Vector3 mousePosition;
     private bool dropped = false;
+    private float height = 0.02f;
     [SerializeField] Camera cmra;
+    private bool enableHoverAnim = true;
 
     public void Awake()
     {
@@ -45,6 +47,7 @@ public class Draggable3DItem : MonoBehaviour
             if (slot != null && slot.slotName == transform.name)
             {
                 slot.SnapToSlot(this);
+                enableHoverAnim = false;
             }
         }
     }
@@ -57,5 +60,19 @@ public class Draggable3DItem : MonoBehaviour
     public void SetDropped(bool dropped)
     {
         this.dropped = dropped;
+        if (!dropped)
+        {
+            enableHoverAnim = true;
+        }
+    }
+
+    void OnMouseEnter()
+    {
+        if (enableHoverAnim) { transform.position = new Vector3(transform.position.x, transform.position.y + height, transform.position.z); }
+    }
+
+    private void OnMouseExit()
+    {
+        if (enableHoverAnim) { transform.position = new Vector3(transform.position.x, transform.position.y - height, transform.position.z); }
     }
 }

@@ -39,7 +39,6 @@ public class DropPoint3D : MonoBehaviour
 
     public void ResetDropPoint()
     {
-        Debug.Log(draggable);
         draggable.transform.position = origStartPos;
         dropCollider.enabled = true;
         draggable.SetDropped(false);
