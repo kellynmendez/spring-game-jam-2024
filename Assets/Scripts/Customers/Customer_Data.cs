@@ -13,6 +13,7 @@ public class Customer_Data : MonoBehaviour
 
     [SerializeField] GameObject _customerPreFab;
     [SerializeField] public Transform _customerSpawnPoint;
+    [SerializeField] public Transform _customerDeathPoint;
 
     [SerializeField] GameObject _counter01;
     [SerializeField] GameObject _counter02;
@@ -47,8 +48,9 @@ public class Customer_Data : MonoBehaviour
         }
     }
 
-    public int CompleteOrder(GameObject customer)
+    public int CompleteOrder(GameObject customer, Weapon weapon)
     {
+        customer.GetComponent<Customer>()._timerStarted = false;
         int scoreIncrease = customer.GetComponent<Customer>()._paymentAmount;
         _currentScore += scoreIncrease;
         _scoreValue.text = _currentScore.ToString();
