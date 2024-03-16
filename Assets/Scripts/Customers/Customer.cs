@@ -13,7 +13,7 @@ public class Customer : MonoBehaviour
     [SerializeField] int HelmetOdds = 100;
     [SerializeField] int SwordOdds = 50;
     [SerializeField] int ArrowOdds = 20;
-    public enum Order { Helmet_R, Helmet_B, Sword_R, Sword_B, Arrow_R, Arrow_B };
+    public enum Order { Helmet_Red, Helmet_Blue, Sword_Red, Sword_Blue, Arrow_Red, Arrow_Blue };
     public Order _order;
     [HideInInspector] public List<Order> _orders = new List<Order>();
     [HideInInspector] public int _paymentAmount = 0;
@@ -32,21 +32,25 @@ public class Customer : MonoBehaviour
     private GameObject _counter;
     private Vector3 _counterPosistion;
     private bool _leavingCounter = false;
-    
+
     private Canvas _canvas;
     private SpriteRenderer _spriteRender;
     [SerializeField] Sprite _orderCompletedSprite;
     [SerializeField] Sprite _orderFailedSprite;
     [SerializeField] Sprite _checkmark;
-    [SerializeField] Sprite _helmetSpriteR;
-    [SerializeField] Sprite _swordSpriteR;
-    [SerializeField] Sprite _arrowSpriteR;
-    [SerializeField] Sprite _helmetSpriteB;
-    [SerializeField] Sprite _swordSpriteB;
-    [SerializeField] Sprite _arrowSpriteB;
+    [SerializeField] Sprite _helmetSpriteRed;
+    [SerializeField] Sprite _swordSpriteRed;
+    [SerializeField] Sprite _arrowSpriteRed;
+    [SerializeField] Sprite _helmetSpriteBlue;
+    [SerializeField] Sprite _swordSpriteBlue;
+    [SerializeField] Sprite _arrowSpriteBlue;
     [SerializeField] public GameObject _1Order;
     [SerializeField] public GameObject _2Order;
     [SerializeField] public GameObject _3Order;
+    [SerializeField] public GameObject _item01Check = null;
+    [SerializeField] public GameObject _item02Check = null;
+    [SerializeField] public GameObject _item03Check = null;
+    public List<GameObject> _itemsChecks = new List<GameObject>();
     [HideInInspector] public Sprite _item01Sprite;
     [HideInInspector] public Sprite _item02Sprite;
     [HideInInspector] public Sprite _item03Sprite;
@@ -59,6 +63,9 @@ public class Customer : MonoBehaviour
         _canvas = GetComponentInChildren<Canvas>();
         _spriteRender = _canvas.GetComponentInChildren<SpriteRenderer>();
         _spriteRender.enabled = false;
+        _itemsChecks.Add(_item01Check);
+        _itemsChecks.Add(_item02Check);
+        _itemsChecks.Add(_item03Check);
     }
 
     public List<Order> GetOrder()
@@ -68,11 +75,11 @@ public class Customer : MonoBehaviour
             int randomNum = Random.Range(1, 100);
             if (randomNum >= 50)
             {
-                _order = Order.Helmet_R;
+                _order = Order.Helmet_Red;
             }
             else
             {
-                _order = Order.Helmet_B;
+                _order = Order.Helmet_Blue;
             }
             _orders.Add(_order);
             _paymentAmount += GetPayment(_order);
@@ -83,11 +90,11 @@ public class Customer : MonoBehaviour
             int randomNum = Random.Range(1, 100);
             if (randomNum >= 50)
             {
-                _order = Order.Sword_R;
+                _order = Order.Sword_Red;
             }
             else
             {
-                _order = Order.Sword_B;
+                _order = Order.Sword_Blue;
             }
             _orders.Add(_order);
             _paymentAmount += GetPayment(_order);
@@ -98,11 +105,11 @@ public class Customer : MonoBehaviour
             int randomNum = Random.Range(1, 100);
             if (randomNum >= 50)
             {
-                _order = Order.Arrow_R;
+                _order = Order.Arrow_Red;
             }
             else
             {
-                _order = Order.Arrow_B;
+                _order = Order.Arrow_Blue;
             }
             _orders.Add(_order);
             _paymentAmount += GetPayment(_order);
@@ -138,16 +145,16 @@ public class Customer : MonoBehaviour
             {
                 print("i = " + i);
                 int _randOrderType = Random.Range(0, 100);
-                if ((_randOrderType <= ArrowOdds) && ((!_orders.Contains(Order.Arrow_R)) || (!_orders.Contains(Order.Arrow_B))))
+                if ((_randOrderType <= ArrowOdds) && ((!_orders.Contains(Order.Arrow_Red)) || (!_orders.Contains(Order.Arrow_Blue))))
                 {
                     int _ranNum = Random.Range(1, 100);
                     if (_ranNum >= 50)
                     {
-                        _order = Order.Arrow_R;
+                        _order = Order.Arrow_Red;
                     }
                     else
                     {
-                        _order = Order.Arrow_B;
+                        _order = Order.Arrow_Blue;
                     }
                 }
                 else if ((_randOrderType <= SwordOdds) && (_swordCount < 2))
@@ -155,11 +162,11 @@ public class Customer : MonoBehaviour
                     int _ranNum = Random.Range(1, 100);
                     if (_ranNum >= 50)
                     {
-                        _order = Order.Sword_R;
+                        _order = Order.Sword_Red;
                     }
                     else
                     {
-                        _order = Order.Sword_B;
+                        _order = Order.Sword_Blue;
                     }
                     _swordCount++;
                 }
@@ -168,11 +175,11 @@ public class Customer : MonoBehaviour
                     int _ranNum = Random.Range(1, 100);
                     if (_ranNum >= 50)
                     {
-                        _order = Order.Helmet_R;
+                        _order = Order.Helmet_Red;
                     }
                     else
                     {
-                        _order = Order.Helmet_B;
+                        _order = Order.Helmet_Blue;
                     }
                 }
                 _paymentAmount += GetPayment(_order);
@@ -199,64 +206,66 @@ public class Customer : MonoBehaviour
             foreach (var item in _orders)
             {
                 GameObject _image = _1Order.transform.GetChild(numOfLoops).gameObject;
+                _itemsChecks[numOfLoops] = _1Order.transform.GetChild(numOfLoops + 1).gameObject;
                 numOfLoops++;
-                if (item == Order.Helmet_R)
+                if (item == Order.Helmet_Red)
                 {
-                    _image.GetComponent<SpriteRenderer>().sprite = _helmetSpriteR;
+                    _image.GetComponent<SpriteRenderer>().sprite = _helmetSpriteRed;
                 }
-                else if (item == Order.Helmet_B)
+                else if (item == Order.Helmet_Blue)
                 {
-                    _image.GetComponent<SpriteRenderer>().sprite = _helmetSpriteB;
+                    _image.GetComponent<SpriteRenderer>().sprite = _helmetSpriteBlue;
                 }
-                else if (item == Order.Sword_R)
+                else if (item == Order.Sword_Red)
                 {
-                    _image.GetComponent<SpriteRenderer>().sprite = _swordSpriteR;
+                    _image.GetComponent<SpriteRenderer>().sprite = _swordSpriteRed;
                 }
-                else if (item == Order.Sword_B)
+                else if (item == Order.Sword_Blue)
                 {
-                    _image.GetComponent<SpriteRenderer>().sprite = _swordSpriteB;
+                    _image.GetComponent<SpriteRenderer>().sprite = _swordSpriteBlue;
                 }
-                else if (item == Order.Arrow_R)
+                else if (item == Order.Arrow_Red)
                 {
-                    _image.GetComponent<SpriteRenderer>().sprite = _arrowSpriteR;
+                    _image.GetComponent<SpriteRenderer>().sprite = _arrowSpriteRed;
                 }
-                else if (item == Order.Arrow_B)
+                else if (item == Order.Arrow_Blue)
                 {
-                    _image.GetComponent<SpriteRenderer>().sprite = _arrowSpriteB;
+                    _image.GetComponent<SpriteRenderer>().sprite = _arrowSpriteBlue;
                 }
             }
         }
-        else if ( _orders.Count == 2) 
+        else if (_orders.Count == 2)
         {
             _2Order.SetActive(true);
             int numOfLoops = 0;
             foreach (var item in _orders)
             {
                 GameObject _image = _2Order.transform.GetChild(numOfLoops).gameObject;
+                _itemsChecks[numOfLoops] = _2Order.transform.GetChild(numOfLoops + 2).gameObject;
                 numOfLoops++;
-                if (item == Order.Helmet_R)
+                if (item == Order.Helmet_Red)
                 {
-                    _image.GetComponent<SpriteRenderer>().sprite = _helmetSpriteR;
+                    _image.GetComponent<SpriteRenderer>().sprite = _helmetSpriteRed;
                 }
-                else if (item == Order.Helmet_B)
+                else if (item == Order.Helmet_Blue)
                 {
-                    _image.GetComponent<SpriteRenderer>().sprite = _helmetSpriteB;
+                    _image.GetComponent<SpriteRenderer>().sprite = _helmetSpriteBlue;
                 }
-                else if (item == Order.Sword_R)
+                else if (item == Order.Sword_Red)
                 {
-                    _image.GetComponent<SpriteRenderer>().sprite = _swordSpriteR;
+                    _image.GetComponent<SpriteRenderer>().sprite = _swordSpriteRed;
                 }
-                else if (item == Order.Sword_B)
+                else if (item == Order.Sword_Blue)
                 {
-                    _image.GetComponent<SpriteRenderer>().sprite = _swordSpriteB;
+                    _image.GetComponent<SpriteRenderer>().sprite = _swordSpriteBlue;
                 }
-                else if (item == Order.Arrow_R)
+                else if (item == Order.Arrow_Red)
                 {
-                    _image.GetComponent<SpriteRenderer>().sprite = _arrowSpriteR;
+                    _image.GetComponent<SpriteRenderer>().sprite = _arrowSpriteRed;
                 }
-                else if (item == Order.Arrow_B)
+                else if (item == Order.Arrow_Blue)
                 {
-                    _image.GetComponent<SpriteRenderer>().sprite = _arrowSpriteB;
+                    _image.GetComponent<SpriteRenderer>().sprite = _arrowSpriteBlue;
                 }
             }
         }
@@ -267,30 +276,31 @@ public class Customer : MonoBehaviour
             foreach (var item in _orders)
             {
                 GameObject _image = _3Order.transform.GetChild(numOfLoops).gameObject;
+                _itemsChecks[numOfLoops] = _3Order.transform.GetChild(numOfLoops + 3).gameObject;
                 numOfLoops++;
-                if (item == Order.Helmet_R)
+                if (item == Order.Helmet_Red)
                 {
-                    _image.GetComponent<SpriteRenderer>().sprite = _helmetSpriteR;
+                    _image.GetComponent<SpriteRenderer>().sprite = _helmetSpriteRed;
                 }
-                else if (item == Order.Helmet_B)
+                else if (item == Order.Helmet_Blue)
                 {
-                    _image.GetComponent<SpriteRenderer>().sprite = _helmetSpriteB;
+                    _image.GetComponent<SpriteRenderer>().sprite = _helmetSpriteBlue;
                 }
-                else if (item == Order.Sword_R)
+                else if (item == Order.Sword_Red)
                 {
-                    _image.GetComponent<SpriteRenderer>().sprite = _swordSpriteR;
+                    _image.GetComponent<SpriteRenderer>().sprite = _swordSpriteRed;
                 }
-                else if (item == Order.Sword_B)
+                else if (item == Order.Sword_Blue)
                 {
-                    _image.GetComponent<SpriteRenderer>().sprite = _swordSpriteB;
+                    _image.GetComponent<SpriteRenderer>().sprite = _swordSpriteBlue;
                 }
-                else if (item == Order.Arrow_R)
+                else if (item == Order.Arrow_Red)
                 {
-                    _image.GetComponent<SpriteRenderer>().sprite = _arrowSpriteR;
+                    _image.GetComponent<SpriteRenderer>().sprite = _arrowSpriteRed;
                 }
-                else if (item == Order.Arrow_B)
+                else if (item == Order.Arrow_Blue)
                 {
-                    _image.GetComponent<SpriteRenderer>().sprite = _arrowSpriteB;
+                    _image.GetComponent<SpriteRenderer>().sprite = _arrowSpriteBlue;
                 }
             }
         }
@@ -300,15 +310,15 @@ public class Customer : MonoBehaviour
     public int GetPayment(Order order)
     {
         int _randomNum = Random.Range(0, 100);
-        if (order == Order.Helmet_R || order == Order.Helmet_B)
+        if (order == Order.Helmet_Red || order == Order.Helmet_Blue)
         {
             _cost = _helmetCost;
         }
-        else if (order == Order.Sword_R || order == Order.Sword_B)
+        else if (order == Order.Sword_Red || order == Order.Sword_Blue)
         {
             _cost = _swordCost;
         }
-        else if (order == Order.Arrow_R || order == Order.Arrow_B)
+        else if (order == Order.Arrow_Red || order == Order.Arrow_Blue)
         {
             _cost = _arrowCost;
         }
@@ -368,6 +378,10 @@ public class Customer : MonoBehaviour
     }
     public void LeaveCounter(bool wasOrderCompleted)
     {
+        _1Order.SetActive(false);
+        _2Order.SetActive(false);
+        _3Order.SetActive(false);
+        _canvas.GetComponentInChildren<UnityEngine.UI.Image>().gameObject.SetActive(false);
         if (wasOrderCompleted == true)
         {
             //happy pop up, walk away, destroy

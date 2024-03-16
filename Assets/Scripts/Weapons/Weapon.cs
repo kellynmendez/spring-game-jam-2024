@@ -11,6 +11,8 @@ public abstract class Weapon : MonoBehaviour
 
     protected PlayerSM playerSM;
 
+    public string _weaponType = "";
+
     public abstract void ShowParts();
     public abstract void ShowDefault();
     public abstract void PaintRed();
@@ -30,6 +32,22 @@ public abstract class Weapon : MonoBehaviour
         Extensions.SetGlobalScale(transform, Vector3.one);
         playerSM.SetWeapon(null);
         playerSM.carryingWeapon = false;
+    }
+    public string GetWeaponType()
+    {
+        if (this is Helmet)
+        {
+            _weaponType = "Helmet";
+        }
+        else if (this is Sword)
+        {
+            _weaponType = "Sword";
+        }
+        else if (this is Arrow)
+        {
+            _weaponType = "Arrow";
+        }
+        return _weaponType;
     }
 }
 

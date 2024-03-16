@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 
 public class Customer_Data : MonoBehaviour
 {
-    public int _ordersCompleted = 0;
+    public int _ordersCompleted = 9;
     public int _ordersFailed = 0;
     public int _currentScore = 0;
 
@@ -48,19 +48,63 @@ public class Customer_Data : MonoBehaviour
         }
     }
 
-    public int CompleteOrder(GameObject customer, Weapon weapon)
+    public void CompleteOrder(GameObject customer, Counter counter, Weapon weapon)
     {
-        customer.GetComponent<Customer>()._timerStarted = false;
-        int scoreIncrease = customer.GetComponent<Customer>()._paymentAmount;
-        _currentScore += scoreIncrease;
-        _scoreValue.text = _currentScore.ToString();
-        print("Current Score: " + _currentScore);
+        int itemToIgnore = 1;
+        foreach (var item in customer.GetComponent<Customer>()._orders)
+        {
+            print(item.ToString() + " | " + weapon.GetWeaponType());
+            print(item.ToString() + " | " + weapon.weaponColor.ToString());
+            if (item.ToString().Contains(weapon.GetWeaponType()) && item.ToString().Contains(weapon.weaponColor.ToString()))
+            {
+                if (itemToIgnore == 1)
+                {
+                    counter._ignoreItem01 = true;
+                    //customer.GetComponent<Customer>()._item01Check.SetActive(true);
+                    customer.GetComponent<Customer>()._itemsChecks[0].SetActive(true);
+                    print("ignoring item 1");
+                    break;
+                }
+                else if (itemToIgnore == 2)
+                {
+                    counter._ignoreItem02 = true;
+                    customer.GetComponent<Customer>()._itemsChecks[1].SetActive(true);
+                    print("ignoring item 1");
+                    break;
+                }
+                else if (itemToIgnore == 3)
+                {
+                    //should do nothing
+                    counter._ignoreItem03 = true;
+                    customer.GetComponent<Customer>()._itemsChecks[2].SetActive(true);
+                    print("ignoring item 1");
+                    break;
+                }
+            }
+            else
+            {
+                itemToIgnore++;
+            }
+        }
 
-        bool _wasorderComleted = true;
-        customer.GetComponent<Customer>().LeaveCounter(_wasorderComleted);
-        _ordersCompleted++;
-        print(_ordersCompleted);
-        return _ordersCompleted;
+        customer.GetComponent<Customer>()._ordersThru++;
+        if (customer.GetComponent<Customer>()._ordersThru < customer.GetComponent<Customer>()._orders.Count)
+        {
+            print("one down");
+        }
+        else
+        {
+            customer.GetComponent<Customer>()._timerStarted = false;
+            int scoreIncrease = customer.GetComponent<Customer>()._paymentAmount;
+            _currentScore += scoreIncrease;
+            _scoreValue.text = _currentScore.ToString();
+            print("Current Score: " + _currentScore);
+
+            bool _wasorderComleted = true;
+            customer.GetComponent<Customer>().LeaveCounter(_wasorderComleted);
+            _ordersCompleted++;
+            print(_ordersCompleted);
+        }
     }
     public void FailOrder(GameObject customer)
     {
@@ -72,7 +116,7 @@ public class Customer_Data : MonoBehaviour
         {
             _life03.sprite = _brokenHeart;
         }
-        else if(_ordersFailed == 2)
+        else if (_ordersFailed == 2)
         {
             _life02.sprite = _brokenHeart;
         }
@@ -89,7 +133,7 @@ public class Customer_Data : MonoBehaviour
         //GameObject player = Instantiate(_playerTEST, _customerSpawnPoint);
         GameObject newCustomer = Instantiate(_customerPreFab, _customerSpawnPoint);
         _customer = newCustomer;
-        
+
         if (_counter01.GetComponent<Counter>()._counterIsEmpty == true)
         {
             _customer.GetComponent<Customer>().ApproachCounter(_counter01.transform);
