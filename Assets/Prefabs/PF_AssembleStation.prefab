@@ -790,7 +790,7 @@ GameObject:
   - component: {fileID: 2675665022826048534}
   m_Layer: 0
   m_Name: AssembleCamera
-  m_TagString: Assemble_Camera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1751,6 +1751,7 @@ MonoBehaviour:
   weaponPlace: {fileID: 4102846615212614377}
   weaponAtStation: {fileID: 0}
   _counterIsEmpty: 0
+  counter: {fileID: 0}
 --- !u!114 &6988370576867178010
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -2017,7 +2017,7 @@ GameObject:
   - component: {fileID: 1459155684453404044}
   m_Layer: 0
   m_Name: PF_PaintStation
-  m_TagString: Clickable
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2078,6 +2078,7 @@ MonoBehaviour:
   weaponPlace: {fileID: 897802663373094938}
   weaponAtStation: {fileID: 0}
   _counterIsEmpty: 0
+  counter: {fileID: 0}
 --- !u!114 &1459155684453404044
 MonoBehaviour:
   m_ObjectHideFlags: 0
