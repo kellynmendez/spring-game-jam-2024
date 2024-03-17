@@ -165,7 +165,7 @@ public class Counter : MonoBehaviour
             }
             else
             {
-                //_customerData.FailOrder(_currentCustomer);
+                _customerData.FailOrder(_currentCustomer);
             }
     }
 }
