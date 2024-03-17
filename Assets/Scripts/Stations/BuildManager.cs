@@ -44,6 +44,9 @@ public class BuildManager : StationManager
     private const string ARROW_BROKEN_ANIM = "ArrowBroken";
 
     [Header("Broken Mold UI")]
+    [SerializeField] GameObject animSwordBrokenMold;
+    [SerializeField] GameObject animHelmetBrokenMold;
+    [SerializeField] GameObject animArrowBrokenMold;
     [SerializeField] GameObject swordBrokenMold;
     [SerializeField] GameObject helmetBrokenMold;
     [SerializeField] GameObject arrowBrokenMold;
@@ -55,6 +58,7 @@ public class BuildManager : StationManager
     private int swordCounter;
     private int helmetCounter;
     private int arrowCounter;
+    private GameObject animBrokenMold = null;
     private GameObject brokenMold = null;
     private MoldManager moldManager;
 
@@ -75,6 +79,10 @@ public class BuildManager : StationManager
         helmetCounter = numHelmetsToMoldBreak;
         arrowCounter = numArrowsToMoldBreak;
         moldManager = FindObjectOfType<MoldManager>();
+
+        animSwordBrokenMold.SetActive(false);
+        animHelmetBrokenMold.SetActive(false);
+        animArrowBrokenMold.SetActive(false);
         swordBrokenMold.SetActive(false);
         helmetBrokenMold.SetActive(false);
         arrowBrokenMold.SetActive(false);
@@ -87,6 +95,7 @@ public class BuildManager : StationManager
         currentState = BuildState.ChoosingMold;
         gameScreen.SetActive(true);
         chooseMoldsScreen.SetActive(true);
+        animBrokenMold = null;
         brokenMold = null;
 
         // Decide if sword can be made
@@ -196,7 +205,8 @@ public class BuildManager : StationManager
             moldBrokenText.SetActive(true);
 
             brokenMold = swordBrokenMold;
-            brokenMold.SetActive(true);
+            animBrokenMold = animSwordBrokenMold;
+            animBrokenMold.SetActive(true);
             swordBreakAnimator.Play(SWORD_BREAK_ANIM);
             StartCoroutine(BreakMold(
                 () => IsAnimated(swordBreakAnimator, SWORD_BREAK_ANIM), swordBreakAnimator));
@@ -209,7 +219,8 @@ public class BuildManager : StationManager
             moldBrokenText.SetActive(true);
 
             brokenMold = helmetBrokenMold;
-            brokenMold.SetActive(true);
+            animBrokenMold = animHelmetBrokenMold;
+            animBrokenMold.SetActive(true);
             helmetBreakAnimator.Play(HELMET_BREAK_ANIM);
             StartCoroutine(BreakMold(
                 () => IsAnimated(helmetBreakAnimator, HELMET_BREAK_ANIM), helmetBreakAnimator));
@@ -222,7 +233,8 @@ public class BuildManager : StationManager
             moldBrokenText.SetActive(true);
 
             brokenMold = arrowBrokenMold;
-            brokenMold.SetActive(true);
+            animBrokenMold = animArrowBrokenMold;
+            animBrokenMold.SetActive(true);
             arrowBreakAnimator.Play(ARROW_BREAK_ANIM);
             StartCoroutine(BreakMold(
                 () => IsAnimated(arrowBreakAnimator, ARROW_BREAK_ANIM), arrowBreakAnimator));
@@ -236,11 +248,11 @@ public class BuildManager : StationManager
         while (condition())
             yield return null;
 
-        anim.speed = 0;
+        animBrokenMold.SetActive(false);
+        brokenMold.SetActive(true);
 
         yield return new WaitForSeconds(1f);
 
-        anim.speed = 1;
         brokenMold.SetActive(false);
         moldBrokenText.SetActive(false);
         weaponObj.SetActive(true);
