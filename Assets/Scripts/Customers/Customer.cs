@@ -18,7 +18,10 @@ public class Customer : MonoBehaviour
     [HideInInspector] public List<Order> _orders = new List<Order>();
     [HideInInspector] public int _paymentAmount = 0;
     public bool _timerStarted = false;
-    public float _timerMax = 60;
+    [HideInInspector] public float _timerMax = 60;
+    [SerializeField] float _1ItemTime = 20;
+    [SerializeField] float _2ItemTime = 50;
+    [SerializeField] float _3ItemTime = 70;
     private float _timerTime = 60;
     [SerializeField] UnityEngine.UI.Slider _timerUI;
     [SerializeField] UnityEngine.UI.Image _timerFace;
@@ -250,6 +253,21 @@ public class Customer : MonoBehaviour
                 _orders.Add(_order);
             }
         }
+
+        if (_orders.Count == 1)
+        {
+            _timerMax = _1ItemTime;
+        }
+        else if (_orders.Count == 2)
+        {
+            _timerMax = _2ItemTime;
+        }
+        else if ( _orders.Count == 3)
+        {
+            _timerMax = _3ItemTime;
+        }
+        _timerTime = _timerMax;
+        _timerUI.maxValue = _timerMax;
 
         string _ordersText = "";
         foreach (var item in _orders)
@@ -489,5 +507,11 @@ public class Customer : MonoBehaviour
         _agent.SetDestination(_customerData._customerDeathPoint.transform.position);
         _seekingDestination = true;
         _leavingCounter = true;
+        _customerData.SpawnNewCustomer();
+        if (_customerData._ordersCompleted == 3)
+        {
+            _customerData.SpawnNewCustomer();
+            _customerData.SpawnNewCustomer();
+        }
     }
 }

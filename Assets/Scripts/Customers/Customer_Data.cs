@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 
 public class Customer_Data : MonoBehaviour
 {
-    public int _ordersCompleted = 9;
+    public int _ordersCompleted = 0;
     public int _ordersFailed = 0;
     public int _currentScore = 0;
 
