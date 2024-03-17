@@ -2038,6 +2038,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   station_type: 1
   weaponPlace: {fileID: 4102846615212614377}
+  _audioSource: {fileID: 6677468299533796989}
+  _audioClip: {fileID: 0}
+  _placeAudioClip: {fileID: 8300000, guid: 98fa789189bc7bf49adcef3f8ed1c28a, type: 3}
   weaponAtStation: {fileID: 0}
   _counterIsEmpty: 0
   counter: {fileID: 0}
@@ -2081,7 +2084,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 92bc7dc370b9f1f40a1f978c24d20c90, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.25
   m_Pitch: 1
   Loop: 0
   Mute: 0

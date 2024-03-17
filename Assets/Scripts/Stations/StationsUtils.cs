@@ -12,6 +12,7 @@ public class StationUtils : MonoBehaviour
 
     [SerializeField] AudioSource _audioSource = null;
     [SerializeField] AudioClip _audioClip = null;
+    [SerializeField] AudioClip _placeAudioClip = null;
 
     PACPointer PACPointer;
     private Collider destination_col;
@@ -125,6 +126,11 @@ public class StationUtils : MonoBehaviour
         {
             if (station_type != Station_Type.Trash && station_type != Station_Type.Counter)
             {
+                if (_audioSource != null)
+                {
+                    _audioSource.clip = _placeAudioClip;
+                    _audioSource.Play();
+                }
                 weapon.PlaceWeapon(weaponPlace.transform);
                 weaponAtStation = weapon;
                 this.stationOccupied = newOccupied;
