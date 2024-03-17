@@ -38,11 +38,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: IdleBroken
+      name: Break
       takeName: Scene
       internalID: -8800838248204228948
-      firstFrame: 6
-      lastFrame: 6.1
+      firstFrame: 1
+      lastFrame: 16
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
