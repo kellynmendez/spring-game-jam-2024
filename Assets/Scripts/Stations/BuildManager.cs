@@ -284,11 +284,20 @@ public class BuildManager : StationManager
         }
         else
         {
-            weaponObj.SetActive(true);
-            currentState = BuildState.Inactive;
-
-            ExitGame();
+            StartCoroutine(ExitIfNotBreakingMold());
         }
+    }
+
+    IEnumerator ExitIfNotBreakingMold()
+    {
+
+
+        yield return new WaitForSeconds(1f);
+
+        weaponObj.SetActive(true);
+        currentState = BuildState.Inactive;
+
+        ExitGame();
     }
 
     IEnumerator BreakMold(Func<bool> condition, Animator anim)
