@@ -1551,6 +1551,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1476774406844090676, guid: 913b7eb61844a8b44b18a90763ccfdd0, type: 3}
+      propertyPath: _audioSource
+      value: 
+      objectReference: {fileID: 2005549902}
     - target: {fileID: 1580902561139993757, guid: 913b7eb61844a8b44b18a90763ccfdd0, type: 3}
       propertyPath: m_Name
       value: PF_TrashCan
@@ -1874,6 +1878,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &2005549902 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 5733438917677302497, guid: 913b7eb61844a8b44b18a90763ccfdd0, type: 3}
+  m_PrefabInstance: {fileID: 1648948909}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &475031513495707316
 PrefabInstance:
   m_ObjectHideFlags: 0

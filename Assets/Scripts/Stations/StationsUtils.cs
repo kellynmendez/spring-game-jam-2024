@@ -10,6 +10,9 @@ public class StationUtils : MonoBehaviour
 
     [SerializeField] public GameObject weaponPlace;
 
+    [SerializeField] AudioSource _audioSource = null;
+    [SerializeField] AudioClip _audioClip = null;
+
     PACPointer PACPointer;
     private Collider destination_col;
     private PlayerSM playerSM;
@@ -136,6 +139,11 @@ public class StationUtils : MonoBehaviour
 
     IEnumerator TrashWeapon(GameObject weapon)
     {
+        if (station_type != Station_Type.Counter && _audioSource != null && _audioClip != null)
+        {
+            _audioSource.clip = _audioClip;
+            _audioSource.Play();
+        }
         yield return new WaitForSeconds(1);
         Destroy(weapon);
     }

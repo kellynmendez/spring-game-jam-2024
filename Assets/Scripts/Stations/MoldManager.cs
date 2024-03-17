@@ -39,6 +39,10 @@ public class MoldManager : StationManager
     [SerializeField] GameObject finishedHelmetMold;
     [SerializeField] GameObject finishedArrowMold;
 
+    [Header("Sounds")]
+    [SerializeField] AudioSource _audioSource;
+    [SerializeField] AudioClip _moldPickClip;
+
     private MoldState currentState;
     private DropPoint3D moldSlot = null;
     private GameObject blankMold = null;
@@ -140,6 +144,10 @@ public class MoldManager : StationManager
         blankMold = blankSwordMold;
         buildManager.swordMoldActive = true;
         canMakeSwordMold = false;
+
+        _audioSource.clip = _moldPickClip;
+        _audioSource.Play();
+
         SwitchToMakeMold();
     }
 
@@ -151,6 +159,10 @@ public class MoldManager : StationManager
         blankMold = blankHelmetMold;
         buildManager.helmetMoldActive = true;
         canMakeHelmetMold = false;
+
+        _audioSource.clip = _moldPickClip;
+        _audioSource.Play();
+
         SwitchToMakeMold();
     }
 
@@ -162,6 +174,10 @@ public class MoldManager : StationManager
         blankMold = blankArrowMold;
         buildManager.arrowMoldActive = true;
         canMakeArrowMold = false;
+
+        _audioSource.clip = _moldPickClip;
+        _audioSource.Play();
+
         SwitchToMakeMold();
     }
 

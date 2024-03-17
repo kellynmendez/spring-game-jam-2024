@@ -20,6 +20,11 @@ public class PaintManager : StationManager
     [SerializeField] GameObject arrowRed;
     [SerializeField] GameObject arrowBlue;
 
+    [Header("Sound")]
+    [SerializeField] AudioSource _audioSource;
+    [SerializeField] AudioClip _audioClipRed;
+    [SerializeField] AudioClip _audioClipBlue;
+
     private PaintState currentState;
     private Weapon stationWeapon;
 
@@ -95,6 +100,9 @@ public class PaintManager : StationManager
             arrowBlue.SetActive(false);
             arrowRed.SetActive(true);
         }
+
+        _audioSource.clip = _audioClipRed;
+        _audioSource.Play();
     }
 
     public void BlueChosen()
@@ -119,6 +127,9 @@ public class PaintManager : StationManager
             arrowRed.SetActive(false);
             arrowBlue.SetActive(true);
         }
+
+        _audioSource.clip = _audioClipBlue;
+        _audioSource.Play();
     }
 
     public void FinishPainting()
