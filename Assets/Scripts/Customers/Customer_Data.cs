@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 
@@ -29,6 +30,8 @@ public class Customer_Data : MonoBehaviour
     [SerializeField] UnityEngine.UI.Image _life03;
     [SerializeField] Sprite _brokenHeart;
     [SerializeField] GameObject _gameOverScreen;
+
+    [SerializeField] AudioSource _audioSource;
 
     private GameObject _customer = null;
 
@@ -132,8 +135,11 @@ public class Customer_Data : MonoBehaviour
         else if (_ordersFailed >= 3)
         {
             _life01.sprite = _brokenHeart;
-            _gameOverScreen.SetActive(true);
-            _gameOverScoreText.text = _currentScore.ToString();
+            //_gameOverScreen.SetActive(true);
+            //_gameOverScoreText.text = _currentScore.ToString();
+            //SceneManager.LoadScene("GameOver");
+            _audioSource.Play();
+            StartCoroutine(WaitForGameOver());
         }
     }
     public void SpawnNewCustomer()
@@ -157,5 +163,11 @@ public class Customer_Data : MonoBehaviour
             _customer.GetComponent<Customer>().ApproachCounter(_counter03.transform);
             _counter03.GetComponent<Counter>()._counterIsEmpty = false;
         }
+    }
+
+    IEnumerator WaitForGameOver()
+    {
+        yield return new WaitForSeconds(2);
+        SceneManager.LoadScene("GameOver");
     }
 }
