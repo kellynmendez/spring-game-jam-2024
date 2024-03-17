@@ -25,6 +25,8 @@ public class Customer_Data : MonoBehaviour
     [SerializeField] UnityEngine.UI.Image _life02;
     [SerializeField] UnityEngine.UI.Image _life03;
     [SerializeField] Sprite _brokenHeart;
+    [SerializeField] GameObject _inGameScoreText;
+    [SerializeField] GameObject _gameOverScoreText;
     [SerializeField] GameObject _gameOverScreen;
 
     private GameObject _customer = null;
