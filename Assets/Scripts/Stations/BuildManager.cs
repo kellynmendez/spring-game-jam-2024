@@ -52,6 +52,12 @@ public class BuildManager : StationManager
     [SerializeField] GameObject arrowBrokenMold;
     [SerializeField] GameObject moldBrokenText;
 
+    [Header("Sound")]
+    [SerializeField] AudioSource _audioSource;
+    [SerializeField] AudioClip _pickMold;
+    [SerializeField] AudioClip _pourMold;
+    [SerializeField] AudioClip _moldBreak;
+
     private BuildState currentState;
     private GameObject weaponObj = null;
     private StationUtils station;
@@ -61,6 +67,8 @@ public class BuildManager : StationManager
     private GameObject animBrokenMold = null;
     private GameObject brokenMold = null;
     private MoldManager moldManager;
+    private MoldInv moldInv;
+
 
     private enum BuildState
     {
@@ -87,6 +95,8 @@ public class BuildManager : StationManager
         helmetBrokenMold.SetActive(false);
         arrowBrokenMold.SetActive(false);
         moldBrokenText.SetActive(false);
+
+        moldInv = FindObjectOfType<MoldInv>();
     }
 
     public override void StartGame()
@@ -136,6 +146,8 @@ public class BuildManager : StationManager
     public void SwordChosen()
     {
         swordCounter--;
+        _audioSource.clip = _pickMold;
+        _audioSource.Play();
 
         weaponObj = Instantiate(swordPrefab);
         station.SetStationOccupied(true, weaponObj.GetComponent<Weapon>());
@@ -145,12 +157,18 @@ public class BuildManager : StationManager
         currentState = BuildState.FillingMold;
 
         pourAnimator.Play(SWORD_POUR_ANIM);
+
+        _audioSource.clip = _pourMold;
+        _audioSource.Play();
+
         StartCoroutine(WaitAfterFill(() => IsAnimated(pourAnimator, SWORD_POUR_ANIM)));
     }
 
     public void HelmetChosen()
     {
         helmetCounter--;
+        _audioSource.clip = _pickMold;
+        _audioSource.Play();
 
         weaponObj = Instantiate(helmetPrefab);
         station.SetStationOccupied(true, weaponObj.GetComponent<Weapon>());
@@ -160,12 +178,18 @@ public class BuildManager : StationManager
         currentState = BuildState.FillingMold;
 
         pourAnimator.Play(HELMET_POUR_ANIM);
+
+        _audioSource.clip = _pourMold;
+        _audioSource.Play();
+
         StartCoroutine(WaitAfterFill(() => IsAnimated(pourAnimator, HELMET_POUR_ANIM)));
     }
 
     public void ArrowChosen()
     {
         arrowCounter--;
+        _audioSource.clip = _pickMold;
+        _audioSource.Play();
 
         weaponObj = Instantiate(arrowPrefab);
         station.SetStationOccupied(true, weaponObj.GetComponent<Weapon>());
@@ -175,6 +199,10 @@ public class BuildManager : StationManager
         currentState = BuildState.FillingMold;
 
         pourAnimator.Play(ARROW_POUR_ANIM);
+
+        _audioSource.clip = _pourMold;
+        _audioSource.Play();
+
         StartCoroutine(WaitAfterFill(() => IsAnimated(pourAnimator, ARROW_POUR_ANIM)));
     }
 
@@ -202,12 +230,17 @@ public class BuildManager : StationManager
             swordMoldActive = false;
             swordCounter = numSwordsToMoldBreak;
             moldManager.canMakeSwordMold = true;
+            moldInv.SetSwordInactive();
             moldBrokenText.SetActive(true);
 
             brokenMold = swordBrokenMold;
             animBrokenMold = animSwordBrokenMold;
             animBrokenMold.SetActive(true);
             swordBreakAnimator.Play(SWORD_BREAK_ANIM);
+
+            _audioSource.clip = _moldBreak;
+            _audioSource.Play();
+
             StartCoroutine(BreakMold(
                 () => IsAnimated(swordBreakAnimator, SWORD_BREAK_ANIM), swordBreakAnimator));
         }
@@ -216,12 +249,17 @@ public class BuildManager : StationManager
             helmetMoldActive = false;
             helmetCounter = numHelmetsToMoldBreak;
             moldManager.canMakeHelmetMold = true;
+            moldInv.SetHelmetInactive();
             moldBrokenText.SetActive(true);
 
             brokenMold = helmetBrokenMold;
             animBrokenMold = animHelmetBrokenMold;
             animBrokenMold.SetActive(true);
             helmetBreakAnimator.Play(HELMET_BREAK_ANIM);
+
+            _audioSource.clip = _moldBreak;
+            _audioSource.Play();
+
             StartCoroutine(BreakMold(
                 () => IsAnimated(helmetBreakAnimator, HELMET_BREAK_ANIM), helmetBreakAnimator));
         }
@@ -230,15 +268,36 @@ public class BuildManager : StationManager
             arrowMoldActive = false;
             arrowCounter = numArrowsToMoldBreak;
             moldManager.canMakeArrowMold = true;
+            moldInv.SetArrowInactive();
             moldBrokenText.SetActive(true);
 
             brokenMold = arrowBrokenMold;
             animBrokenMold = animArrowBrokenMold;
             animBrokenMold.SetActive(true);
             arrowBreakAnimator.Play(ARROW_BREAK_ANIM);
+
+            _audioSource.clip = _moldBreak;
+            _audioSource.Play();
+
             StartCoroutine(BreakMold(
                 () => IsAnimated(arrowBreakAnimator, ARROW_BREAK_ANIM), arrowBreakAnimator));
         }
+        else
+        {
+            StartCoroutine(ExitIfNotBreakingMold());
+        }
+    }
+
+    IEnumerator ExitIfNotBreakingMold()
+    {
+
+
+        yield return new WaitForSeconds(1f);
+
+        weaponObj.SetActive(true);
+        currentState = BuildState.Inactive;
+
+        ExitGame();
     }
 
     IEnumerator BreakMold(Func<bool> condition, Animator anim)

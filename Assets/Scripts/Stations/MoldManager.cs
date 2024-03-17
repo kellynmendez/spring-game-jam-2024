@@ -50,6 +50,7 @@ public class MoldManager : StationManager
     private GameObject finishedMold = null;
     private BuildManager buildManager;
     private bool created = false;
+    private MoldInv moldInv;
 
     private enum MoldState
     {
@@ -63,6 +64,7 @@ public class MoldManager : StationManager
         playerSM = FindObjectOfType<PlayerSM>();
         currentState = MoldState.Inactive;
         buildManager = FindObjectOfType<BuildManager>();
+        moldInv = FindObjectOfType<MoldInv>();
         // Default all screens that shouldn't be active
         gameScreen.SetActive(false);
         swordCutter.SetActive(false);
@@ -143,6 +145,7 @@ public class MoldManager : StationManager
         moldSlot = swordSlot;
         blankMold = blankSwordMold;
         buildManager.swordMoldActive = true;
+        moldInv.SetSwordActive();
         canMakeSwordMold = false;
 
         _audioSource.clip = _moldPickClip;
@@ -158,6 +161,7 @@ public class MoldManager : StationManager
         moldSlot = helmetSlot;
         blankMold = blankHelmetMold;
         buildManager.helmetMoldActive = true;
+        moldInv.SetHelmetActive();
         canMakeHelmetMold = false;
 
         _audioSource.clip = _moldPickClip;
@@ -173,6 +177,7 @@ public class MoldManager : StationManager
         moldSlot = arrowSlot;
         blankMold = blankArrowMold;
         buildManager.arrowMoldActive = true;
+        moldInv.SetArrowActive();
         canMakeArrowMold = false;
 
         _audioSource.clip = _moldPickClip;

@@ -112,8 +112,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slotName: Helmet_CTR
-  _audioSource: {fileID: 0}
-  _clip: {fileID: 0}
+  _audioSource: {fileID: 4623856289811188378}
+  _clip: {fileID: 8300000, guid: 86829be975a80b04e8c0321937b83b70, type: 3}
 --- !u!1 &460371938960168812
 GameObject:
   m_ObjectHideFlags: 0
@@ -473,7 +473,7 @@ MonoBehaviour:
   m_margin: {x: -232.55092, y: 0, z: -234.06284, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &1582143993020916220
@@ -486,6 +486,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7640055481002554756}
   - component: {fileID: 257967942113605045}
+  - component: {fileID: 3963240580586698873}
   m_Layer: 7
   m_Name: MoldCamera
   m_TagString: Untagged
@@ -559,6 +560,66 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &3963240580586698873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1582143993020916220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volumeTrigger: {fileID: 7640055481002554756}
+  volumeLayer:
+    serializedVersion: 2
+    m_Bits: 192
+  stopNaNPropagation: 1
+  finalBlitToCameraTarget: 0
+  antialiasingMode: 0
+  temporalAntialiasing:
+    jitterSpread: 0.75
+    sharpness: 0.25
+    stationaryBlending: 0.95
+    motionBlending: 0.85
+  subpixelMorphologicalAntialiasing:
+    quality: 2
+  fastApproximateAntialiasing:
+    fastMode: 0
+    keepAlpha: 0
+  fog:
+    enabled: 1
+    excludeSkybox: 1
+  debugLayer:
+    lightMeter:
+      width: 512
+      height: 256
+      showCurves: 1
+    histogram:
+      width: 512
+      height: 256
+      channel: 3
+    waveform:
+      exposure: 0.12
+      height: 256
+    vectorscope:
+      size: 256
+      exposure: 0.12
+    overlaySettings:
+      linearDepth: 0
+      motionColorIntensity: 4
+      motionGridSize: 64
+      colorBlindnessType: 0
+      colorBlindnessStrength: 1
+  m_Resources: {fileID: 11400000, guid: d82512f9c8e5d4a4d938b575d47f88d4, type: 2}
+  m_ShowToolkit: 0
+  m_ShowCustomSorter: 0
+  breakBeforeColorGrading: 0
+  m_BeforeTransparentBundles: []
+  m_BeforeStackBundles: []
+  m_AfterStackBundles: []
 --- !u!1 &1995393127495560932
 GameObject:
   m_ObjectHideFlags: 0
@@ -690,7 +751,7 @@ MonoBehaviour:
   m_margin: {x: -232.55092, y: 0, z: -234.06284, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &2263518843741680411
@@ -824,7 +885,7 @@ MonoBehaviour:
   m_margin: {x: -232.55092, y: 0, z: -234.06284, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &2547498880053344091
@@ -922,15 +983,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.42745098, g: 0.3764706, b: 0.26666668, a: 1}
+  m_Color: {r: 0.42745098, g: 0.3764706, b: 0.26666668, a: 0.8666667}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -1287,7 +1348,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &3918602149526949839
@@ -1421,7 +1482,7 @@ MonoBehaviour:
   m_margin: {x: -232.55092, y: 0, z: -234.06284, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &4392332638136701124
@@ -1536,8 +1597,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slotName: Sword_CTR
-  _audioSource: {fileID: 0}
-  _clip: {fileID: 0}
+  _audioSource: {fileID: 4623856289811188378}
+  _clip: {fileID: 8300000, guid: 86829be975a80b04e8c0321937b83b70, type: 3}
 --- !u!1 &4592714722572941999
 GameObject:
   m_ObjectHideFlags: 0
@@ -1658,7 +1719,7 @@ Transform:
   m_GameObject: {fileID: 4640512406833495240}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.91400427, z: -0, w: 0.40570468}
-  m_LocalPosition: {x: 33.201, y: 1.922, z: -24.265}
+  m_LocalPosition: {x: 33.612, y: 1.922, z: -24.081}
   m_LocalScale: {x: 0.308918, y: 0.28136146, z: 0.31660476}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1738,6 +1799,7 @@ GameObject:
   - component: {fileID: 7089119191150557168}
   - component: {fileID: 1176576733033458181}
   - component: {fileID: 6998370549744209483}
+  - component: {fileID: 4623856289811188378}
   m_Layer: 0
   m_Name: PF_MoldStation
   m_TagString: Clickable
@@ -1840,8 +1902,104 @@ MonoBehaviour:
   finishedSwordMold: {fileID: 595268472651068748}
   finishedHelmetMold: {fileID: 9074347672346908776}
   finishedArrowMold: {fileID: 460371938960168812}
-  _audioSource: {fileID: 0}
-  _moldPickClip: {fileID: 0}
+  _audioSource: {fileID: 4623856289811188378}
+  _moldPickClip: {fileID: 8300000, guid: abf009091e6fc1842a6bdb705d1a308f, type: 3}
+--- !u!82 &4623856289811188378
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4923050592734899400}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &5032020924182453117
 GameObject:
   m_ObjectHideFlags: 0
@@ -2097,7 +2255,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4607405878386061053
 Transform:
   m_ObjectHideFlags: 0
@@ -2230,8 +2388,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slotName: Arrow_CTR
-  _audioSource: {fileID: 0}
-  _clip: {fileID: 0}
+  _audioSource: {fileID: 4623856289811188378}
+  _clip: {fileID: 8300000, guid: 86829be975a80b04e8c0321937b83b70, type: 3}
 --- !u!1 &6109330501781371513
 GameObject:
   m_ObjectHideFlags: 0
@@ -2363,7 +2521,7 @@ MonoBehaviour:
   m_margin: {x: -232.55092, y: 0, z: -234.06284, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &6150452919811982602
@@ -2517,7 +2675,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4472308218737253759
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2874,7 +3032,7 @@ MonoBehaviour:
   m_margin: {x: -232.55092, y: 0, z: -234.06284, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &7424855937888085689
@@ -3538,7 +3696,7 @@ MonoBehaviour:
   m_margin: {x: -232.55092, y: 0, z: -234.06284, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &9074347672346908776

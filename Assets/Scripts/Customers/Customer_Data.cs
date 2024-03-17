@@ -139,6 +139,7 @@ public class Customer_Data : MonoBehaviour
             //_gameOverScoreText.text = _currentScore.ToString();
             //SceneManager.LoadScene("GameOver");
             _audioSource.Play();
+            PlayerPrefs.SetInt("Score", _currentScore);
             StartCoroutine(WaitForGameOver());
         }
     }
