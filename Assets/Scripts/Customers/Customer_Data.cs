@@ -97,6 +97,7 @@ public class Customer_Data : MonoBehaviour
         if (customer.GetComponent<Customer>()._ordersThru < customer.GetComponent<Customer>()._orders.Count)
         {
             print("one down");
+            customer.GetComponent<Customer>()._customerCheckAS.Play();
         }
         else
         {
@@ -111,6 +112,7 @@ public class Customer_Data : MonoBehaviour
             _ordersCompleted++;
             print(_ordersCompleted);
             print(customer.GetComponent<Customer>()._ordersThru++);
+            customer.GetComponent<Customer>()._customerWinAS.Play();
         }
     }
     public void FailOrder(GameObject customer)

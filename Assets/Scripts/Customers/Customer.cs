@@ -63,6 +63,11 @@ public class Customer : MonoBehaviour
     [HideInInspector] public Sprite _item03Sprite;
     public int _ordersThru = 0;
 
+    [SerializeField] AudioSource _customerTalkAS;
+    [SerializeField] AudioSource _customerLostAS;
+    [SerializeField] public AudioSource _customerWinAS;
+    [SerializeField] public AudioSource _customerCheckAS;
+
     private void Awake()
     {
         _customerData = GameObject.FindObjectOfType(typeof(Customer_Data)) as Customer_Data;
@@ -208,6 +213,7 @@ public class Customer : MonoBehaviour
         //for (int numOfOrders = 0; numOfOrders < _orders.Count; numOfOrders++)
         //{
         _orderSheetImage.gameObject.SetActive(true);
+        _customerTalkAS.Play();
         //}
         //Set the UI
         if (_orders.Count == 1)
@@ -412,6 +418,7 @@ public class Customer : MonoBehaviour
             print("order done");
             _spriteRender.sprite = _orderCompletedSprite;
             _spriteRender.enabled = true;
+
         }
         else
         {
@@ -419,12 +426,13 @@ public class Customer : MonoBehaviour
             print("order failed");
             _spriteRender.sprite = _orderFailedSprite;
             _spriteRender.enabled = true;
+            _customerLostAS.Play();
         }
         StartCoroutine(WaitToLeave());
     }
     private IEnumerator WaitToLeave()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(2);
         _counter.GetComponent<Counter>()._counterIsEmpty = true;
         _agent.SetDestination(_customerData._customerDeathPoint.transform.position);
         _seekingDestination = true;
