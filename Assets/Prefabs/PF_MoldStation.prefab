@@ -112,8 +112,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slotName: Helmet_CTR
-  _audioSource: {fileID: 0}
-  _clip: {fileID: 0}
+  _audioSource: {fileID: 4623856289811188378}
+  _clip: {fileID: 8300000, guid: 86829be975a80b04e8c0321937b83b70, type: 3}
 --- !u!1 &460371938960168812
 GameObject:
   m_ObjectHideFlags: 0
@@ -1536,8 +1536,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slotName: Sword_CTR
-  _audioSource: {fileID: 0}
-  _clip: {fileID: 0}
+  _audioSource: {fileID: 4623856289811188378}
+  _clip: {fileID: 8300000, guid: 86829be975a80b04e8c0321937b83b70, type: 3}
 --- !u!1 &4592714722572941999
 GameObject:
   m_ObjectHideFlags: 0
@@ -1738,6 +1738,7 @@ GameObject:
   - component: {fileID: 7089119191150557168}
   - component: {fileID: 1176576733033458181}
   - component: {fileID: 6998370549744209483}
+  - component: {fileID: 4623856289811188378}
   m_Layer: 0
   m_Name: PF_MoldStation
   m_TagString: Clickable
@@ -1840,8 +1841,104 @@ MonoBehaviour:
   finishedSwordMold: {fileID: 595268472651068748}
   finishedHelmetMold: {fileID: 9074347672346908776}
   finishedArrowMold: {fileID: 460371938960168812}
-  _audioSource: {fileID: 0}
-  _moldPickClip: {fileID: 0}
+  _audioSource: {fileID: 4623856289811188378}
+  _moldPickClip: {fileID: 8300000, guid: abf009091e6fc1842a6bdb705d1a308f, type: 3}
+--- !u!82 &4623856289811188378
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4923050592734899400}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &5032020924182453117
 GameObject:
   m_ObjectHideFlags: 0
@@ -2230,8 +2327,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slotName: Arrow_CTR
-  _audioSource: {fileID: 0}
-  _clip: {fileID: 0}
+  _audioSource: {fileID: 4623856289811188378}
+  _clip: {fileID: 8300000, guid: 86829be975a80b04e8c0321937b83b70, type: 3}
 --- !u!1 &6109330501781371513
 GameObject:
   m_ObjectHideFlags: 0
