@@ -9,6 +9,7 @@ TagManager:
   - Un-Clickable
   - itemUI
   - checkUI
+  - CustomerFace
   layers:
   - Default
   - TransparentFX

@@ -53,8 +53,6 @@ public class Customer_Data : MonoBehaviour
         int itemToIgnore = 1;
         foreach (var item in customer.GetComponent<Customer>()._orders)
         {
-            print(item.ToString() + " | " + weapon.GetWeaponType());
-            print(item.ToString() + " | " + weapon.weaponColor.ToString());
             if (item.ToString().Contains(weapon.GetWeaponType()) && item.ToString().Contains(weapon.weaponColor.ToString()))
             {
                 if (itemToIgnore == 1)
@@ -69,7 +67,7 @@ public class Customer_Data : MonoBehaviour
                 {
                     counter._ignoreItem02 = true;
                     customer.GetComponent<Customer>()._itemsChecks[1].SetActive(true);
-                    print("ignoring item 1");
+                    print("ignoring item 2");
                     break;
                 }
                 else if (itemToIgnore == 3)
@@ -77,7 +75,7 @@ public class Customer_Data : MonoBehaviour
                     //should do nothing
                     counter._ignoreItem03 = true;
                     customer.GetComponent<Customer>()._itemsChecks[2].SetActive(true);
-                    print("ignoring item 1");
+                    print("ignoring item 3");
                     break;
                 }
             }
@@ -86,6 +84,8 @@ public class Customer_Data : MonoBehaviour
                 itemToIgnore++;
             }
         }
+
+        print("ignore items " + counter._ignoreItem01 + " " + counter._ignoreItem02 + " " + counter._ignoreItem03);
 
         customer.GetComponent<Customer>()._ordersThru++;
         if (customer.GetComponent<Customer>()._ordersThru < customer.GetComponent<Customer>()._orders.Count)
@@ -104,6 +104,7 @@ public class Customer_Data : MonoBehaviour
             customer.GetComponent<Customer>().LeaveCounter(_wasorderComleted);
             _ordersCompleted++;
             print(_ordersCompleted);
+            print(customer.GetComponent<Customer>()._ordersThru++);
         }
     }
     public void FailOrder(GameObject customer)
