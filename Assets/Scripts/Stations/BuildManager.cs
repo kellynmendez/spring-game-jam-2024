@@ -67,6 +67,7 @@ public class BuildManager : StationManager
     private GameObject animBrokenMold = null;
     private GameObject brokenMold = null;
     private MoldManager moldManager;
+    private MoldInv moldInv;
 
 
     private enum BuildState
@@ -94,6 +95,8 @@ public class BuildManager : StationManager
         helmetBrokenMold.SetActive(false);
         arrowBrokenMold.SetActive(false);
         moldBrokenText.SetActive(false);
+
+        moldInv = FindObjectOfType<MoldInv>();
     }
 
     public override void StartGame()
@@ -227,6 +230,7 @@ public class BuildManager : StationManager
             swordMoldActive = false;
             swordCounter = numSwordsToMoldBreak;
             moldManager.canMakeSwordMold = true;
+            moldInv.SetSwordInactive();
             moldBrokenText.SetActive(true);
 
             brokenMold = swordBrokenMold;
@@ -245,6 +249,7 @@ public class BuildManager : StationManager
             helmetMoldActive = false;
             helmetCounter = numHelmetsToMoldBreak;
             moldManager.canMakeHelmetMold = true;
+            moldInv.SetHelmetInactive();
             moldBrokenText.SetActive(true);
 
             brokenMold = helmetBrokenMold;
@@ -263,6 +268,7 @@ public class BuildManager : StationManager
             arrowMoldActive = false;
             arrowCounter = numArrowsToMoldBreak;
             moldManager.canMakeArrowMold = true;
+            moldInv.SetArrowInactive();
             moldBrokenText.SetActive(true);
 
             brokenMold = arrowBrokenMold;
