@@ -68,6 +68,19 @@ public class Customer : MonoBehaviour
     [SerializeField] public AudioSource _customerWinAS;
     [SerializeField] public AudioSource _customerCheckAS;
 
+    [Header("Animation")]
+    [SerializeField] Animator animA1;
+    [SerializeField] Animator animA2;
+    [SerializeField] Animator animB1;
+    [SerializeField] Animator animB2;
+    [SerializeField] public GameObject artTypeA1;
+    [SerializeField] public GameObject artTypeA2;
+    [SerializeField] public GameObject artTypeB1;
+    [SerializeField] public GameObject artTypeB2;
+    private const string IDLE_ANIM = "Idle";
+    private const string WALK_ANIM = "Walk";
+    private Animator animator;
+
     private void Awake()
     {
         _customerData = GameObject.FindObjectOfType(typeof(Customer_Data)) as Customer_Data;
@@ -82,6 +95,41 @@ public class Customer : MonoBehaviour
         _timerUI.maxValue = _timerMax;
         _timerUI.value = 0;
         _timerFace.sprite = _timerHappy;
+
+        artTypeA1.SetActive(false);
+        artTypeA2.SetActive(false);
+        artTypeB1.SetActive(false);
+        artTypeB2.SetActive(false);
+        // Randomly choose customer model
+        int randNum = Random.Range(0, 100);
+        if (randNum <= 50) // typeA
+        {
+            randNum = Random.Range(0, 100);
+            if (randNum <= 50) // version1
+            {
+                artTypeA1.SetActive(true);
+                animator = animA1;
+            }
+            else // version2
+            {
+                artTypeA2.SetActive(true);
+                animator = animA2;
+            }
+        }
+        else // typeB
+        {
+            randNum = Random.Range(0, 100);
+            if (randNum <= 50) // version1
+            {
+                artTypeB1.SetActive(true);
+                animator = animB1;
+            }
+            else // version2
+            {
+                artTypeB1.SetActive(true);
+                animator = animB2;
+            }
+        }
     }
 
     public List<Order> GetOrder()
@@ -397,6 +445,8 @@ public class Customer : MonoBehaviour
 
     public void ApproachCounter(Transform counter)
     {
+        animator.Play(WALK_ANIM);
+
         _agent.SetDestination(counter.GetChild(2).position);
         _counter = counter.gameObject;
         _counter.GetComponent<Counter>()._currentCustomer = gameObject;
@@ -408,6 +458,8 @@ public class Customer : MonoBehaviour
     }
     public void LeaveCounter(bool wasOrderCompleted)
     {
+        animator.Play(WALK_ANIM);
+
         _1Order.SetActive(false);
         _2Order.SetActive(false);
         _3Order.SetActive(false);

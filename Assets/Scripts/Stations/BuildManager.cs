@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -27,31 +28,34 @@ public class BuildManager : StationManager
     [SerializeField] GameObject helmetGrayedOutMold;
     [SerializeField] GameObject arrowGrayedOutMold;
 
-    [Header("Fill Mold UI Objects")]
-    [SerializeField] GameObject swordUnfilledMold;
-    [SerializeField] GameObject helmetUnfilledMold;
-    [SerializeField] GameObject arrowUnfilledMold;
-    [SerializeField] GameObject swordFilledMold;
-    [SerializeField] GameObject helmetFilledMold;
-    [SerializeField] GameObject arrowFilledMold;
+    [Header("Animation")]
+    [SerializeField] Animator pourAnimator;
+    private const string SWORD_POUR_ANIM = "SwordPour";
+    private const string HELMET_POUR_ANIM = "HelmetPour";
+    private const string ARROW_POUR_ANIM = "ArrowPour";
+    [SerializeField] Animator swordBreakAnimator;
+    private const string SWORD_BREAK_ANIM = "SwordBreak";
+    private const string SWORD_BROKEN_ANIM = "SwordBroken";
+    [SerializeField] Animator helmetBreakAnimator;
+    private const string HELMET_BREAK_ANIM = "HelmetBreak";
+    private const string HELMET_BROKEN_ANIM = "HelmetBroken";
+    [SerializeField] Animator arrowBreakAnimator;
+    private const string ARROW_BREAK_ANIM = "ArrowBreak";
+    private const string ARROW_BROKEN_ANIM = "ArrowBroken";
 
     [Header("Broken Mold UI")]
-    [SerializeField] GameObject brokenMoldGroup;
-    [SerializeField] GameObject swordUnbrokenMold;
-    [SerializeField] GameObject helmetUnbrokenMold;
-    [SerializeField] GameObject arrowUnbrokenMold;
     [SerializeField] GameObject swordBrokenMold;
     [SerializeField] GameObject helmetBrokenMold;
     [SerializeField] GameObject arrowBrokenMold;
+    [SerializeField] GameObject moldBrokenText;
 
     private BuildState currentState;
-    private GameObject unfilledMold = null;
-    private GameObject filledMold = null;
     private GameObject weaponObj = null;
     private StationUtils station;
     private int swordCounter;
     private int helmetCounter;
     private int arrowCounter;
+    private GameObject brokenMold = null;
     private MoldManager moldManager;
 
     private enum BuildState
@@ -71,6 +75,10 @@ public class BuildManager : StationManager
         helmetCounter = numHelmetsToMoldBreak;
         arrowCounter = numArrowsToMoldBreak;
         moldManager = FindObjectOfType<MoldManager>();
+        swordBrokenMold.SetActive(false);
+        helmetBrokenMold.SetActive(false);
+        arrowBrokenMold.SetActive(false);
+        moldBrokenText.SetActive(false);
     }
 
     public override void StartGame()
@@ -78,8 +86,8 @@ public class BuildManager : StationManager
         inactive = false;
         currentState = BuildState.ChoosingMold;
         gameScreen.SetActive(true);
-        brokenMoldGroup.SetActive(false);
         chooseMoldsScreen.SetActive(true);
+        brokenMold = null;
 
         // Decide if sword can be made
         if (swordMoldActive)
@@ -119,100 +127,123 @@ public class BuildManager : StationManager
     public void SwordChosen()
     {
         swordCounter--;
-        unfilledMold = swordUnfilledMold;
-        filledMold = swordFilledMold;
+
         weaponObj = Instantiate(swordPrefab);
         station.SetStationOccupied(true, weaponObj.GetComponent<Weapon>());
         weaponObj.SetActive(false);
-        SwitchToFillMold();
+        chooseMoldsScreen.SetActive(false);
+
+        currentState = BuildState.FillingMold;
+
+        pourAnimator.Play(SWORD_POUR_ANIM);
+        StartCoroutine(WaitAfterFill(() => IsAnimated(pourAnimator, SWORD_POUR_ANIM)));
     }
 
     public void HelmetChosen()
     {
         helmetCounter--;
-        unfilledMold = helmetUnfilledMold;
-        filledMold = helmetFilledMold;
+
         weaponObj = Instantiate(helmetPrefab);
         station.SetStationOccupied(true, weaponObj.GetComponent<Weapon>());
         weaponObj.SetActive(false);
-        SwitchToFillMold();
+        chooseMoldsScreen.SetActive(false);
+
+        currentState = BuildState.FillingMold;
+
+        pourAnimator.Play(HELMET_POUR_ANIM);
+        StartCoroutine(WaitAfterFill(() => IsAnimated(pourAnimator, HELMET_POUR_ANIM)));
     }
 
     public void ArrowChosen()
     {
         arrowCounter--;
-        unfilledMold = arrowUnfilledMold;
-        filledMold = arrowFilledMold;
+
         weaponObj = Instantiate(arrowPrefab);
         station.SetStationOccupied(true, weaponObj.GetComponent<Weapon>());
         weaponObj.SetActive(false);
-        SwitchToFillMold();
-    }
-
-    private void SwitchToFillMold()
-    {
         chooseMoldsScreen.SetActive(false);
-        unfilledMold.SetActive(true);
+
         currentState = BuildState.FillingMold;
+
+        pourAnimator.Play(ARROW_POUR_ANIM);
+        StartCoroutine(WaitAfterFill(() => IsAnimated(pourAnimator, ARROW_POUR_ANIM)));
     }
 
-    public void FillMold()
+    public bool IsAnimated(Animator ani, string animationName, int layerIndex = 0)
     {
-        unfilledMold.SetActive(false);
-        filledMold.SetActive(true);
-        if (swordCounter == 0) 
+        return ani.GetCurrentAnimatorStateInfo(layerIndex).IsName(animationName);
+    }
+
+    IEnumerator WaitAfterFill(Func<bool> condition)
+    {
+        yield return new WaitForEndOfFrame();
+
+        while (condition())
+            yield return null;
+
+        CheckBreakMold();
+        
+        yield break;
+    }
+
+    private void CheckBreakMold()
+    {
+        if (swordCounter == 0)
         {
             swordMoldActive = false;
             swordCounter = numSwordsToMoldBreak;
             moldManager.canMakeSwordMold = true;
-            StartCoroutine(BreakMold(filledMold, swordUnbrokenMold, swordBrokenMold));
+            moldBrokenText.SetActive(true);
+
+            brokenMold = swordBrokenMold;
+            brokenMold.SetActive(true);
+            swordBreakAnimator.Play(SWORD_BREAK_ANIM);
+            StartCoroutine(BreakMold(
+                () => IsAnimated(swordBreakAnimator, SWORD_BREAK_ANIM), swordBreakAnimator));
         }
         else if (helmetCounter == 0)
         {
             helmetMoldActive = false;
             helmetCounter = numHelmetsToMoldBreak;
             moldManager.canMakeHelmetMold = true;
-            StartCoroutine(BreakMold(filledMold, helmetUnbrokenMold, helmetBrokenMold));
+            moldBrokenText.SetActive(true);
+
+            brokenMold = helmetBrokenMold;
+            brokenMold.SetActive(true);
+            helmetBreakAnimator.Play(HELMET_BREAK_ANIM);
+            StartCoroutine(BreakMold(
+                () => IsAnimated(helmetBreakAnimator, HELMET_BREAK_ANIM), helmetBreakAnimator));
         }
         else if (arrowCounter == 0)
         {
             arrowMoldActive = false;
             arrowCounter = numArrowsToMoldBreak;
             moldManager.canMakeArrowMold = true;
-            StartCoroutine(BreakMold(filledMold, arrowUnbrokenMold, arrowBrokenMold));
-        }
-        else
-        {
-            StartCoroutine(WaitAfterFill());
+            moldBrokenText.SetActive(true);
+
+            brokenMold = arrowBrokenMold;
+            brokenMold.SetActive(true);
+            arrowBreakAnimator.Play(ARROW_BREAK_ANIM);
+            StartCoroutine(BreakMold(
+                () => IsAnimated(arrowBreakAnimator, ARROW_BREAK_ANIM), arrowBreakAnimator));
         }
     }
 
-    IEnumerator BreakMold(GameObject filledMold, GameObject unbrokenMold, GameObject brokenMold)
+    IEnumerator BreakMold(Func<bool> condition, Animator anim)
     {
+        yield return new WaitForEndOfFrame();
+
+        while (condition())
+            yield return null;
+
+        anim.speed = 0;
+
         yield return new WaitForSeconds(1f);
-        filledMold.SetActive(false);
-        brokenMoldGroup.SetActive(true);
-        unbrokenMold.SetActive(true);
+
+        anim.speed = 1;
         brokenMold.SetActive(false);
-        yield return new WaitForSeconds(0.5f);
-        unbrokenMold.SetActive(false);
-        brokenMold.SetActive(true);
-        StartCoroutine(WaitAfterFill());
-        yield break;
-    }
-
-    IEnumerator WaitAfterFill()
-    {
-        yield return new WaitForSeconds(1f);
-
-        // Resetting UI
-        brokenMoldGroup.SetActive(false);
-        swordBrokenMold.SetActive(false);
-        helmetBrokenMold.SetActive(false);
-        arrowBrokenMold.SetActive(false);
+        moldBrokenText.SetActive(false);
         weaponObj.SetActive(true);
-        filledMold.SetActive(false);
-        // Setting build state
         currentState = BuildState.Inactive;
 
         ExitGame();

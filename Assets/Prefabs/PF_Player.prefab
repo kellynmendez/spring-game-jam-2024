@@ -129,7 +129,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 100
+  m_Speed: 50
   m_Acceleration: 1000
   avoidancePriority: 50
   m_AngularSpeed: 1000
@@ -187,6 +187,7 @@ MonoBehaviour:
   _pointer: {fileID: 0}
   _position: {x: 0, y: 0, z: 0}
   _hitVisuals: {fileID: 0}
+  animator: {fileID: 5874641141794784823}
 --- !u!1 &8692216694181836420
 GameObject:
   m_ObjectHideFlags: 0
@@ -212,7 +213,7 @@ Transform:
   m_GameObject: {fileID: 8692216694181836420}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.95, z: 2.71}
+  m_LocalPosition: {x: 0, y: 5.29, z: 2.71}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -230,29 +231,33 @@ PrefabInstance:
       propertyPath: m_Name
       value: PF_GrannySmith
       objectReference: {fileID: 0}
+    - target: {fileID: 5784055786646601342, guid: 58a3c02ab1547a64fb48fa930b957bdc, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 1e2edf52454f8d0469ec8b9f8dacc2d6, type: 2}
     - target: {fileID: 5940869030853513084, guid: 58a3c02ab1547a64fb48fa930b957bdc, type: 3}
       propertyPath: m_LocalScale.x
-      value: 4.179684
+      value: 5.2
       objectReference: {fileID: 0}
     - target: {fileID: 5940869030853513084, guid: 58a3c02ab1547a64fb48fa930b957bdc, type: 3}
       propertyPath: m_LocalScale.y
-      value: 4.179684
+      value: 5.2
       objectReference: {fileID: 0}
     - target: {fileID: 5940869030853513084, guid: 58a3c02ab1547a64fb48fa930b957bdc, type: 3}
       propertyPath: m_LocalScale.z
-      value: 4.179684
+      value: 5.2
       objectReference: {fileID: 0}
     - target: {fileID: 5940869030853513084, guid: 58a3c02ab1547a64fb48fa930b957bdc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.041505814
+      value: 0.044591
       objectReference: {fileID: 0}
     - target: {fileID: 5940869030853513084, guid: 58a3c02ab1547a64fb48fa930b957bdc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.33
       objectReference: {fileID: 0}
     - target: {fileID: 5940869030853513084, guid: 58a3c02ab1547a64fb48fa930b957bdc, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.033342116
+      value: 0.03635
       objectReference: {fileID: 0}
     - target: {fileID: 5940869030853513084, guid: 58a3c02ab1547a64fb48fa930b957bdc, type: 3}
       propertyPath: m_LocalRotation.w
@@ -287,6 +292,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 58a3c02ab1547a64fb48fa930b957bdc, type: 3}
+--- !u!95 &5874641141794784823 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5784055786646601342, guid: 58a3c02ab1547a64fb48fa930b957bdc, type: 3}
+  m_PrefabInstance: {fileID: 127212301258209353}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6030819086486386485 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5940869030853513084, guid: 58a3c02ab1547a64fb48fa930b957bdc, type: 3}
