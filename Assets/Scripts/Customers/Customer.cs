@@ -18,7 +18,13 @@ public class Customer : MonoBehaviour
     [HideInInspector] public List<Order> _orders = new List<Order>();
     [HideInInspector] public int _paymentAmount = 0;
     public bool _timerStarted = false;
-    public float _timerTime = 60;
+    public float _timerMax = 60;
+    private float _timerTime = 60;
+    [SerializeField] UnityEngine.UI.Slider _timerUI;
+    [SerializeField] UnityEngine.UI.Image _timerFace;
+    [SerializeField] Sprite _timerHappy;
+    [SerializeField] Sprite _timerAnnoyed;
+    [SerializeField] Sprite _timerAngry;
     private int _orderNumMax = 3;
     private int _cost = 0;
     public int _helmetCost = 30;
@@ -35,6 +41,7 @@ public class Customer : MonoBehaviour
 
     private Canvas _canvas;
     private SpriteRenderer _spriteRender;
+    [SerializeField] UnityEngine.UI.Image _orderSheetImage;
     [SerializeField] Sprite _orderCompletedSprite;
     [SerializeField] Sprite _orderFailedSprite;
     [SerializeField] Sprite _checkmark;
@@ -66,6 +73,10 @@ public class Customer : MonoBehaviour
         _itemsChecks.Add(_item01Check);
         _itemsChecks.Add(_item02Check);
         _itemsChecks.Add(_item03Check);
+        _timerTime = _timerMax;
+        _timerUI.maxValue = _timerMax;
+        _timerUI.value = 0;
+        _timerFace.sprite = _timerHappy;
     }
 
     public List<Order> GetOrder()
@@ -196,7 +207,7 @@ public class Customer : MonoBehaviour
 
         //for (int numOfOrders = 0; numOfOrders < _orders.Count; numOfOrders++)
         //{
-
+        _orderSheetImage.gameObject.SetActive(true);
         //}
         //Set the UI
         if (_orders.Count == 1)
@@ -338,13 +349,23 @@ public class Customer : MonoBehaviour
         //}
         if (_timerStarted == true)
         {
-            _timerTime -= Time.deltaTime;
             if (_timerTime <= 0)
             {
                 _customerData.FailOrder(gameObject);
-                //print("Timer Ended. Order Failed.");
                 _timerStarted = false;
-                //transform.Translate(0, 0, 15);
+            }
+
+            _timerTime -= Time.deltaTime;
+            _timerUI.value = _timerTime;
+            _timerUI.value = _timerMax - _timerTime;
+
+            if (_timerUI.value >= .6 * _timerMax)
+            {
+                _timerFace.sprite = _timerAngry;
+            }
+            else if (_timerUI.value >= .3 * _timerMax)
+            {
+                _timerFace.sprite = _timerAnnoyed;
             }
         }
 
@@ -373,6 +394,9 @@ public class Customer : MonoBehaviour
         _agent.SetDestination(counter.GetChild(2).position);
         _counter = counter.gameObject;
         _counter.GetComponent<Counter>()._currentCustomer = gameObject;
+        _counter.GetComponent<Counter>()._ignoreItem01 = false;
+        _counter.GetComponent<Counter>()._ignoreItem02 = false;
+        _counter.GetComponent<Counter>()._ignoreItem03 = false;
         _counterPosistion = counter.position;
         _seekingDestination = true;
     }
