@@ -6,6 +6,8 @@ using UnityEngine.EventSystems;
 public class DropPoint3D : MonoBehaviour
 {
     [SerializeField] public string slotName;
+    [SerializeField] AudioSource _audioSource;
+    [SerializeField] AudioClip _clip;
 
     private bool dropped = false;
     private Draggable3DItem draggable;
@@ -25,6 +27,9 @@ public class DropPoint3D : MonoBehaviour
         dropCollider.enabled = false;
         draggable.SetDropped(true);
         dropped = true;
+
+        _audioSource.clip = _clip;
+        _audioSource.Play();
     }
 
     public void SetSlotName(string slotName)

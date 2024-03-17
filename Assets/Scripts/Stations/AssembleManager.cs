@@ -11,6 +11,9 @@ public class AssembleManager : StationManager
     [SerializeField] GameObject helmetGroup;
     [SerializeField] GameObject arrowGroup;
 
+    [SerializeField] AudioSource _assembled;
+    [SerializeField] AudioClip _assembledClip;
+
     private AssembleState currentState;
     private Weapon stationWeapon = null;
     private DropPoint3D[] dropPoints = null;
@@ -87,6 +90,8 @@ public class AssembleManager : StationManager
 
         if (isAssembled && !finishedAssembly)
         {
+            _assembled.clip = _assembledClip;
+            _assembled.Play();
             finishedAssembly = true;
             StartCoroutine(WaitAfterAssembled());
         }

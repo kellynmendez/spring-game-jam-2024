@@ -84,17 +84,17 @@ public class Counter : MonoBehaviour
             {
                 //_weapon.GetComponentInChildren(Renderer).material;
                 if (_weapon.weaponColor == Weapon.WeaponColor.Red
-                    && ((item01.ToString().Contains("_R") && _ignoreItem01 != true)
-                    || (item02.ToString().Contains("_R") && _ignoreItem02 != true)
-                    || (item03.ToString().Contains("_R") && _ignoreItem03 != true)))
+                    && ((item01.ToString().Contains("Helmet_R") && _ignoreItem01 != true)
+                    || (item02.ToString().Contains("Helmet_R") && _ignoreItem02 != true)
+                    || (item03.ToString().Contains("Helmet_R") && _ignoreItem03 != true)))
                 {
                     _customerData.CompleteOrder(_currentCustomer, _counter, _weapon);
                     print("is red");
                 }
                 else if (_weapon.weaponColor == Weapon.WeaponColor.Blue
-                    && ((item01.ToString().Contains("_B") && _ignoreItem01 != true)
-                    || (item02.ToString().Contains("_B") && _ignoreItem02 != true)
-                    || (item03.ToString().Contains("_B") && _ignoreItem03 != true)))
+                    && ((item01.ToString().Contains("Helmet_B") && _ignoreItem01 != true)
+                    || (item02.ToString().Contains("Helmet_B") && _ignoreItem02 != true)
+                    || (item03.ToString().Contains("Helmet_B") && _ignoreItem03 != true)))
                 {
                     _customerData.CompleteOrder(_currentCustomer, _counter, _weapon);
                     print("is blue");
@@ -113,16 +113,16 @@ public class Counter : MonoBehaviour
             {
                 //_weapon.GetComponentInChildren(Renderer).material;
                 if (_weapon.weaponColor == Weapon.WeaponColor.Red
-                    && ((item01.ToString().Contains("_R") && _ignoreItem01 != true)
-                    || (item02.ToString().Contains("_R") && _ignoreItem02 != true)
-                    || (item03.ToString().Contains("_R") && _ignoreItem03 != true)))
+                    && ((item01.ToString().Contains("Sword_R") && _ignoreItem01 != true)
+                    || (item02.ToString().Contains("Sword_R") && _ignoreItem02 != true)
+                    || (item03.ToString().Contains("Sword_R") && _ignoreItem03 != true)))
                 {
                     _customerData.CompleteOrder(_currentCustomer, _counter, _weapon);
                 }
                 else if (_weapon.weaponColor == Weapon.WeaponColor.Blue
-                     && ((item01.ToString().Contains("_B") && _ignoreItem01 != true)
-                    || (item02.ToString().Contains("_B") && _ignoreItem02 != true)
-                    || (item03.ToString().Contains("_B") && _ignoreItem03 != true)))
+                     && ((item01.ToString().Contains("Sword_B") && _ignoreItem01 != true)
+                    || (item02.ToString().Contains("Sword_B") && _ignoreItem02 != true)
+                    || (item03.ToString().Contains("Sword_B") && _ignoreItem03 != true)))
                 {
                     _customerData.CompleteOrder(_currentCustomer, _counter, _weapon);
                 }
@@ -140,16 +140,16 @@ public class Counter : MonoBehaviour
             {
                 //_weapon.GetComponentInChildren(Renderer).material;
                 if (_weapon.weaponColor == Weapon.WeaponColor.Red
-                    && ((item01.ToString().Contains("_R") && _ignoreItem01 != true)
-                    || (item02.ToString().Contains("_R") && _ignoreItem02 != true)
-                    || (item03.ToString().Contains("_R") && _ignoreItem03 != true)))
+                    && ((item01.ToString().Contains("Arrow_R") && _ignoreItem01 != true)
+                    || (item02.ToString().Contains("Arrow_R") && _ignoreItem02 != true)
+                    || (item03.ToString().Contains("Arrow_R") && _ignoreItem03 != true)))
                 {
                     _customerData.CompleteOrder(_currentCustomer, _counter, _weapon);
                 }
                 else if (_weapon.weaponColor == Weapon.WeaponColor.Blue
-                    && ((item01.ToString().Contains("_B") && _ignoreItem01 != true)
-                    || (item02.ToString().Contains("_B") && _ignoreItem02 != true)
-                    || (item03.ToString().Contains("_B") && _ignoreItem03 != true)))
+                    && ((item01.ToString().Contains("Arrow_B") && _ignoreItem01 != true)
+                    || (item02.ToString().Contains("Arrow_B") && _ignoreItem02 != true)
+                    || (item03.ToString().Contains("Arrow_B") && _ignoreItem03 != true)))
                 {
                     _customerData.CompleteOrder(_currentCustomer, _counter, _weapon);
                 }
@@ -165,7 +165,7 @@ public class Counter : MonoBehaviour
             }
             else
             {
-                //_customerData.FailOrder(_currentCustomer);
+                _customerData.FailOrder(_currentCustomer);
             }
     }
 }
