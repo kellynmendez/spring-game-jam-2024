@@ -19,8 +19,11 @@ public class Customer_Data : MonoBehaviour
     [SerializeField] GameObject _counter02;
     [SerializeField] GameObject _counter03;
 
-    private Text _scoreValue;
     [SerializeField] Canvas _canvas;
+    [SerializeField] TMP_Text _inGameScoreText;
+    //TextMeshPro _inGameScoreText;
+    [SerializeField] TMP_Text _gameOverScoreText;
+    //TextMeshPro _gameOverScoreText;
     [SerializeField] UnityEngine.UI.Image _life01;
     [SerializeField] UnityEngine.UI.Image _life02;
     [SerializeField] UnityEngine.UI.Image _life03;
@@ -36,7 +39,10 @@ public class Customer_Data : MonoBehaviour
     {
         _currentScore = 0;
         SpawnNewCustomer();
-        _scoreValue = _canvas.GetComponentInChildren<Text>();
+        //_inGameScoreText = _inGameScoreTextGO.GetComponent<TextMeshPro>();
+        //_gameOverScoreText = _gameOverScoreTextGO.GetComponent<TextMeshPro>();
+        //print(_inGameScoreText);
+        //print(_gameOverScoreText);
     }
 
     // Update is called once per frame
@@ -97,7 +103,7 @@ public class Customer_Data : MonoBehaviour
             customer.GetComponent<Customer>()._timerStarted = false;
             int scoreIncrease = customer.GetComponent<Customer>()._paymentAmount;
             _currentScore += scoreIncrease;
-            _scoreValue.text = _currentScore.ToString();
+            _inGameScoreText.text = _currentScore.ToString();
             print("Current Score: " + _currentScore);
 
             bool _wasorderComleted = true;
@@ -125,8 +131,7 @@ public class Customer_Data : MonoBehaviour
         {
             _life01.sprite = _brokenHeart;
             _gameOverScreen.SetActive(true);
-            Text _finalScoreText = _gameOverScreen.GetComponentInChildren<Text>();
-            _finalScoreText.text = _currentScore.ToString();
+            _gameOverScoreText.text = _currentScore.ToString();
         }
     }
     public void SpawnNewCustomer()

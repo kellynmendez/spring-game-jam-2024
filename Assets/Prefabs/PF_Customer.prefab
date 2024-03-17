@@ -240,7 +240,7 @@ MonoBehaviour:
   _orders: 
   _paymentAmount: 0
   _timerStarted: 0
-  _timerMax: 10
+  _timerMax: 5
   _timerUI: {fileID: 2750521214993409454}
   _timerFace: {fileID: 2913027939399933241}
   _timerHappy: {fileID: 21300000, guid: 16ef132be3b4b654caa5e11f1e5bbfde, type: 3}
