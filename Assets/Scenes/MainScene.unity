@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18002728, g: 0.22540456, b: 0.30676192, a: 1}
+  m_IndirectSpecularColor: {r: 0.18002717, g: 0.22540447, b: 0.30676165, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -550,6 +550,22 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3b8a453c993aa94993bc0b25f1fd7ed, type: 3}
+--- !u!1 &909630437 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2360644054843971282, guid: 30bee70e43697304a99f7f0f6fd7558d, type: 3}
+  m_PrefabInstance: {fileID: 1462727162}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &909630439 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8260069077817656238, guid: 30bee70e43697304a99f7f0f6fd7558d, type: 3}
+  m_PrefabInstance: {fileID: 1462727162}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 909630437}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &954677533 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1621342578138114420, guid: 30bee70e43697304a99f7f0f6fd7558d, type: 3}
@@ -698,6 +714,22 @@ MonoBehaviour:
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 37cc821060397da4ba5dc7875c6c9ce3, type: 2}
   m_BuildHeightMesh: 0
+--- !u!1 &1017808405 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4454174201584090484, guid: 30bee70e43697304a99f7f0f6fd7558d, type: 3}
+  m_PrefabInstance: {fileID: 1462727162}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1017808407 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6643261243978635587, guid: 30bee70e43697304a99f7f0f6fd7558d, type: 3}
+  m_PrefabInstance: {fileID: 1462727162}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1017808405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1101513983
 GameObject:
   m_ObjectHideFlags: 0
@@ -854,7 +886,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3095658669873027596, guid: 3b4ca66d246a8ab468157a1c91e0629e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -57.7
+      value: -52.83
       objectReference: {fileID: 0}
     - target: {fileID: 3095658669873027596, guid: 3b4ca66d246a8ab468157a1c91e0629e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -862,7 +894,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8485925949329299390, guid: 3b4ca66d246a8ab468157a1c91e0629e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -47.89
+      value: -45.55
       objectReference: {fileID: 0}
     - target: {fileID: 8485925949329299390, guid: 3b4ca66d246a8ab468157a1c91e0629e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -901,9 +933,25 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 954677533}
     - target: {fileID: 9137962705898787253, guid: 3b4ca66d246a8ab468157a1c91e0629e, type: 3}
+      propertyPath: _inGameScoreText
+      value: 
+      objectReference: {fileID: 909630439}
+    - target: {fileID: 9137962705898787253, guid: 3b4ca66d246a8ab468157a1c91e0629e, type: 3}
       propertyPath: _ordersCompleted
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 9137962705898787253, guid: 3b4ca66d246a8ab468157a1c91e0629e, type: 3}
+      propertyPath: _gameOverScoreText
+      value: 
+      objectReference: {fileID: 1017808407}
+    - target: {fileID: 9137962705898787253, guid: 3b4ca66d246a8ab468157a1c91e0629e, type: 3}
+      propertyPath: _inGameScoreTextGO
+      value: 
+      objectReference: {fileID: 909630437}
+    - target: {fileID: 9137962705898787253, guid: 3b4ca66d246a8ab468157a1c91e0629e, type: 3}
+      propertyPath: _gameOverScoreTextGO
+      value: 
+      objectReference: {fileID: 1017808405}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
