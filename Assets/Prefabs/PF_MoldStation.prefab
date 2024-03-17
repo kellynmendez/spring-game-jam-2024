@@ -112,6 +112,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slotName: Helmet_CTR
+  _audioSource: {fileID: 0}
+  _clip: {fileID: 0}
 --- !u!1 &460371938960168812
 GameObject:
   m_ObjectHideFlags: 0
@@ -920,7 +922,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.42138356, g: 0.40275258, b: 0.37235466, a: 0.9019608}
+  m_Color: {r: 0.42745098, g: 0.3764706, b: 0.26666668, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1534,6 +1536,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slotName: Sword_CTR
+  _audioSource: {fileID: 0}
+  _clip: {fileID: 0}
 --- !u!1 &4592714722572941999
 GameObject:
   m_ObjectHideFlags: 0
@@ -1795,6 +1799,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   station_type: 3
   weaponPlace: {fileID: 8086756415448967790}
+  _audioSource: {fileID: 0}
+  _audioClip: {fileID: 0}
+  _placeAudioClip: {fileID: 0}
   weaponAtStation: {fileID: 0}
   _counterIsEmpty: 0
   counter: {fileID: 0}
@@ -1833,6 +1840,8 @@ MonoBehaviour:
   finishedSwordMold: {fileID: 595268472651068748}
   finishedHelmetMold: {fileID: 9074347672346908776}
   finishedArrowMold: {fileID: 460371938960168812}
+  _audioSource: {fileID: 0}
+  _moldPickClip: {fileID: 0}
 --- !u!1 &5032020924182453117
 GameObject:
   m_ObjectHideFlags: 0
@@ -2221,6 +2230,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slotName: Arrow_CTR
+  _audioSource: {fileID: 0}
+  _clip: {fileID: 0}
 --- !u!1 &6109330501781371513
 GameObject:
   m_ObjectHideFlags: 0
