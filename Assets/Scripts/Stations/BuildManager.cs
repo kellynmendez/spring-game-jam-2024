@@ -282,6 +282,13 @@ public class BuildManager : StationManager
             StartCoroutine(BreakMold(
                 () => IsAnimated(arrowBreakAnimator, ARROW_BREAK_ANIM), arrowBreakAnimator));
         }
+        else
+        {
+            weaponObj.SetActive(true);
+            currentState = BuildState.Inactive;
+
+            ExitGame();
+        }
     }
 
     IEnumerator BreakMold(Func<bool> condition, Animator anim)
