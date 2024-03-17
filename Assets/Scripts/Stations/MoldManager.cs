@@ -192,7 +192,6 @@ public class MoldManager : StationManager
 
     IEnumerator WaitAfterCreating()
     {
-        yield return new WaitForSeconds(0.5f);
         blankMold.SetActive(false);
         moldCutter.SetActive(false);
         finishedMold.SetActive(true);

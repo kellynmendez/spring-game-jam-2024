@@ -35,10 +35,13 @@ public class BuildManager : StationManager
     private const string ARROW_POUR_ANIM = "ArrowPour";
     [SerializeField] Animator swordBreakAnimator;
     private const string SWORD_BREAK_ANIM = "SwordBreak";
+    private const string SWORD_BROKEN_ANIM = "SwordBroken";
     [SerializeField] Animator helmetBreakAnimator;
     private const string HELMET_BREAK_ANIM = "HelmetBreak";
+    private const string HELMET_BROKEN_ANIM = "HelmetBroken";
     [SerializeField] Animator arrowBreakAnimator;
     private const string ARROW_BREAK_ANIM = "ArrowBreak";
+    private const string ARROW_BROKEN_ANIM = "ArrowBroken";
 
     [Header("Broken Mold UI")]
     [SerializeField] GameObject swordBrokenMold;
@@ -235,7 +238,7 @@ public class BuildManager : StationManager
 
         anim.speed = 0;
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
 
         anim.speed = 1;
         brokenMold.SetActive(false);
