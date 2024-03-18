@@ -504,6 +504,7 @@ public class Customer : MonoBehaviour
         _agent.SetDestination(_customerData._customerDeathPoint.transform.position);
         _seekingDestination = true;
         _leavingCounter = true;
+        _counter.GetComponent<Counter>()._counterIsEmpty = true;
         _customerData.SpawnNewCustomer();
         if (_customerData._ordersCompleted == 3)
         {
