@@ -1903,7 +1903,7 @@ MonoBehaviour:
   finishedHelmetMold: {fileID: 9074347672346908776}
   finishedArrowMold: {fileID: 460371938960168812}
   _audioSource: {fileID: 4623856289811188378}
-  _moldPickClip: {fileID: 8300000, guid: abf009091e6fc1842a6bdb705d1a308f, type: 3}
+  _moldPickClip: {fileID: 8300000, guid: 9e0789da5cbff3847bc7c12606430738, type: 3}
 --- !u!82 &4623856289811188378
 AudioSource:
   m_ObjectHideFlags: 0

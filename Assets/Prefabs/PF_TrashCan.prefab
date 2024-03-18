@@ -135,7 +135,7 @@ MonoBehaviour:
   station_type: 4
   weaponPlace: {fileID: 677833158956682386}
   _audioSource: {fileID: 5733438917677302497}
-  _audioClip: {fileID: 8300000, guid: 0c81666f3e8abb84289833a4effdc4f3, type: 3}
+  _audioClip: {fileID: 8300000, guid: 3708048bec4a1bd45947b5c04487e5ba, type: 3}
   _placeAudioClip: {fileID: 0}
   weaponAtStation: {fileID: 0}
   _counterIsEmpty: 0

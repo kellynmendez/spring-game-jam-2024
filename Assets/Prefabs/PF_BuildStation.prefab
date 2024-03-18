@@ -2214,7 +2214,7 @@ MonoBehaviour:
   arrowBrokenMold: {fileID: 6650235556597038299}
   moldBrokenText: {fileID: 1875775357403383752}
   _audioSource: {fileID: 2316746877199252629}
-  _pickMold: {fileID: 8300000, guid: abf009091e6fc1842a6bdb705d1a308f, type: 3}
+  _pickMold: {fileID: 8300000, guid: 9e0789da5cbff3847bc7c12606430738, type: 3}
   _pourMold: {fileID: 8300000, guid: d7296479c7816344e9467a4ad9089d0c, type: 3}
   _moldBreak: {fileID: 8300000, guid: 9d418238ab71110478ab1172e9367565, type: 3}
 --- !u!82 &2316746877199252629
