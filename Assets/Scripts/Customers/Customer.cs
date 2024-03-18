@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
@@ -510,6 +511,12 @@ public class Customer : MonoBehaviour
         {
             _customerData.SpawnNewCustomer();
             _customerData.SpawnNewCustomer();
+
+            TutorialUI[] uiObjs = FindObjectsOfType<TutorialUI>();
+            foreach(TutorialUI obj in uiObjs)
+            {
+                obj.gameObject.SetActive(false);
+            }
         }
     }
 }
