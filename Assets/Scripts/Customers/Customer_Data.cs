@@ -51,10 +51,7 @@ public class Customer_Data : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Fire2"))
-        {
-            SpawnNewCustomer();
-        }
+
     }
 
     public void CompleteOrder(GameObject customer, Counter counter, Weapon weapon)
