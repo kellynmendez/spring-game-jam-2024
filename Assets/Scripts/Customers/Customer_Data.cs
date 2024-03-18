@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
+using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 
 public class Customer_Data : MonoBehaviour
 {
@@ -121,6 +122,7 @@ public class Customer_Data : MonoBehaviour
     public void FailOrder(GameObject customer)
     {
         bool _wasorderComleted = false;
+        customer.GetComponent<Customer>()._counter.GetComponent<Counter>()._counterIsEmpty = true;
         customer.GetComponent<Customer>().LeaveCounter(_wasorderComleted);
 
         _ordersFailed++;
