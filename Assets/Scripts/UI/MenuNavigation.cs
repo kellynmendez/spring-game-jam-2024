@@ -37,6 +37,14 @@ public class MenuNavigation : MonoBehaviour
         StartCoroutine(Wait());
         Application.Quit();
     }
+    public void OpenScreen(GameObject screen)
+    {
+        screen.SetActive(true);
+    }
+    public void CloseScreen(GameObject screen)
+    {
+        screen.SetActive(false);
+    }
 
     IEnumerator Wait()
     {
