@@ -103,6 +103,8 @@ public class PaintManager : StationManager
 
         _audioSource.clip = _audioClipRed;
         _audioSource.Play();
+
+        StartCoroutine(WaitAfterPaint());
     }
 
     public void BlueChosen()
@@ -130,17 +132,13 @@ public class PaintManager : StationManager
 
         _audioSource.clip = _audioClipBlue;
         _audioSource.Play();
-    }
 
-    public void FinishPainting()
-    {
         StartCoroutine(WaitAfterPaint());
     }
 
     IEnumerator WaitAfterPaint()
     {
         yield return new WaitForSeconds(0.5f);
-        Debug.Log("finished painting");
         // Setting paint state
         currentState = PaintState.Inactive;
         // Setting weapon state

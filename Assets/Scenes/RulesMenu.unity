@@ -3786,7 +3786,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Choose the mold you want and drag the stamp onto the blcok of clay to make
+  m_text: Choose the mold you want and drag the stamp onto the block of clay to make
     a new mold!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 792e2fde10b4f214e95a94070508ba16, type: 2}

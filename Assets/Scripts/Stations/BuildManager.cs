@@ -284,16 +284,12 @@ public class BuildManager : StationManager
         }
         else
         {
-            StartCoroutine(ExitIfNotBreakingMold());
+            ExitIfNotBreakingMold();
         }
     }
 
-    IEnumerator ExitIfNotBreakingMold()
+    private void ExitIfNotBreakingMold()
     {
-
-
-        yield return new WaitForSeconds(1f);
-
         weaponObj.SetActive(true);
         currentState = BuildState.Inactive;
 
