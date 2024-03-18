@@ -2186,9 +2186,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameScreen: {fileID: 5561616773770020100}
-  numSwordsToMoldBreak: 1
-  numHelmetsToMoldBreak: 1
-  numArrowsToMoldBreak: 1
+  numSwordsToMoldBreak: 4
+  numHelmetsToMoldBreak: 5
+  numArrowsToMoldBreak: 3
   swordMoldActive: 1
   helmetMoldActive: 1
   arrowMoldActive: 1

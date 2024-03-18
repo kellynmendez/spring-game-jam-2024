@@ -36,7 +36,7 @@ public class Customer : MonoBehaviour
 
     [HideInInspector] public NavMeshAgent _agent;
     private bool _seekingDestination = false;
-    private GameObject _counter;
+    public GameObject _counter;
     private Vector3 _counterPosistion;
     private bool _leavingCounter = false;
 
@@ -501,7 +501,6 @@ public class Customer : MonoBehaviour
     private IEnumerator WaitToLeave()
     {
         yield return new WaitForSeconds(2);
-        _counter.GetComponent<Counter>()._counterIsEmpty = true;
         _agent.SetDestination(_customerData._customerDeathPoint.transform.position);
         _seekingDestination = true;
         _leavingCounter = true;
