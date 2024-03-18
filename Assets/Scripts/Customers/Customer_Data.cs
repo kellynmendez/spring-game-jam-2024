@@ -121,6 +121,7 @@ public class Customer_Data : MonoBehaviour
     public void FailOrder(GameObject customer)
     {
         bool _wasorderComleted = false;
+        customer.GetComponent<Customer>()._counter.GetComponent<Counter>()._counterIsEmpty = true;
         customer.GetComponent<Customer>().LeaveCounter(_wasorderComleted);
 
         _ordersFailed++;

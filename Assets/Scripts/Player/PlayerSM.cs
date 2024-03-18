@@ -41,6 +41,11 @@ public class PlayerSM : MonoBehaviour
     private void Update()
     {
         //Debug.Log(currentPlayerState);
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
     }
 
     public void ChangeState(PlayerState nextState, StationManager newStnMngr)
