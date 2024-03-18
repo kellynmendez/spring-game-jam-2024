@@ -488,6 +488,7 @@ GameObject:
   - component: {fileID: 4801161979754366639}
   - component: {fileID: 5148487748284044470}
   - component: {fileID: 989227581195662744}
+  - component: {fileID: 7246579912058523277}
   m_Layer: 5
   m_Name: IndicatorCanvas
   m_TagString: Untagged
@@ -578,6 +579,18 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &7246579912058523277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1431534218224559189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c40df4fe0f2c6ed40b9ef4048960738f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1582143993020916220
 GameObject:
   m_ObjectHideFlags: 0
