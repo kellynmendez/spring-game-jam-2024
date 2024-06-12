@@ -507,9 +507,8 @@ public class Customer : MonoBehaviour
         _leavingCounter = true;
         _counter.GetComponent<Counter>()._counterIsEmpty = true;
         _customerData.SpawnNewCustomer();
-        if (_customerData._ordersCompleted == 3)
+        if (_customerData._ordersCompleted == 4) // starts 2 customers at once
         {
-            _customerData.SpawnNewCustomer();
             _customerData.SpawnNewCustomer();
 
             TutorialUI[] uiObjs = FindObjectsOfType<TutorialUI>();
@@ -517,6 +516,10 @@ public class Customer : MonoBehaviour
             {
                 obj.gameObject.SetActive(false);
             }
+        }
+        if (_customerData._ordersCompleted == 7) //starts 3 customers at once
+        {
+            _customerData.SpawnNewCustomer();
         }
     }
 }
