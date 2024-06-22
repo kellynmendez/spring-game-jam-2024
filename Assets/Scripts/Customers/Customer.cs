@@ -83,6 +83,9 @@ public class Customer : MonoBehaviour
     private const string WALK_ANIM = "Walk";
     private Animator animator;
 
+    [SerializeField] int _advanceTimerPoint = 29;
+    [SerializeField] int _advanceTimerAmount = 3;
+
     private void Awake()
     {
         _customerData = GameObject.FindObjectOfType(typeof(Customer_Data)) as Customer_Data;
@@ -263,7 +266,10 @@ public class Customer : MonoBehaviour
         }
         else if ( _orders.Count == 3)
         {
-            _timerMax = _3ItemTime;
+            if (_customerData._ordersCompleted >= _advanceTimerPoint) {
+                _timerMax -= _advanceTimerAmount;
+            }
+            else { _timerMax = _3ItemTime; }
         }
         _timerTime = _timerMax;
         _timerUI.maxValue = _timerMax;
@@ -517,8 +523,9 @@ public class Customer : MonoBehaviour
                 obj.gameObject.SetActive(false);
             }
         }
-        if (_customerData._ordersCompleted == 7) //starts 3 customers at once
+        else if (_customerData._ordersCompleted == 7) //starts 3 customers at once
         {
+            _customerData.SpawnNewCustomer();
             _customerData.SpawnNewCustomer();
         }
     }
